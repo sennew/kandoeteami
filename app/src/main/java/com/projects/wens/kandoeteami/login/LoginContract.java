@@ -5,11 +5,11 @@ package com.projects.wens.kandoeteami.login;
  */
 public interface LoginContract {
     interface view{
-
+        void showListOrganisation();
     }
 
     interface UserActionListener{
-
+        void login();
     }
 
 }

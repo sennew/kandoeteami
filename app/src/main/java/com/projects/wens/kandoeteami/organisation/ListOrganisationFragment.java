@@ -28,7 +28,7 @@ import static android.support.test.espresso.core.deps.guava.base.Preconditions.c
  * Created by senne on 21/02/2016.
  */
 public class ListOrganisationFragment extends Fragment implements ListOrganisationContract.view {
-   private ListOrganisationContract.UserActionListener mActionListener;
+   private ListOrganisationContract.UserActionListener mOrgaActionListener;
    private ContentAdapter mOrganisationAdapter;
    private OrganisationService service;
 
@@ -45,12 +45,12 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
       service = ServiceGenerator.createService(
               OrganisationService.class,
               "http://wildfly-teamiip2kdgbe.rhcloud.com/api");
-      mActionListener = new ListOrganisationPresenter(this,service);
+      mOrgaActionListener = new ListOrganisationPresenter(this,service);
    }
 
    public void onResume(){
       super.onResume();
-      mActionListener.loadOrga(true);
+      mOrgaActionListener.loadOrga(true);
    }
 
 
@@ -69,7 +69,7 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
       swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener(){
          @Override
          public void onRefresh() {
-            mActionListener.loadOrga(true);
+            mOrgaActionListener.loadOrga(true);
          }
       });
 
@@ -180,7 +180,7 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
    OrganisationItemListener mItemListener = new OrganisationItemListener() {
       @Override
       public void onOrganisationClick(Organisation clickOrganisation) {
-         mActionListener.openOrganisationThema(clickOrganisation);
+         mOrgaActionListener.openOrganisationThema(clickOrganisation);
       }
    };
 

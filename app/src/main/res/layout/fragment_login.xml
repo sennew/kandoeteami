@@ -23,6 +23,7 @@
             android:textColor="@color/textColorWhite"/>
 
         <EditText
+            android:id="@+id/login_username"
             android:layout_width="fill_parent"
             android:layout_height="48sp"
             android:inputType="text"
@@ -37,6 +38,7 @@
             android:textColor="@color/textColorWhite"/>
 
         <EditText
+            android:id="@+id/login_password"
             android:layout_width="fill_parent"
             android:layout_height="48sp"
             android:inputType="textPassword"
