@@ -1,6 +1,6 @@
 package com.projects.wens.kandoeteami.login;
 
-import com.projects.wens.kandoeteami.login.data.AccesToken;
+import com.projects.wens.kandoeteami.login.data.LoginDTO;
 import com.projects.wens.kandoeteami.retrofit.service.LoginService;
 
 import retrofit.Callback;
@@ -25,11 +25,12 @@ public class LoginPresenter implements LoginContract.UserActionListener {
     public void login() {
         String username = view.getUsername();
         String password = view.getPassword();
-        service.login(username, password, new Callback<AccesToken>() {
+        LoginDTO login = new LoginDTO(username,password);
+        service.login(login, new Callback<String>() {
             @Override
-            public void success(AccesToken accesToken, Response response) {
+            public void success(String accesToken, Response response) {
                 view.showSuccessMessage("Login correct");
-                view.saveToken(accesToken.getAcces_token());
+                view.saveToken(accesToken);
                 //TODO sessionManagement
                 view.showOrganisationsActivity();
             }
