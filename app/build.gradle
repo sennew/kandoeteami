@@ -27,6 +27,12 @@ dependencies {
     compile "com.android.support:design:$rootProject.supportLibraryVersion"
     compile "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
 
+    //Crouton
+    compile('de.keyboardsurfer.android.widget:crouton:1.8.5@aar') {
+        // exclusion is not necessary, but generally a good idea.
+        exclude group: 'com.google.android', module: 'support-v4'
+    }
+
     //Dit zijn de dependencys voor de REST API
     compile 'com.google.code.gson:gson:2.4'
     compile 'com.squareup.retrofit:retrofit:1.9.0'
@@ -48,6 +54,8 @@ dependencies {
     androidTestCompile "com.android.support.test.espresso:espresso-contrib:$rootProject.ext.espressoVersion"
     androidTestCompile "com.android.support.test.espresso:espresso-intents:$rootProject.ext.espressoVersion"
     compile 'com.android.support.test.espresso:espresso-core:2.2.1'
+
+
 }
 
 

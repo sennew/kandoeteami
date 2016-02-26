@@ -48,27 +48,10 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginTop="16dp"
-            android:gravity="right">
+            android:gravity="center">
 
             <Button
-                android:id="@+id/new_account"
-                android:layout_width="wrap_content"
-                android:layout_height="36dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
-                android:background="@drawable/btn_background_white"
-                android:minWidth="64dp"
-                android:paddingLeft="8dp"
-                android:paddingRight="8dp"
-                android:text="Registreer"
-                android:textAllCaps="true"
-                android:textColor="@color/colorAccent"
-                android:textSize="12sp"
-                />
-
-            <Button
-                android:id="@+id/login_button"
+                android:id="@+id/btnLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="36dp"
                 android:layout_gravity="center"
@@ -82,12 +65,7 @@
                 android:textAllCaps="true"
                 android:textColor="@color/colorAccent"
                 android:textSize="12sp"
-
                 />
-
-
-
-
         </LinearLayout>
 
     </LinearLayout>

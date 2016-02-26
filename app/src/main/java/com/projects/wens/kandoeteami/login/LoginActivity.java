@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.projects.wens.kandoeteami.R;
+import com.projects.wens.kandoeteami.organisation.ListOrganisationFragment;
 
 /**
  * Created by senne on 23/02/2016.
@@ -34,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         if (null == savedInstanceState){
-            //TODO: INIT FRAGMENT
+            initFragment(LoginFragment.newInstance());
         }
     }
 
