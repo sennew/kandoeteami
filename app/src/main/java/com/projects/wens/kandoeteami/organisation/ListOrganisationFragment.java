@@ -1,7 +1,9 @@
 package com.projects.wens.kandoeteami.organisation;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -50,7 +52,9 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
 
    public void onResume(){
       super.onResume();
-      mOrgaActionListener.loadOrga(true);
+      SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+      String token = prefs.getString("token", "");
+      mOrgaActionListener.loadOrganisations(true, token);
    }
 
 
@@ -69,7 +73,9 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
       swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener(){
          @Override
          public void onRefresh() {
-            mOrgaActionListener.loadOrga(true);
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+            String token = prefs.getString("token", "");
+            mOrgaActionListener.loadOrganisations(true, token);
          }
       });
 

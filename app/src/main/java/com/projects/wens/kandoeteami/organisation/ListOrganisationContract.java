@@ -18,7 +18,7 @@ public interface ListOrganisationContract {
     }
 
     interface UserActionListener{
-        void loadOrga(boolean forceUpdate);
+        void loadOrganisations(boolean forceUpdate, String token);
         void openOrganisationThema(@NonNull Organisation requestOrga);
     }
 }

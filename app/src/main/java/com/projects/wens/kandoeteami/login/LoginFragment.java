@@ -40,8 +40,7 @@ public class LoginFragment extends Fragment implements LoginContract.view {
     }
 
     public static LoginFragment newInstance(){
-        LoginFragment fragment = new LoginFragment();
-        return fragment;
+        return new LoginFragment();
     }
 
     @Override
@@ -74,7 +73,6 @@ public class LoginFragment extends Fragment implements LoginContract.view {
         super.onResume();
     }
 
-
     @Override
     public void showErrorMessage(String message) {
         //Crouton
@@ -102,6 +100,8 @@ public class LoginFragment extends Fragment implements LoginContract.view {
         editor.putString("token", token);
         editor.apply();
     }
+
+
 
     @Override
     public String getUsername() {

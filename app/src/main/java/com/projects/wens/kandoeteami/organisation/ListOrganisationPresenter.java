@@ -1,5 +1,6 @@
 package com.projects.wens.kandoeteami.organisation;
 
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 
 import com.projects.wens.kandoeteami.organisation.data.Organisation;
@@ -26,12 +27,13 @@ public class ListOrganisationPresenter implements ListOrganisationContract.UserA
         this.service = serviceOrga;
     }
 
-    public void loadOrga(boolean forceUpdate) {
+
+    @Override
+    public void loadOrganisations(boolean forceUpdate, String token) {
         if (view != null){
             view.setProgressIndicator(true);
         }
-
-        service.getOrganisations(new Callback<List<Organisation>>() {
+        service.getOrganisations(token, new Callback<List<Organisation>>() {
             @Override
             public void success(List<Organisation> organisations, Response response) {
                 if (view != null){
@@ -39,7 +41,6 @@ public class ListOrganisationPresenter implements ListOrganisationContract.UserA
                     view.setProgressIndicator(false);
                 }
             }
-
             @Override
             public void failure(RetrofitError error) {
 
