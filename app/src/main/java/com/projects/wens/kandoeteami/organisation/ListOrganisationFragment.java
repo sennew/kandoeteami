@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.projects.wens.kandoeteami.R;
 import com.projects.wens.kandoeteami.organisation.data.Organisation;
@@ -22,6 +23,9 @@ import com.projects.wens.kandoeteami.retrofit.service.OrganisationService;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Style;
 
 import static android.support.test.espresso.core.deps.guava.base.Preconditions.checkNotNull;
 
@@ -52,9 +56,14 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
 
    public void onResume(){
       super.onResume();
-      SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
-      String token = prefs.getString("token", "");
+      SharedPreferences pref = getActivity().getPreferences(Context.MODE_PRIVATE);
+      String token = pref.getString("TOKEN", "");
+      Crouton.makeText(getActivity(), token, Style.CONFIRM).show();
+
+      Toast.makeText(getContext(), "Bearer " + token, Toast.LENGTH_SHORT).show();
+
       mOrgaActionListener.loadOrganisations(true, token);
+
    }
 
 
@@ -73,9 +82,11 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
       swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener(){
          @Override
          public void onRefresh() {
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
-            String token = prefs.getString("token", "");
+            SharedPreferences pref = getActivity().getPreferences(Context.MODE_PRIVATE);
+            String token = pref.getString("TOKEN", "");
             mOrgaActionListener.loadOrganisations(true, token);
+
+            Crouton.makeText(getActivity(), token, Style.ALERT).show();
          }
       });
 

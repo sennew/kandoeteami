@@ -1,15 +1,21 @@
 package com.projects.wens.kandoeteami.login;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.projects.wens.kandoeteami.R;
 import com.projects.wens.kandoeteami.login.data.AccesToken;
@@ -22,12 +28,11 @@ import com.projects.wens.kandoeteami.retrofit.service.OrganisationService;
 import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
 
-/**
- * Created by senne on 23/02/2016.
- */
+
 public class LoginFragment extends Fragment implements LoginContract.view {
     private LoginContract.UserActionListener mLoginActionListener;
     private LoginService service;
+
 
     //DECLARATION COMPONENTS
     private Button mLogin_button;
@@ -95,10 +100,18 @@ public class LoginFragment extends Fragment implements LoginContract.view {
     @Override
     public void saveToken(String token) {
         // Storing token
-        SharedPreferences pref = getActivity().getSharedPreferences("MyPref", 0); // 0 - for private mode
-        SharedPreferences.Editor editor = pref.edit();
-        editor.putString("token", token);
-        editor.apply();
+        //SharedPreferences pref = getActivity().getSharedPreferences("MyPref", 0); // 0 - for private mode
+        //SharedPreferences.Editor editor = pref.edit();
+
+
+        SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("TOKEN", token);
+        editor.commit();
+
+        SharedPreferences pref = getActivity().getPreferences(Context.MODE_PRIVATE);
+        Toast.makeText(getActivity(), "Bearer " + pref.getString("TOKEN",""), Toast.LENGTH_SHORT).show();
+
     }
 
 
