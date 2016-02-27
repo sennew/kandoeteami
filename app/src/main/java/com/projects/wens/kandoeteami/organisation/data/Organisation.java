@@ -12,8 +12,8 @@ public class Organisation {
     private String logoUrl;
     private List<Link> links;
 
-    public Organisation(int organistionId) {
-        this.organistionId = organistionId;
+    public Organisation() {
+        //empty
     }
 
     public int getOrganistionId() {

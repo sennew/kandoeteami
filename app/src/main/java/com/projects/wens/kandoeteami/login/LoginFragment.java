@@ -32,6 +32,7 @@ import de.keyboardsurfer.android.widget.crouton.Style;
 public class LoginFragment extends Fragment implements LoginContract.view {
     private LoginContract.UserActionListener mLoginActionListener;
     private LoginService service;
+    public static final String PREFS_NAME = "MyPrefs";
 
 
     //DECLARATION COMPONENTS
@@ -100,18 +101,18 @@ public class LoginFragment extends Fragment implements LoginContract.view {
     @Override
     public void saveToken(String token) {
         // Storing token
-        //SharedPreferences pref = getActivity().getSharedPreferences("MyPref", 0); // 0 - for private mode
-        //SharedPreferences.Editor editor = pref.edit();
+        // We need an Editor object to make preference changes.
+        // All objects are from android.context.Context
+        SharedPreferences settings = getActivity().getSharedPreferences(PREFS_NAME, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("token", token);
 
-
-        SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString("TOKEN", token);
+        // Commit the edits!
         editor.commit();
 
+        //TESTING PREFERENCES SAVED
         SharedPreferences pref = getActivity().getPreferences(Context.MODE_PRIVATE);
         Toast.makeText(getActivity(), "Bearer " + pref.getString("TOKEN",""), Toast.LENGTH_SHORT).show();
-
     }
 
 

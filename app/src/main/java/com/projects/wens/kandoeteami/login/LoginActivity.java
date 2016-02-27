@@ -1,5 +1,6 @@
 package com.projects.wens.kandoeteami.login;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -19,7 +20,6 @@ import com.projects.wens.kandoeteami.organisation.ListOrganisationFragment;
  */
 public class LoginActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
-
 
 
     @Override
