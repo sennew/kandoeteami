@@ -3,7 +3,6 @@ package com.projects.wens.kandoeteami.organisation;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -14,7 +13,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.projects.wens.kandoeteami.R;
 import com.projects.wens.kandoeteami.organisation.data.Organisation;
@@ -23,11 +21,6 @@ import com.projects.wens.kandoeteami.retrofit.service.OrganisationService;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import de.keyboardsurfer.android.widget.crouton.Crouton;
-import de.keyboardsurfer.android.widget.crouton.Style;
-
-import static android.support.test.espresso.core.deps.guava.base.Preconditions.checkNotNull;
 
 
 public class ListOrganisationFragment extends Fragment implements ListOrganisationContract.view {
@@ -126,7 +119,7 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
         private OrganisationItemListener mOrganisationListener;
 
         public ContentAdapter(List<Organisation> organisations, OrganisationItemListener itemListener) {
-            setList(organisations);
+            mOrganisations = organisations;
             mOrganisationListener = itemListener;
         }
 
@@ -134,9 +127,9 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             Context context = parent.getContext();
             LayoutInflater inflater = LayoutInflater.from(context);
-            View cardOrgaView = inflater.inflate(R.layout.item_organisation, parent, false);
+            View cardOrgView = inflater.inflate(R.layout.item_organisation, parent, false);
 
-            return new ViewHolder(cardOrgaView, mOrganisationListener);
+            return new ViewHolder(cardOrgView, mOrganisationListener);
         }
 
         @Override
@@ -154,11 +147,13 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
 
         @Override
         public int getItemCount() {
-            return 0;
+            return mOrganisations.size();
         }
 
         private void setList(List<Organisation> organisations) {
-            mOrganisations = checkNotNull(organisations);
+            for (Organisation o : organisations){
+                mOrganisations.add(o);
+            }
         }
 
         public Organisation getOrga(int position) {
