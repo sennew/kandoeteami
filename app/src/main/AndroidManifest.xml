@@ -21,8 +21,6 @@
         <activity android:name=".organisation.ListOrganisationActivity">
 
         </activity>
-
-
     </application>
 
 </manifest>

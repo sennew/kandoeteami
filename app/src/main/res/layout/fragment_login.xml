@@ -3,52 +3,65 @@
     android:id="@+id/login_linear"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="8dp"
-    android:gravity="center_vertical">
+    android:background="@color/colorLight"
+    android:gravity="center_vertical"
+    android:padding="8dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
-        android:paddingLeft="10dp"
         android:orientation="vertical"
-        android:background="@color/colorLight"
-        >
+        android:paddingLeft="10dp"
+        android:id="@+id/linearLayout">
+
+
+        <ImageView
+            android:layout_marginBottom="50dp"
+            android:layout_marginTop="20dp"
+            android:padding="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:id="@+id/imageView"
+            android:src="@drawable/kandoelogo"
+         />
 
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:text="Gebruikersnaam of email"
-            android:textColor="@color/textColorWhite"/>
+            android:text="Email"
+            android:textColor="@color/textColorWhite" />
 
         <EditText
             android:id="@+id/login_username"
             android:layout_width="fill_parent"
             android:layout_height="48sp"
+            android:hint="Enter email"
             android:inputType="text"
             android:paddingBottom="8dp"
-            android:paddingTop="8dp"/>
+            android:paddingTop="8dp" />
 
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="Wachtwoord"
-            android:textColor="@color/textColorWhite"/>
+            android:textColor="@color/textColorWhite" />
 
         <EditText
             android:id="@+id/login_password"
             android:layout_width="fill_parent"
             android:layout_height="48sp"
+            android:hint="Enter password"
             android:inputType="textPassword"
-            android:paddingBottom="8dp"/>
+            android:paddingBottom="8dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginTop="16dp"
-            android:gravity="center">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:gravity="center_horizontal"
+            android:layout_gravity="bottom">
 
             <Button
                 android:id="@+id/btnLogin"
@@ -57,17 +70,21 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
-                android:background="@drawable/btn_background_white"
-                android:minWidth="64dp"
+                android:background="@drawable/btn_accent"
+                android:minWidth="150dp"
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"
                 android:text="Login"
                 android:textAllCaps="true"
-                android:textColor="@color/colorAccent"
-                android:textSize="12sp"
-                />
-        </LinearLayout>
+                android:textColor="@color/textColorWhite"
+                android:textSize="12sp" />
 
+
+        </LinearLayout>
     </LinearLayout>
+
+
+
+
 
 </RelativeLayout>
