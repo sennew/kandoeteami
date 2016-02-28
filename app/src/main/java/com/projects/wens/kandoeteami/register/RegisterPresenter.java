@@ -30,20 +30,23 @@ public class RegisterPresenter implements RegisterContract.UserActionListener {
             registerDTO.setUsername(username);
             registerDTO.setEmail(email);
             registerDTO.setPassword(password);
-
+            view.showProgressRegister();
             service.register(registerDTO, new Callback<String>() {
                 @Override
                 public void success(String s, Response response) {
                     view.showSuccessMessage(s);
+                    view.hideProgress();
                     view.showLoginActivity();
                 }
 
                 @Override
                 public void failure(RetrofitError error) {
+                    view.hideProgress();
                     view.showErrorMessage(error.getMessage());
                 }
             });
         }
+
 
     }
 

@@ -1,5 +1,6 @@
 package com.projects.wens.kandoeteami.register;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -29,6 +30,8 @@ public class RegisterFragment extends Fragment implements RegisterContract.view 
     public static final String PATH = "http://wildfly-teamiip2kdgbe.rhcloud.com/api";
     private RegisterContract.UserActionListener registerListener;
     private RegisterService service;
+
+    private ProgressDialog progressDialog;
 
     //DECLARATION COMPONENTS
     private Button btnRegister;
@@ -140,5 +143,19 @@ public class RegisterFragment extends Fragment implements RegisterContract.view 
     public void showUsernameError(String message) {
         etUsername.setError(message);
     }
+
+    @Override
+    public void showProgressRegister() {
+        progressDialog = new ProgressDialog(getActivity(), R.style.AppTheme_Dark_Dialog);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("Creating account...");
+        progressDialog.show();
+    }
+
+    @Override
+    public void hideProgress() {
+        progressDialog.dismiss();
+    }
+
 
 }
