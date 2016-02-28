@@ -12,12 +12,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.projects.wens.kandoeteami.R;
 import com.projects.wens.kandoeteami.organisation.data.Organisation;
 import com.projects.wens.kandoeteami.retrofit.ServiceGenerator;
 import com.projects.wens.kandoeteami.retrofit.service.OrganisationService;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -138,6 +140,8 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
             holder.title.setText(organisation.getOrganisationName());
             //TODO:DE DESCRIPTION MOET NOG TOEGEVOEGD WORDEN AAN HET MODEL
             holder.description.setText(organisation.getOrganisationName());
+            Context context = holder.image.getContext();
+            Picasso.with(context).load(organisation.getLogoUrl()).into(holder.image);
         }
 
         public void replaceData(List<Organisation> organisations) {
@@ -164,6 +168,7 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
         public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
             public TextView title;
             public TextView description;
+            public ImageView image;
 
             private OrganisationItemListener mOrganisationListener;
 
@@ -172,6 +177,7 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
                 mOrganisationListener = listener;
                 title = (TextView) itemView.findViewById(R.id.card_title);
                 description = (TextView) itemView.findViewById(R.id.card_text);
+                image = (ImageView) itemView.findViewById(R.id.card_image);
                 itemView.setOnClickListener(this);
 
             }
