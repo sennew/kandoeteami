@@ -33,7 +33,9 @@ public class LoginPresenter implements LoginContract.UserActionListener {
                 view.showSuccessMessage("Login correct");
                 view.saveToken(accesToken);
                 //TODO sessionManagement
+                view.stopProgress();
                 view.showOrganisationsActivity();
+
             }
 
             @Override

@@ -8,4 +8,5 @@
     <color name="dark_grey">#424242</color>
     <color name="light_grey">#F6F6F6</color>
     <color name="button_grey">#757575</color>
+    <color name="iron">#CCCCCC</color>
 </resources>
