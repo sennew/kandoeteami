@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">kandoeteami</string>
+    <string name="app_name">Kandoe</string>
     <string name="reg_already_account">Already an account? Login</string>
     <string name="register_button">Register</string>
     <string name="retype_password">Retype password</string>
