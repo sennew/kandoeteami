@@ -26,6 +26,7 @@ public class LoginPresenter implements LoginContract.UserActionListener {
         String username = view.getUsername();
         String password = view.getPassword();
         LoginDTO login = new LoginDTO(username,password);
+        view.showProgressLogin();
         service.login(login, new Callback<String>() {
             @Override
             public void success(String accesToken, Response response) {
@@ -38,6 +39,7 @@ public class LoginPresenter implements LoginContract.UserActionListener {
             @Override
             public void failure(RetrofitError error) {
                 view.showErrorMessage("Login failed.");
+                view.stopProgress();
             }
         });
     }

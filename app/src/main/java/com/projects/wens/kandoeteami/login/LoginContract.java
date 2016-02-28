@@ -13,6 +13,10 @@ public interface LoginContract {
         void saveToken(String token);
         String getUsername();
         String getPassword();
+
+        void showProgressLogin();
+
+        void stopProgress();
     }
 
     interface UserActionListener{
