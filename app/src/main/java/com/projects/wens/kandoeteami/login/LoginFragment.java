@@ -1,5 +1,6 @@
 package com.projects.wens.kandoeteami.login;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -33,6 +34,7 @@ public class LoginFragment extends Fragment implements LoginContract.view {
     private LoginContract.UserActionListener mLoginActionListener;
     private LoginService service;
     public static final String PREFS_NAME = "MyPrefs";
+    private ProgressDialog progressDialog;
 
 
     //DECLARATION COMPONENTS
@@ -98,6 +100,7 @@ public class LoginFragment extends Fragment implements LoginContract.view {
 
     @Override
     public void showOrganisationsActivity() {
+
         Intent i = new Intent(getContext(), ListOrganisationActivity.class);
         startActivity(i);
         getActivity().finish();
@@ -130,5 +133,18 @@ public class LoginFragment extends Fragment implements LoginContract.view {
     @Override
     public String getPassword() {
         return mPassword.getText().toString();
+    }
+
+    @Override
+    public void showProgressLogin() {
+        progressDialog = new ProgressDialog(getActivity(), R.style.AppTheme);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("Authenticating...");
+        progressDialog.show();
+    }
+
+    @Override
+    public void stopProgress() {
+        progressDialog.dismiss();
     }
 }
