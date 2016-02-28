@@ -137,7 +137,7 @@ public class LoginFragment extends Fragment implements LoginContract.view {
 
     @Override
     public void showProgressLogin() {
-        progressDialog = new ProgressDialog(getActivity(), R.style.AppTheme);
+        progressDialog = new ProgressDialog(getActivity(), R.style.AppTheme_Dark_Dialog);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Authenticating...");
         progressDialog.show();

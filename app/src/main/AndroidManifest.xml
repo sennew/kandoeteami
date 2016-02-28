@@ -13,12 +13,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".login.LoginActivity"
+            android:theme="@style/AppTheme.Dark"
             android:label="Login">
 
         </activity>
 
         <activity android:name=".register.RegisterActivity"
-            android:label="Kandoe">
+            android:label="Kandoe"
+            android:theme="@style/AppTheme.Dark">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
