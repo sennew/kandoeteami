@@ -48,6 +48,11 @@ public class RegisterPresenter implements RegisterContract.UserActionListener {
     }
 
     private boolean validate() {
+
+        if(view.getUsername().isEmpty()){
+            view.showUsernameError("Username is empty");
+            return false;
+        }
         if(view.getEmail().isEmpty()){
             view.showEmailError("Email is empty");
             return false;

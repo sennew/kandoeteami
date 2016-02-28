@@ -136,4 +136,9 @@ public class RegisterFragment extends Fragment implements RegisterContract.view 
         etRetypePassword.setError(message);
     }
 
+    @Override
+    public void showUsernameError(String message) {
+        etUsername.setError(message);
+    }
+
 }

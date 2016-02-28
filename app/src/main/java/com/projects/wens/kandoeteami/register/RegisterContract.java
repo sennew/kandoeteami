@@ -54,6 +54,8 @@ public interface RegisterContract {
         void showPasswordError(String message);
 
         void showRetypePasswordError(String message);
+
+        void showUsernameError(String message);
     }
 
     interface UserActionListener {
