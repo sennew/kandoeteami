@@ -1,18 +1,12 @@
 package com.projects.wens.kandoeteami.organisation;
 
-import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
-import android.util.Log;
-import android.widget.Toast;
 
 import com.projects.wens.kandoeteami.organisation.data.Organisation;
 import com.projects.wens.kandoeteami.retrofit.service.OrganisationService;
 
-import java.io.Console;
 import java.util.List;
 
-import de.keyboardsurfer.android.widget.crouton.Crouton;
-import de.keyboardsurfer.android.widget.crouton.Style;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -43,8 +37,9 @@ public class ListOrganisationPresenter implements ListOrganisationContract.UserA
             @Override
             public void success(List<Organisation> organisations, Response response) {
                 if (view != null){
-                    view.showOrganisations(organisations);
                     view.setProgressIndicator(false);
+                    view.showOrganisations(organisations);
+
                 }
             }
             @Override

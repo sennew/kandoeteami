@@ -84,7 +84,7 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
     }
 
     @Override
-    public void setProgressIndicator(boolean active) {
+    public void setProgressIndicator(final boolean active) {
         if (getView() == null) {
             return;
         }
@@ -94,7 +94,7 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
         srl.post(new Runnable() {
             @Override
             public void run() {
-                srl.setRefreshing(true);
+                srl.setRefreshing(active);
             }
         });
     }
@@ -151,6 +151,7 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
         }
 
         private void setList(List<Organisation> organisations) {
+            mOrganisations.clear();
             for (Organisation o : organisations){
                 mOrganisations.add(o);
             }

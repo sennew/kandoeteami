@@ -27,7 +27,6 @@
             android:layout_height="40dp"
             android:layout_alignBottom="@+id/card_image"
             android:layout_marginLeft="16dp"
-            android:text="First App WENS :)"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
 
         <TextView
@@ -39,7 +38,6 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:layout_marginRight="16dp"
-            android:text="Naar waar gaat onze reis in Parijs?"
             android:ellipsize="end"
             android:singleLine="true"
             android:textColor="@color/dark_grey"
