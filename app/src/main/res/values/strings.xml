@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">kandoeteami</string>
+    <string name="reg_already_account">Already an account? Login</string>
+    <string name="register_button">Register</string>
+    <string name="retype_password">Retype password</string>
+    <string name="password_enter">Enter password</string>
+    <string name="email_enter">Enter email</string>
 </resources>

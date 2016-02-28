@@ -54,6 +54,11 @@ public class LoginFragment extends Fragment implements LoginContract.view {
         super.onActivityCreated(savedInstanceState);
         //TODO: HIER MOET DE PRESENTER AANGEMAAKT WORDEN
 
+        if(savedInstanceState != null){
+            String email = getActivity().getIntent().getExtras().getString("EMAIL");
+            mUsername.setText(email);
+        }
+
         service = ServiceGenerator.createService(LoginService.class, "http://wildfly-teamiip2kdgbe.rhcloud.com/api");
         mLoginActionListener = new LoginPresenter(this,service);
 
