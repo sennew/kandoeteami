@@ -1,14 +1,12 @@
 package com.projects.wens.kandoeteami.login;
 
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 
 import com.projects.wens.kandoeteami.R;
 
@@ -39,19 +37,6 @@ public class LoginActivity extends AppCompatActivity {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.add(R.id.contentFrame, loginFrag);
         transaction.commit();
-    }
-
-    private void setupDrawerContent(NavigationView navigationView) {
-        //Hier gaan de menu opties uitgewerkt worden
-        navigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        //TODO: UITWERKING MENU OPTIES
-                        return false;
-                    }
-                }
-        );
     }
 
 
