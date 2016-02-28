@@ -32,6 +32,7 @@ public class RegisterFragment extends Fragment implements RegisterContract.view 
 
     //DECLARATION COMPONENTS
     private Button btnRegister;
+    private EditText etUsername;
     private EditText etEmail;
     private EditText etPassword;
     private EditText etRetypePassword;
@@ -58,6 +59,7 @@ public class RegisterFragment extends Fragment implements RegisterContract.view 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_register, container, false);
+        etUsername = (EditText) root.findViewById(R.id.reg_username);
         tvLinkLogin = (TextView) root.findViewById(R.id.link_login);
         etEmail = (EditText) root.findViewById(R.id.reg_email);
         etPassword = (EditText) root.findViewById(R.id.reg_password);
@@ -113,4 +115,25 @@ public class RegisterFragment extends Fragment implements RegisterContract.view 
     public String getRetypePassword() {
         return etRetypePassword.getText().toString();
     }
+
+    @Override
+    public String getUsername() {
+        return etUsername.getText().toString();
+    }
+
+    @Override
+    public void showEmailError(String message) {
+        etEmail.setError(message);
+    }
+
+    @Override
+    public void showPasswordError(String message) {
+        etPassword.setError(message);
+    }
+
+    @Override
+    public void showRetypePasswordError(String message) {
+        etRetypePassword.setError(message);
+    }
+
 }

@@ -22,23 +22,46 @@ public class RegisterPresenter implements RegisterContract.UserActionListener {
     @Override
     public void register() {
         RegisterDTO registerDTO = new RegisterDTO();
-        view.getEmail();
-        view.getPassword();
-        view.getRetypePassword();
+        String email = view.getEmail();
+        String password = view.getPassword();
+        String username = view.getUsername();
 
+        if (validate()){
+            registerDTO.setUsername(username);
+            registerDTO.setEmail(email);
+            registerDTO.setPassword(password);
 
-        //TODO: juiste registerDTO en callback type
-        service.register(registerDTO, new Callback<String>() {
-            @Override
-            public void success(String s, Response response) {
-                view.showSuccessMessage(s);
-                view.showLoginActivity();
-            }
+            service.register(registerDTO, new Callback<String>() {
+                @Override
+                public void success(String s, Response response) {
+                    view.showSuccessMessage(s);
+                    view.showLoginActivity();
+                }
 
-            @Override
-            public void failure(RetrofitError error) {
-                view.showErrorMessage(error.getMessage());
-            }
-        });
+                @Override
+                public void failure(RetrofitError error) {
+                    view.showErrorMessage(error.getMessage());
+                }
+            });
+        }
+
+    }
+
+    private boolean validate() {
+        if(view.getEmail().isEmpty()){
+            view.showEmailError("Email is empty");
+            return false;
+        }
+
+        if(view.getPassword().isEmpty()){
+            view.showPasswordError("Password is empty!");
+            return false;
+        }
+
+        if(!view.getRetypePassword().equals(view.getPassword())){
+            view.showRetypePasswordError("Passwords do not match!");
+            return false;
+        }
+        return true;
     }
 }

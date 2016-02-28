@@ -5,4 +5,5 @@
     <string name="retype_password">Retype password</string>
     <string name="password_enter">Enter password</string>
     <string name="email_enter">Enter email</string>
+    <string name="username_enter">Enter username</string>
 </resources>
