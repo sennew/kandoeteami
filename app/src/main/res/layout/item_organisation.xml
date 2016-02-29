@@ -27,7 +27,8 @@
             android:layout_height="40dp"
             android:layout_alignBottom="@+id/card_image"
             android:layout_marginLeft="16dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textColor="@color/colorAccent"/>
 
         <TextView
             android:id="@+id/card_text"
