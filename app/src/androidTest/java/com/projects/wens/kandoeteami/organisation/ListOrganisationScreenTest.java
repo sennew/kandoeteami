@@ -24,6 +24,8 @@ public class ListOrganisationScreenTest {
         //Kijk of er naar de detailView gegaan wordt
         onView(withId(R.id.listThemes)).check(matches(isDisplayed()));
     }
+    
+
 
     //TEST: Als je op de detail button klikt moet je naar het detail scherm gaan
     @Test

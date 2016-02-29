@@ -31,7 +31,6 @@
 
         <item name="colorButtonNormal">@color/colorOrange</item>
 
-
     </style>
 
     <style name="AppTheme.Dark.Dialog" parent="Theme.AppCompat.Dialog">
