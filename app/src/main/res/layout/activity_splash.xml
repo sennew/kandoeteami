@@ -1,23 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_height="match_parent"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
-        android:layout_height="wrap_content"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <android.support.v7.widget.Toolbar
-            android:background="?attr/colorPrimary"
             android:id="@+id/toolbar"
-            android:layout_height="?attr/actionBarSize"
             android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
     </android.support.design.widget.AppBarLayout>
@@ -60,16 +59,18 @@
                 android:layout_marginBottom="50dp"
                 android:layout_marginTop="50dp"
                 android:gravity="center"
+                android:textSize="16dp"
                 android:text="Free platform for making decisions." />
 
             <android.support.v7.widget.AppCompatButton
-                android:id="@+id/register_button"
+                android:id="@+id/login_button"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
                 android:padding="12dp"
-                android:text="@string/register_button" />
+                android:text="@string/login_button" />
+
 
             <TextView
                 android:layout_width="fill_parent"
@@ -80,13 +81,15 @@
                 android:text="Or" />
 
             <android.support.v7.widget.AppCompatButton
-                android:id="@+id/login_button"
+                android:id="@+id/register_button"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
                 android:padding="12dp"
-                android:text="@string/login_button" />
+                app:theme="@style/AppTheme.Dark.OButton"
+                android:text="@string/register_button" />
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

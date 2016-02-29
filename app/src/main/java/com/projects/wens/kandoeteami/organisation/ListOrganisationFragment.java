@@ -21,6 +21,8 @@ import com.projects.wens.kandoeteami.retrofit.ServiceGenerator;
 import com.projects.wens.kandoeteami.retrofit.service.OrganisationService;
 import com.squareup.picasso.Picasso;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -82,6 +84,7 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
 
             }
         });
+
 
         return root;
     }

@@ -23,7 +23,7 @@ public class LoginPresenter implements LoginContract.UserActionListener {
 
     @Override
     public void login() {
-        String username = view.getUsername();
+        final String username = view.getUsername();
         String password = view.getPassword();
         LoginDTO login = new LoginDTO(username, password);
         view.showProgressLogin();
@@ -34,6 +34,7 @@ public class LoginPresenter implements LoginContract.UserActionListener {
                 public void success(String accesToken, Response response) {
                     view.showSuccessMessage("Login correct");
                     view.saveToken(accesToken);
+                    view.saveUserDetails(username);
                     //TODO sessionManagement
                     view.stopProgress();
                     view.showOrganisationsActivity();

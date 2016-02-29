@@ -11,15 +11,15 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.projects.wens.kandoeteami.R;
 
 
-/**
- * Created by senne on 19/02/2016.
- */
+
 public class ListOrganisationActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
+    public static final String PREFS_NAME = "MyPrefs";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +31,7 @@ public class ListOrganisationActivity extends AppCompatActivity {
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
+
 
         ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(this,  mDrawerLayout, toolbar, 0, 0);
 
@@ -46,7 +47,14 @@ public class ListOrganisationActivity extends AppCompatActivity {
         if (null == savedInstanceState){
             initFragment(ListOrganisationFragment.newInstance());
         }
+
+        //DRAWER
+         String username = this.getSharedPreferences(PREFS_NAME, 0).getString("username", null);
+         TextView tvUsername = (TextView)findViewById(R.id.nav_username);
+         tvUsername.setText(username);
     }
+
+
 
     private void initFragment(Fragment listOrganisationFrag){
         FragmentManager fragmentManager = getSupportFragmentManager();

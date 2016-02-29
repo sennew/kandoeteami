@@ -18,5 +18,5 @@ public interface OrganisationService {
     void getOrganisations(@Header("Authorization") String token, Callback<List<Organisation>> callback);
 
     @GET("/organisations/{id}")
-    void getOrganisation(@Path("id") int organisationId, Callback<Organisation> callback);
+    void getOrganisation(@Header("Authorization") String token, @Path("id") int organisationId, Callback<Organisation> callback);
 }

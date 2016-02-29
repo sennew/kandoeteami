@@ -29,8 +29,8 @@
         <item name="colorControlHighlight">@android:color/white</item>
         <item name="android:textColorHint">@color/iron</item>
 
-        <item name="colorButtonNormal">@color/colorPrimaryDark</item>
-       
+        <item name="colorButtonNormal">@color/colorOrange</item>
+
 
     </style>
 
@@ -38,6 +38,10 @@
         <item name="colorAccent">@android:color/white</item>
         <item name="android:textColorPrimary">@color/iron</item>
         <item name="android:background">@color/colorPrimary</item>
+    </style>
+
+    <style name="AppTheme.Dark.OButton">
+        <item name="colorButtonNormal">@color/colorPrimaryDark</item>
     </style>
 
 </resources>

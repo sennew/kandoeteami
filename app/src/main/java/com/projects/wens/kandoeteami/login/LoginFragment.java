@@ -118,10 +118,6 @@ public class LoginFragment extends Fragment implements LoginContract.view {
 
         // Commit the edits!
         editor.commit();
-
-        //TESTING PREFERENCES SAVED
-        SharedPreferences pref = getActivity().getPreferences(Context.MODE_PRIVATE);
-        Toast.makeText(getActivity(), "Bearer " + pref.getString("TOKEN",""), Toast.LENGTH_SHORT).show();
     }
 
 
@@ -157,5 +153,18 @@ public class LoginFragment extends Fragment implements LoginContract.view {
     @Override
     public void showPasswordError(String message) {
         mPassword.setError(message);
+    }
+
+    @Override
+    public void saveUserDetails(String username) {
+        // Storing token
+        // We need an Editor object to make preference changes.
+        // All objects are from android.context.Context
+        SharedPreferences settings = getActivity().getSharedPreferences(PREFS_NAME, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("username", username);
+
+        // Commit the edits!
+        editor.commit();
     }
 }

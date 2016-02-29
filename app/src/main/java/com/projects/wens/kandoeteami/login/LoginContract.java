@@ -21,6 +21,8 @@ public interface LoginContract {
         void showUsernameError(String message);
 
         void showPasswordError(String message);
+
+        void saveUserDetails(String username);
     }
 
     interface UserActionListener{
