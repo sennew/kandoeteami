@@ -64,6 +64,7 @@ public class LoginFragment extends Fragment implements LoginContract.view {
         service = ServiceGenerator.createService(LoginService.class, "http://wildfly-teamiip2kdgbe.rhcloud.com/api");
         mLoginActionListener = new LoginPresenter(this,service);
 
+
     }
 
     @Nullable
@@ -146,5 +147,15 @@ public class LoginFragment extends Fragment implements LoginContract.view {
     @Override
     public void stopProgress() {
         progressDialog.dismiss();
+    }
+
+    @Override
+    public void showUsernameError(String message) {
+        mUsername.setError(message);
+    }
+
+    @Override
+    public void showPasswordError(String message) {
+        mPassword.setError(message);
     }
 }

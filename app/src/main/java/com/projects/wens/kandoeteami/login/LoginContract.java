@@ -17,6 +17,10 @@ public interface LoginContract {
         void showProgressLogin();
 
         void stopProgress();
+
+        void showUsernameError(String message);
+
+        void showPasswordError(String message);
     }
 
     interface UserActionListener{

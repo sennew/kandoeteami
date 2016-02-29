@@ -59,6 +59,7 @@ dependencies {
     compile 'com.android.support.test.espresso:espresso-core:2.2.1'
 
 
+    compile 'com.google.android.gms:play-services-appindexing:8.1.0'
 }
 
 

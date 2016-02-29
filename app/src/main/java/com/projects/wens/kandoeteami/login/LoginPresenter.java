@@ -25,24 +25,41 @@ public class LoginPresenter implements LoginContract.UserActionListener {
     public void login() {
         String username = view.getUsername();
         String password = view.getPassword();
-        LoginDTO login = new LoginDTO(username,password);
+        LoginDTO login = new LoginDTO(username, password);
         view.showProgressLogin();
-        service.login(login, new Callback<String>() {
-            @Override
-            public void success(String accesToken, Response response) {
-                view.showSuccessMessage("Login correct");
-                view.saveToken(accesToken);
-                //TODO sessionManagement
-                view.stopProgress();
-                view.showOrganisationsActivity();
 
-            }
+        if (validate()) {
+            service.login(login, new Callback<String>() {
+                @Override
+                public void success(String accesToken, Response response) {
+                    view.showSuccessMessage("Login correct");
+                    view.saveToken(accesToken);
+                    //TODO sessionManagement
+                    view.stopProgress();
+                    view.showOrganisationsActivity();
 
-            @Override
-            public void failure(RetrofitError error) {
-                view.showErrorMessage("Login failed.");
-                view.stopProgress();
-            }
-        });
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+                    view.showErrorMessage("Login failed.");
+                    view.stopProgress();
+                }
+            });
+        }
+    }
+
+    private boolean validate() {
+        if (view.getUsername().isEmpty()) {
+            view.showUsernameError("Username is empty");
+            return false;
+        }
+
+        if (view.getPassword().isEmpty()) {
+            view.showPasswordError("Password is empty!");
+            return false;
+        }
+
+        return true;
     }
 }

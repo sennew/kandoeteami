@@ -20,10 +20,10 @@
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="wrap_content"
-            android:layout_height="72dp"
+            android:layout_height="130dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="24dp"
-            android:src="@drawable/kandoelogo" />
+            android:layout_marginBottom="14dp"
+            android:src="@drawable/kandoesqlogo" />
 
         <!-- Email Label -->
         <android.support.design.widget.TextInputLayout
@@ -67,7 +67,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:layout_marginTop="26dp"
+            android:layout_marginTop="6dp"
             android:orientation="vertical"
             android:gravity="center_horizontal">
 
