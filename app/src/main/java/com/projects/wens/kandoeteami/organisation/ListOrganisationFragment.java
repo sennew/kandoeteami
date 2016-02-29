@@ -27,6 +27,7 @@ import java.util.List;
 
 public class ListOrganisationFragment extends Fragment implements ListOrganisationContract.view {
     public static final String PREFS_NAME = "MyPrefs";
+    private static final String PICASSO_BASEURL = "http://wildfly-teamiip2kdgbe.rhcloud.com/";
     private ListOrganisationContract.UserActionListener mOrgaActionListener;
     private ContentAdapter mOrganisationAdapter;
     private OrganisationService service;
@@ -136,12 +137,13 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
 
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
+
             Organisation organisation = mOrganisations.get(position);
             holder.title.setText(organisation.getOrganisationName());
             //TODO:DE DESCRIPTION MOET NOG TOEGEVOEGD WORDEN AAN HET MODEL
             holder.description.setText(organisation.getOrganisationName());
             Context context = holder.image.getContext();
-            Picasso.with(context).load(organisation.getLogoUrl()).into(holder.image);
+            Picasso.with(context).load(PICASSO_BASEURL + organisation.getLogoUrl()).into(holder.image);
         }
 
         public void replaceData(List<Organisation> organisations) {

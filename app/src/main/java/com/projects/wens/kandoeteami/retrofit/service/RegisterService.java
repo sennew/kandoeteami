@@ -1,6 +1,5 @@
 package com.projects.wens.kandoeteami.retrofit.service;
 
-import com.projects.wens.kandoeteami.login.data.LoginDTO;
 import com.projects.wens.kandoeteami.register.data.RegisterDTO;
 
 import retrofit.Callback;
@@ -12,7 +11,7 @@ import retrofit.http.POST;
  */
 public interface RegisterService {
 
-    @POST("/register")
+    @POST("/users")
     void register(@Body RegisterDTO registerDTO, Callback<String> callback);
 
 }
