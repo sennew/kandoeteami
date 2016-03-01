@@ -37,5 +37,10 @@
         <activity android:name=".organisation.ListOrganisationActivity"
             android:label="My Organisations">
         </activity>
+
+        <activity android:name=".organisation.OrganisationActivity"
+            android:parentActivityName=".organisation.ListOrganisationActivity"
+            android:label="My Organisations">
+        </activity>
     </application>
 </manifest>

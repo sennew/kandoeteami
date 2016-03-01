@@ -14,9 +14,4 @@ public class OrganisationPresenter implements OrganisationContract.UserActionLis
         this.service = service;
     }
 
-
-    @Override
-    public void loadOrganisation(int ID) {
-        //TODO: service
-    }
 }

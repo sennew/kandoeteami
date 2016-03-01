@@ -27,7 +27,6 @@ public class LoginPresenter implements LoginContract.UserActionListener {
         String password = view.getPassword();
         LoginDTO login = new LoginDTO(username, password);
         view.showProgressLogin();
-
         if (validate()) {
             service.login(login, new Callback<String>() {
                 @Override

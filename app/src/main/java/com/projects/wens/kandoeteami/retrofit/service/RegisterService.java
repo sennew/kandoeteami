@@ -14,4 +14,5 @@ public interface RegisterService {
     @POST("/users")
     void register(@Body RegisterDTO registerDTO, Callback<String> callback);
 
+
 }

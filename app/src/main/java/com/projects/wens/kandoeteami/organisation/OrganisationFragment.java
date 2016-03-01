@@ -7,7 +7,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.projects.wens.kandoeteami.R;
 import com.projects.wens.kandoeteami.organisation.data.Organisation;
 import com.projects.wens.kandoeteami.retrofit.ServiceGenerator;
 import com.projects.wens.kandoeteami.retrofit.service.OrganisationService;
@@ -23,6 +26,10 @@ public class OrganisationFragment extends Fragment implements OrganisationContra
     public static final String PREFS_NAME = "MyPrefs";
     private OrganisationService service;
     private OrganisationContract.UserActionListener organisationActionListener;
+    private TextView tvOrganisationTitle;
+    private TextView tvOrganisationDescription;
+    private ImageView imgOrganisation;
+    private int organisationId;
 
     public static Fragment newInstance() {
         return new OrganisationFragment();
@@ -33,6 +40,11 @@ public class OrganisationFragment extends Fragment implements OrganisationContra
         super.onCreate(savedInstanceState);
         service = ServiceGenerator.createService(OrganisationService.class, "http://wildfly-teamiip2kdgbe.rhcloud.com/api");
         organisationActionListener = new OrganisationPresenter(this, service);
+
+        //TODO: GET ID from BUNDLE
+        if(savedInstanceState!=null){
+            organisationId = savedInstanceState.getInt("ORGAID");
+        }
     }
 
     @Override
@@ -40,34 +52,22 @@ public class OrganisationFragment extends Fragment implements OrganisationContra
         super.onResume();
         SharedPreferences settings = getActivity().getSharedPreferences(PREFS_NAME, 0);
         String token = settings.getString("token", null);
-        /*service.getOrganisation(token, 1, new Callback<Organisation>() {
-            @Override
-            public void success(Organisation organisation, Response response) {
 
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-
-            }
-        });*/
+        //LOAD ORGANISATION METHOD?
+        //organisationActionListener.loadOrganisation(token, id);
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
-        //ROOT VIEW
+        View root = inflater.inflate(R.layout.fragment_organisation_item, container, false);
+        tvOrganisationTitle = (TextView) root.findViewById(R.id.org_title);
+        tvOrganisationDescription = (TextView) root.findViewById(R.id.org_description);
+        imgOrganisation = (ImageView) root.findViewById(R.id.org_img);
 
+        tvOrganisationTitle.setText("ORGAID:" + organisationId);
+        return root;
     }
 
-    @Override
-    public int getOrganisationID() {
-        return 0;
-    }
 
-    @Override
-    public void showOrganisation() {
-
-    }
 }

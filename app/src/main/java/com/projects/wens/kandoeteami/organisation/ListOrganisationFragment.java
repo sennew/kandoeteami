@@ -1,6 +1,7 @@
 package com.projects.wens.kandoeteami.organisation;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.projects.wens.kandoeteami.R;
+import com.projects.wens.kandoeteami.login.LoginActivity;
 import com.projects.wens.kandoeteami.organisation.data.Organisation;
 import com.projects.wens.kandoeteami.retrofit.ServiceGenerator;
 import com.projects.wens.kandoeteami.retrofit.service.OrganisationService;
@@ -112,7 +114,11 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
 
     @Override
     public void showOrganisationDetailUi(Integer noteId) {
-        //TODO: NIEUWE INTENT AANMAKEN OM DETAIL ACTIVITY OP TE STARTEN
+        Intent i = new Intent(getContext(), OrganisationActivity.class);
+        Bundle mBundle = new Bundle();
+        mBundle.putInt("ORGAID", noteId);
+        i.putExtras(mBundle);
+        startActivity(i);
     }
 
     @Override

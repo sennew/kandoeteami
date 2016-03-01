@@ -6,11 +6,10 @@ package com.projects.wens.kandoeteami.organisation;
 public interface OrganisationContract {
 
     interface View{
-        int getOrganisationID();
-        void showOrganisation();
+
     }
 
     interface UserActionListener {
-        void loadOrganisation(int ID);
+
     }
 }
