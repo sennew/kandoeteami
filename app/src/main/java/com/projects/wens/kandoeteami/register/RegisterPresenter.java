@@ -1,5 +1,7 @@
 package com.projects.wens.kandoeteami.register;
 
+import android.content.SharedPreferences;
+
 import com.projects.wens.kandoeteami.register.data.RegisterDTO;
 import com.projects.wens.kandoeteami.retrofit.service.RegisterService;
 
@@ -11,6 +13,7 @@ import retrofit.client.Response;
  * Created by michaelkees on 28/02/16.
  */
 public class RegisterPresenter implements RegisterContract.UserActionListener {
+    public static final String PREFS_NAME = "MyPrefs";
     private final RegisterContract.view view;
     private final RegisterService service;
 
@@ -20,7 +23,7 @@ public class RegisterPresenter implements RegisterContract.UserActionListener {
     }
 
     @Override
-    public void register() {
+    public void register(SharedPreferences shared) {
         RegisterDTO registerDTO = new RegisterDTO();
         String email = view.getEmail();
         String password = view.getPassword();
@@ -30,6 +33,9 @@ public class RegisterPresenter implements RegisterContract.UserActionListener {
             registerDTO.setUsername(username);
             registerDTO.setEmail(email);
             registerDTO.setPassword(password);
+            SharedPreferences.Editor editor = shared.edit();
+            editor.putString("username", username);
+            editor.commit();
             view.showProgressRegister();
             service.register(registerDTO, new Callback<String>() {
                 @Override

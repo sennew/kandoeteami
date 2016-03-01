@@ -1,6 +1,6 @@
 package com.projects.wens.kandoeteami.register;
 
-import android.widget.EditText;
+import android.content.SharedPreferences;
 
 /**
  * Created by michaelkees on 28/02/16.
@@ -63,7 +63,7 @@ public interface RegisterContract {
     }
 
     interface UserActionListener {
-       void register();
+       void register(SharedPreferences sharedPreferences);
 
     }
 }

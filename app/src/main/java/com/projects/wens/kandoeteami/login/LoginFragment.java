@@ -1,30 +1,21 @@
 package com.projects.wens.kandoeteami.login;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.projects.wens.kandoeteami.R;
-import com.projects.wens.kandoeteami.login.data.AccesToken;
 import com.projects.wens.kandoeteami.organisation.ListOrganisationActivity;
-import com.projects.wens.kandoeteami.organisation.ListOrganisationPresenter;
 import com.projects.wens.kandoeteami.retrofit.ServiceGenerator;
 import com.projects.wens.kandoeteami.retrofit.service.LoginService;
-import com.projects.wens.kandoeteami.retrofit.service.OrganisationService;
 
 import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
@@ -71,7 +62,11 @@ public class LoginFragment extends Fragment implements LoginContract.view {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_login, container, false);
+        //SharedPreferences om user
+        String username = getActivity().getSharedPreferences(PREFS_NAME,0).getString("username", null);
+
         mUsername = (EditText) root.findViewById(R.id.login_username);
+        mUsername.setText(username);
         mPassword = (EditText) root.findViewById(R.id.login_password);
         mLogin_button = (Button) root.findViewById(R.id.btnLogin);
         mLogin_button.setOnClickListener(new View.OnClickListener() {
