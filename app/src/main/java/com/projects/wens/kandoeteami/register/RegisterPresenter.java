@@ -1,6 +1,7 @@
 package com.projects.wens.kandoeteami.register;
 
 import android.content.SharedPreferences;
+import android.support.annotation.Nullable;
 
 import com.projects.wens.kandoeteami.register.data.RegisterDTO;
 import com.projects.wens.kandoeteami.retrofit.service.RegisterService;
@@ -23,7 +24,7 @@ public class RegisterPresenter implements RegisterContract.UserActionListener {
     }
 
     @Override
-    public void register(SharedPreferences shared) {
+    public void register(@Nullable SharedPreferences shared) {
         RegisterDTO registerDTO = new RegisterDTO();
         String email = view.getEmail();
         String password = view.getPassword();
@@ -33,9 +34,12 @@ public class RegisterPresenter implements RegisterContract.UserActionListener {
             registerDTO.setUsername(username);
             registerDTO.setEmail(email);
             registerDTO.setPassword(password);
-            SharedPreferences.Editor editor = shared.edit();
-            editor.putString("username", username);
-            editor.commit();
+            //Toegevoegd voor testing
+            if (shared != null){
+                SharedPreferences.Editor editor = shared.edit();
+                editor.putString("username", username);
+                editor.commit();
+            }
             view.showProgressRegister();
             service.register(registerDTO, new Callback<String>() {
                 @Override

@@ -38,6 +38,7 @@ public class LoginPresenterTest {
 
     @Test
     public void checkLogin(){
+        //Hier moet de test komen om na te gaan of de login correct verloopt
         verify(mLoginView).showProgressLogin();
         verify(mLoginView).showSuccessMessage("Login correct");
     }
