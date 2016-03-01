@@ -16,7 +16,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
- * Created by senne on 29/02/2016.
+ *
  */
 public class LoginPresenterTest {
     @Mock

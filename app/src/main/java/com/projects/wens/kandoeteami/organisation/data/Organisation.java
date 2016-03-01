@@ -16,6 +16,12 @@ public class Organisation {
         //empty
     }
 
+    //Constructor voor TESTING
+    public Organisation(String organisationName, String address){
+        this.organisationName = organisationName;
+        this.address = address;
+    }
+
     public int getOrganistionId() {
         return organistionId;
     }

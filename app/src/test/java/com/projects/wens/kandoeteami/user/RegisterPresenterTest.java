@@ -14,7 +14,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
- * Created by senne on 01/03/2016.
+ *
  */
 public class RegisterPresenterTest {
     @Mock
