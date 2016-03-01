@@ -45,7 +45,6 @@ public class LoginFragment extends Fragment implements LoginContract.view {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        //TODO: HIER MOET DE PRESENTER AANGEMAAKT WORDEN
 
         if(savedInstanceState != null){
             String email = getActivity().getIntent().getExtras().getString("EMAIL");
@@ -64,7 +63,6 @@ public class LoginFragment extends Fragment implements LoginContract.view {
         View root = inflater.inflate(R.layout.fragment_login, container, false);
         //SharedPreferences om user
         String username = getActivity().getSharedPreferences(PREFS_NAME,0).getString("username", null);
-
         mUsername = (EditText) root.findViewById(R.id.login_username);
         mUsername.setText(username);
         mPassword = (EditText) root.findViewById(R.id.login_password);
