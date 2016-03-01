@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.projects.wens.kandoeteami.R;
 
@@ -19,11 +20,16 @@ import com.projects.wens.kandoeteami.R;
  */
 public class OrganisationActivity extends AppCompatActivity {
 
+    private int organisationId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if(savedInstanceState!=null){
+             organisationId = savedInstanceState.getInt("ORGAID");
+             Toast.makeText(this, "ORGA: " + organisationId, Toast.LENGTH_SHORT).show();
+        }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -52,4 +58,7 @@ public class OrganisationActivity extends AppCompatActivity {
         transaction.commit();
     }
 
+    public int getOrganisationId() {
+        return organisationId;
+    }
 }

@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.projects.wens.kandoeteami.R;
 import com.projects.wens.kandoeteami.login.LoginActivity;
@@ -114,6 +115,7 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
 
     @Override
     public void showOrganisationDetailUi(Integer noteId) {
+        Toast.makeText(getContext(), "showOrgaDetail: " + noteId, Toast.LENGTH_SHORT).show();
         Intent i = new Intent(getContext(), OrganisationActivity.class);
         Bundle mBundle = new Bundle();
         mBundle.putInt("ORGAID", noteId);
@@ -173,9 +175,7 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
             }
         }
 
-        public Organisation getOrga(int position) {
-            return mOrganisations.get(position);
-        }
+
 
         public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
             public TextView title;
@@ -196,8 +196,9 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
 
             @Override
             public void onClick(View v) {
+
                 int position = getAdapterPosition();
-                Organisation orga = getOrga(position);
+                Organisation orga = mOrganisations.get(position);
                 mOrganisationListener.onOrganisationClick(orga);
             }
         }

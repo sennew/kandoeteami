@@ -52,6 +52,6 @@ public class ListOrganisationPresenter implements ListOrganisationContract.UserA
 
     @Override
     public void openOrganisationThema(@NonNull Organisation requestOrga) {
-        view.showOrganisationDetailUi(requestOrga.getOrganistionId());
+        view.showOrganisationDetailUi(requestOrga.getOrganisationId());
     }
 }

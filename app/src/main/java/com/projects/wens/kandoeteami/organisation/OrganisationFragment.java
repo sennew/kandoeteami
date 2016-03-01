@@ -9,11 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.projects.wens.kandoeteami.R;
 import com.projects.wens.kandoeteami.organisation.data.Organisation;
 import com.projects.wens.kandoeteami.retrofit.ServiceGenerator;
 import com.projects.wens.kandoeteami.retrofit.service.OrganisationService;
+
+import java.util.List;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -31,6 +34,8 @@ public class OrganisationFragment extends Fragment implements OrganisationContra
     private ImageView imgOrganisation;
     private int organisationId;
 
+
+
     public static Fragment newInstance() {
         return new OrganisationFragment();
     }
@@ -42,9 +47,8 @@ public class OrganisationFragment extends Fragment implements OrganisationContra
         organisationActionListener = new OrganisationPresenter(this, service);
 
         //TODO: GET ID from BUNDLE
-        if(savedInstanceState!=null){
-            organisationId = savedInstanceState.getInt("ORGAID");
-        }
+        organisationId = (int) getActivity().getIntent().getExtras().get("ORGAID");
+        Toast.makeText(getContext(), "ORGAID: " + organisationId, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -70,4 +74,33 @@ public class OrganisationFragment extends Fragment implements OrganisationContra
     }
 
 
+    @Override
+    public void showSuccesMessage(String message) {
+
+    }
+
+    @Override
+    public void showOrganisation(Organisation organisation) {
+
+    }
+
+    @Override
+    public String getOrganisationName() {
+        return null;
+    }
+
+    @Override
+    public String getOrganisationDescription() {
+        return null;
+    }
+
+    @Override
+    public List<String> getOrganisationMembers() {
+        return null;
+    }
+
+    @Override
+    public List<String> getOrganisationOrganisers() {
+        return null;
+    }
 }

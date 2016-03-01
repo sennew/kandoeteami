@@ -14,4 +14,8 @@ public class OrganisationPresenter implements OrganisationContract.UserActionLis
         this.service = service;
     }
 
+    @Override
+    public void loadOrganisation(String token, int id) {
+
+    }
 }

@@ -7,4 +7,5 @@
     <string name="email_enter">Enter email</string>
     <string name="username_enter">Enter username</string>
     <string name="login_button">Login</string>
+    <string name="succes_get_organisation">Organisation HTTP 200</string>
 </resources>

@@ -6,7 +6,7 @@ import java.util.List;
  * Created by senne on 22/02/2016.
  */
 public class Organisation {
-    private int organistionId;
+    private int organisationId;
     private String organisationName;
     private String address;
     private String logoUrl;
@@ -22,12 +22,12 @@ public class Organisation {
         this.address = address;
     }
 
-    public int getOrganistionId() {
-        return organistionId;
+    public int getOrganisationId() {
+        return organisationId;
     }
 
-    public void setOrganistionId(int organistionId) {
-        this.organistionId = organistionId;
+    public void setOrganisationId(int organistionId) {
+        this.organisationId = organistionId;
     }
 
     public String getOrganisationName() {
