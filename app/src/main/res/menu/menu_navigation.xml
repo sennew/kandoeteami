@@ -1,7 +1,44 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/statistics_navigation_menu_item"
-        android:icon="@drawable/ic_statistics"
-        android:title="List Organisations" />
+        android:id="@+id/nav_ic_organisaitons"
+        android:icon="@drawable/ic_forward_activity"
+        android:title="My Organisations" />
+
+    <item
+        android:id="@+id/nav_ic_themes"
+        android:icon="@drawable/ic_forward_activity"
+        android:title="My Themes" />
+
+    <item
+        android:id="@+id/nav_ic_kandoes"
+        android:icon="@drawable/ic_forward_activity"
+        android:title="My Kandoes" />
+
+    <item
+        android:id="@+id/nav_ic_newkandoe"
+        android:icon="@drawable/ic_forward_activity"
+        android:title="Create new Kandoe" />
+
+    <!--line-->
+    <item
+        android:id="@+id/nav_ic_profile"
+        android:icon="@drawable/ic_forward_activity"
+        android:title="Profile" />
+
+    <item
+        android:id="@+id/nav_ic_about"
+        android:icon="@drawable/ic_forward_activity"
+        android:title="About" />
+
+    <item
+        android:id="@+id/nav_ic_help"
+        android:icon="@drawable/ic_forward_activity"
+        android:title="Help" />
+
+    <item
+        android:id="@+id/nav_logout"
+        android:icon="@drawable/ic_forward_activity"
+        android:title="Logout" />
+
 </menu>
