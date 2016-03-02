@@ -44,7 +44,7 @@ public class OrganisationPresenterTest {
         verify(service).getOrganisation(anyString(), anyInt(), argumentCaptor.capture());
 
         argumentCaptor.getValue().success(ORGANISATION, null);
-        verify(view).showSuccesMessage("Success");
+        verify(view).showSuccesMessage("Successfully loaded organisations");
         verify(view).showOrganisation(ORGANISATION);
     }
 }

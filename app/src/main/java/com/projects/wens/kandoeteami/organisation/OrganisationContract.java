@@ -11,12 +11,18 @@ public interface OrganisationContract {
 
     interface View{
         void showSuccesMessage(String message);
+
         void showOrganisation(Organisation organisation);
+
         String getOrganisationName();
+
         String getOrganisationDescription();
+
         List<String> getOrganisationMembers();
+
         List<String> getOrganisationOrganisers();
 
+        void showErrorMessage(String message);
     }
 
     interface UserActionListener {

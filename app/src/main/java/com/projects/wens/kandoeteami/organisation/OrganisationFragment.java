@@ -1,5 +1,6 @@
 package com.projects.wens.kandoeteami.organisation;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,17 +16,18 @@ import com.projects.wens.kandoeteami.R;
 import com.projects.wens.kandoeteami.organisation.data.Organisation;
 import com.projects.wens.kandoeteami.retrofit.ServiceGenerator;
 import com.projects.wens.kandoeteami.retrofit.service.OrganisationService;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Style;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-/**
- * Created by michaelkees on 29/02/16.
- */
 public class OrganisationFragment extends Fragment implements OrganisationContract.View {
+    private static final String PICASSO_BASEURL = "http://wildfly-teamiip2kdgbe.rhcloud.com/";
     public static final String PREFS_NAME = "MyPrefs";
     private OrganisationService service;
     private OrganisationContract.UserActionListener organisationActionListener;
@@ -48,7 +50,6 @@ public class OrganisationFragment extends Fragment implements OrganisationContra
 
         //TODO: GET ID from BUNDLE
         organisationId = (int) getActivity().getIntent().getExtras().get("ORGAID");
-        Toast.makeText(getContext(), "ORGAID: " + organisationId, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -58,7 +59,7 @@ public class OrganisationFragment extends Fragment implements OrganisationContra
         String token = settings.getString("token", null);
 
         //LOAD ORGANISATION METHOD?
-        //organisationActionListener.loadOrganisation(token, id);
+        organisationActionListener.loadOrganisation(token, organisationId);
     }
 
     @Nullable
@@ -69,38 +70,47 @@ public class OrganisationFragment extends Fragment implements OrganisationContra
         tvOrganisationDescription = (TextView) root.findViewById(R.id.org_description);
         imgOrganisation = (ImageView) root.findViewById(R.id.org_img);
 
-        tvOrganisationTitle.setText("ORGAID:" + organisationId);
         return root;
     }
 
 
     @Override
     public void showSuccesMessage(String message) {
-
+        Crouton.makeText(getActivity(), message, Style.CONFIRM).show();
     }
 
     @Override
     public void showOrganisation(Organisation organisation) {
-
+        tvOrganisationTitle.setText(organisation.getOrganisationName());
+        tvOrganisationDescription.setText(organisation.getAddress());
+        //Context context = imgOrganisation.getContext();
+        //Picasso.with(context).load(PICASSO_BASEURL + organisation.getLogoUrl()).into(imgOrganisation);
     }
 
     @Override
     public String getOrganisationName() {
-        return null;
+        return tvOrganisationTitle.getText().toString();
     }
 
     @Override
     public String getOrganisationDescription() {
-        return null;
+        return tvOrganisationDescription.getText().toString();
     }
 
     @Override
     public List<String> getOrganisationMembers() {
+        //TODO ListView members
         return null;
     }
 
     @Override
     public List<String> getOrganisationOrganisers() {
+        //TODO ListView organisers
         return null;
+    }
+
+    @Override
+    public void showErrorMessage(String message) {
+        Crouton.makeText(getActivity(), message, Style.ALERT).show();
     }
 }
