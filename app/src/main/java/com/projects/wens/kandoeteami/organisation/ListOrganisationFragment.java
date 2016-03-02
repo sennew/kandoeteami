@@ -153,7 +153,7 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
             Organisation organisation = mOrganisations.get(position);
             holder.title.setText(organisation.getOrganisationName());
             //TODO:DE DESCRIPTION MOET NOG TOEGEVOEGD WORDEN AAN HET MODEL
-            holder.description.setText(organisation.getOrganisationName());
+            holder.description.setText(organisation.getAddress());
             //Context context = holder.image.getContext();
             //Picasso.with(context).load(PICASSO_BASEURL + organisation.getLogoUrl()).into(holder.image);
         }
