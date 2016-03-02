@@ -1,6 +1,7 @@
 package com.projects.wens.kandoeteami.organisation;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -14,7 +15,8 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.projects.wens.kandoeteami.R;
-
+import com.projects.wens.kandoeteami.login.LoginActivity;
+import com.projects.wens.kandoeteami.user.UserActivity;
 
 
 public class ListOrganisationActivity extends AppCompatActivity {
@@ -70,6 +72,22 @@ public class ListOrganisationActivity extends AppCompatActivity {
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
                         //TODO: UITWERKING MENU OPTIES
+                        Intent i;
+                        switch (menuItem.getItemId()){
+                            case R.id.nav_ic_organisaitons:
+                                i = new Intent(getApplicationContext(), ListOrganisationActivity.class);
+                                startActivity(i);
+                                break;
+                            case R.id.nav_ic_profile:
+                                i = new Intent(getApplicationContext(), UserActivity.class);
+                                startActivity(i);
+                                break;
+                            case R.id.nav_ic_logout:
+                                i = new Intent(getApplicationContext(), LoginActivity.class);
+                                startActivity(i);
+                                break;
+
+                        }
                         return false;
                     }
                 }

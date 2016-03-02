@@ -1,7 +1,5 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
     <group  android:id="@+id/group_content" android:checkableBehavior="all">
-
         <item
             android:id="@+id/nav_ic_newkandoe"
             android:icon="@drawable/ic_add_kandoe"
@@ -12,7 +10,6 @@
             android:icon="@drawable/ic_my_kandoes"
             android:title="My Kandoes" />
 
-
         <item
             android:id="@+id/nav_ic_organisaitons"
             android:icon="@drawable/ic_organisations"
@@ -22,12 +19,9 @@
             android:id="@+id/nav_ic_themes"
             android:icon="@drawable/ic_themes"
             android:title="My Themes" />
-
     </group>
 
     <group android:id="@+id/group_account" android:checkableBehavior="all">
-
-        <!--line-->
         <item
             android:id="@+id/nav_ic_profile"
             android:icon="@drawable/ic_profile"
@@ -44,9 +38,8 @@
             android:title="Help" />
 
         <item
-            android:id="@+id/nav_logout"
+            android:id="@+id/nav_ic_logout"
             android:icon="@drawable/ic_logout"
             android:title="Logout" />
-
     </group>
 </menu>
