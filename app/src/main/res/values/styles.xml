@@ -30,6 +30,7 @@
         <item name="android:textColorHint">@color/iron</item>
 
         <item name="colorButtonNormal">@color/colorOrange</item>
+        <item name="android:windowActionBarOverlay">true</item>
 
     </style>
 
@@ -48,5 +49,7 @@
     <style name="AppTheme.Dark.OButton">
         <item name="colorButtonNormal">@color/colorPrimaryDark</item>
     </style>
+
+
 
 </resources>
