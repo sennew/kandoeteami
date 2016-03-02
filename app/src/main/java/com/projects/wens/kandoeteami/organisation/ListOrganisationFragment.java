@@ -141,7 +141,6 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             Context context = parent.getContext();
             LayoutInflater inflater = LayoutInflater.from(context);
-            //FIXME: fix error
             View cardOrgView = inflater.inflate(R.layout.item_organisation, parent, false);
 
             return new ViewHolder(cardOrgView, mOrganisationListener);

@@ -2,6 +2,7 @@ package com.projects.wens.kandoeteami.organisation;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 
 import com.projects.wens.kandoeteami.R;
 import com.projects.wens.kandoeteami.login.LoginActivity;
+import com.projects.wens.kandoeteami.themes.ListThemeActivity;
 import com.projects.wens.kandoeteami.user.UserActivity;
 
 
@@ -83,8 +85,30 @@ public class ListOrganisationActivity extends AppCompatActivity {
                                 startActivity(i);
                                 break;
                             case R.id.nav_ic_logout:
+                                //Removing token
+                                SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+                                SharedPreferences.Editor editor = settings.edit();
+                                editor.putString("token", "");
+                                editor.remove("token");
+
+                                // Commit the edits!
+                                editor.commit();
+
                                 i = new Intent(getApplicationContext(), LoginActivity.class);
                                 startActivity(i);
+                                finish();
+                                break;
+                            case R.id.nav_ic_kandoes:
+                                break;
+                            case R.id.nav_ic_newkandoe:
+                                break;
+                            case R.id.nav_ic_themes:
+                                i = new Intent(getApplicationContext(), ListThemeActivity.class);
+                                startActivity(i);
+                                break;
+                            case R.id.nav_ic_help:
+                                break;
+                            case R.id.nav_ic_about:
                                 break;
 
                         }

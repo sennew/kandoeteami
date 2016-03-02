@@ -14,9 +14,6 @@ import retrofit.client.Response;
 import static android.support.test.espresso.core.deps.guava.base.Preconditions.checkNotNull;
 
 
-/**
- * Created by senne on 22/02/2016.
- */
 public class ListOrganisationPresenter implements ListOrganisationContract.UserActionListener {
     private final ListOrganisationContract.view view;
     private final OrganisationService service;
