@@ -2,8 +2,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="192dp"
-    android:background="?attr/colorPrimaryDark"
+    android:background="@drawable/kandoe_background_img_flat"
     android:gravity="bottom"
+    android:scaleType="fitCenter"
     android:orientation="vertical"
     android:padding="10dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">

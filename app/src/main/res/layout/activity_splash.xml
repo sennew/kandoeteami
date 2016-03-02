@@ -5,6 +5,7 @@
     android:id="@+id/splash"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/kandoe_background_img_flat"
     android:orientation="vertical">
 
     <android.support.design.widget.AppBarLayout
