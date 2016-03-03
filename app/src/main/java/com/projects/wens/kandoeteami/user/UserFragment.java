@@ -1,5 +1,6 @@
 package com.projects.wens.kandoeteami.user;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -92,6 +93,14 @@ public class UserFragment extends Fragment implements UserContract.View{
             }
         });
 
+        btnChangePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getContext(), ChangeUserPasswordActivity.class);
+                startActivity(i);
+            }
+        });
+
         return root;
     }
 
@@ -110,7 +119,8 @@ public class UserFragment extends Fragment implements UserContract.View{
 
     @Override
     public void showChangePasswordActivity() {
-        //TODO change password activity
+        Intent i = new Intent(getContext(), ChangeUserPasswordActivity.class);
+        startActivity(i);
     }
 
     @Override

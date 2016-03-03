@@ -5,7 +5,6 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
     <style name="Widget.CardContent" parent="android:Widget">
@@ -34,11 +33,6 @@
 
     </style>
 
-    <style name="AppTheme.Dark.Toolbar" parent="Base.Widget.AppCompat.Toolbar">
-        <item name="android:windowActionBarOverlay">true</item>
-        <!-- Support library compatibility -->
-        <item name="windowActionBarOverlay">true</item>
-    </style>
 
     <style name="AppTheme.Dark.Dialog" parent="Theme.AppCompat.Dialog">
         <item name="colorAccent">@android:color/white</item>
@@ -50,6 +44,31 @@
         <item name="colorButtonNormal">@color/colorPrimaryDark</item>
     </style>
 
+    <style name="AppTheme.Dark.Toolbar" parent="Widget.AppCompat.Toolbar">
+        <item name="android:windowActionBarOverlay">true</item>
+        <!-- Support library compatibility -->
+        <item name="windowActionBarOverlay">true</item>
+    </style>
+
+    <style name="AppTheme.Light" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/dark_grey</item>
+
+        <item name="colorControlNormal">@color/dark_grey</item>
+        <item name="colorControlActivated">@android:color/darker_gray</item>
+        <item name="colorControlHighlight">@android:color/darker_gray</item>
+        <item name="android:textColorHint">@color/dark_grey</item>
+
+        <item name="colorButtonNormal">@color/colorLight</item>
+    </style>
+
+
+    <style name="AppTheme.Light.Toolbar" parent="Widget.AppCompat.Toolbar">
+        <item name="android:windowActionBarOverlay">true</item>
+        <!-- Support library compatibility -->
+        <item name="windowActionBarOverlay">true</item>
+    </style>
 
 
 </resources>

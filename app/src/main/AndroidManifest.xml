@@ -45,6 +45,14 @@
 
         <activity android:name=".user.UserActivity"
             android:label="My Profile"
+            android:theme="@style/AppTheme.Light"
+            >
+        </activity>
+
+        <activity android:name=".user.ChangeUserPasswordActivity"
+            android:label="Change password"
+            android:theme="@style/AppTheme.Light"
+            android:parentActivityName=".user.UserActivity"
             >
         </activity>
 
