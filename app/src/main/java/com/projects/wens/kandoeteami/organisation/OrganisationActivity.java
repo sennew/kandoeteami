@@ -23,7 +23,7 @@ public class OrganisationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_noside_collapsetoolbar);
+        setContentView(R.layout.activity_main_noside_toolbarcollapse);
 
         if(savedInstanceState!=null){
              organisationId = savedInstanceState.getInt("ORGAID");
