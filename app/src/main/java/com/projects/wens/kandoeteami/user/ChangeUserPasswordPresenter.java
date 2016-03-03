@@ -8,7 +8,7 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 
-public class ChangeUserPasswordPresenter  implements ChangeUserPasswordContract.UserActionListener {
+public class ChangeUserPasswordPresenter implements ChangeUserPasswordContract.UserActionListener {
     private final ChangeUserPasswordContract.View view;
     private final UserService service;
 
@@ -22,8 +22,8 @@ public class ChangeUserPasswordPresenter  implements ChangeUserPasswordContract.
         User user = new User();
         User cUser = view.getCurrentUser();
 
-        if(validate()) {
-            if(cUser !=null){
+        if (validate()) {
+            if (cUser != null) {
                 user = cUser;
                 user.setOldPassword(view.getOldPassword());
                 user.setPassword(view.getNewPassword());
@@ -47,19 +47,21 @@ public class ChangeUserPasswordPresenter  implements ChangeUserPasswordContract.
     }
 
     private boolean validate() {
-        if(view.getOldPassword().isEmpty()){
-            view.showOldPasswordError("Empty old password");
-            return false;
-        }
+        if (view != null) {
+            if (view.getOldPassword().isEmpty()) {
+                view.showOldPasswordError("Empty old password");
+                return false;
+            }
 
-        if(view.getNewPassword().isEmpty()){
-            view.showNewPasswordError("Empty new password");
-            return false;
-        }
+            if (view.getNewPassword().isEmpty()) {
+                view.showNewPasswordError("Empty new password");
+                return false;
+            }
 
-        if(!view.getNewPassword().equals(view.getRetypeNewPassword())){
-            view.showNewPasswordError("Passwords do not match");
-            return false;
+            if (!view.getNewPassword().equals(view.getRetypeNewPassword())) {
+                view.showNewPasswordError("Passwords do not match");
+                return false;
+            }
         }
         return true;
     }
