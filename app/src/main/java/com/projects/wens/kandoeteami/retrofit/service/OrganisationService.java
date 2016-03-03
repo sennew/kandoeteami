@@ -1,12 +1,17 @@
 package com.projects.wens.kandoeteami.retrofit.service;
 
+import android.telecom.Call;
+
 import com.projects.wens.kandoeteami.organisation.data.Organisation;
+import com.projects.wens.kandoeteami.user.data.User;
 
 import java.util.List;
 
 import retrofit.Callback;
+import retrofit.http.Body;
 import retrofit.http.GET;
 import retrofit.http.Header;
+import retrofit.http.POST;
 import retrofit.http.Path;
 
 /**
@@ -19,4 +24,13 @@ public interface OrganisationService {
 
     @GET("/organisations/{id}")
     void getOrganisation(@Header("Authorization") String token, @Path("id") int organisationId, Callback<Organisation> callback);
+
+    @GET("/organisations/{orgId}/members")
+    void getOrganisationMembers(@Header("Authorization") String token, @Path("orgId") int organisationId, Callback<User> userCallback);
+
+    @GET("/organisations/{orgId}/organisers")
+    void getOrganisationOrganisers(@Header("Authorization") String token, @Path("orgId") int organisationId, Callback<User> userCallback);
+
+    @POST("/organisations/{orgId}/addMember")
+    void addOrganisationMember(@Header("Authorization") String token, @Path("orgId") int organisationId, @Body User user, Callback<User> userCallback);
 }

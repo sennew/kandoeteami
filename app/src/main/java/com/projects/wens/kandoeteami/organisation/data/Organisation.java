@@ -9,7 +9,7 @@ public class Organisation {
     private int organisationId;
     private String organisationName;
     private String address;
-    private String logoUrl;
+    private String logoURL;
     private List<Link> links;
 
     public Organisation() {
@@ -46,12 +46,12 @@ public class Organisation {
         this.address = address;
     }
 
-    public String getLogoUrl() {
-        return logoUrl;
+    public String getLogoURL() {
+        return logoURL;
     }
 
-    public void setLogoUrl(String logoUrl) {
-        this.logoUrl = logoUrl;
+    public void setLogoURL(String logoURL) {
+        this.logoURL = logoURL;
     }
 
     public List<Link> getLinks() {

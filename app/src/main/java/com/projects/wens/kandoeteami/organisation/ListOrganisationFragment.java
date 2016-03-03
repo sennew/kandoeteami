@@ -3,6 +3,8 @@ package com.projects.wens.kandoeteami.organisation;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -18,21 +20,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.projects.wens.kandoeteami.R;
-import com.projects.wens.kandoeteami.login.LoginActivity;
+import com.projects.wens.kandoeteami.images.ImageDownloader;
 import com.projects.wens.kandoeteami.organisation.data.Organisation;
 import com.projects.wens.kandoeteami.retrofit.ServiceGenerator;
 import com.projects.wens.kandoeteami.retrofit.service.OrganisationService;
-import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
-
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class ListOrganisationFragment extends Fragment implements ListOrganisationContract.view {
     public static final String PREFS_NAME = "MyPrefs";
-    private static final String PICASSO_BASEURL = "http://wildfly-teamiip2kdgbe.rhcloud.com/";
     private ListOrganisationContract.UserActionListener mOrgaActionListener;
     private ContentAdapter mOrganisationAdapter;
     private OrganisationService service;
@@ -148,13 +148,16 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
 
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
-
             Organisation organisation = mOrganisations.get(position);
             holder.title.setText(organisation.getOrganisationName());
-            //TODO:DE DESCRIPTION MOET NOG TOEGEVOEGD WORDEN AAN HET MODEL
             holder.description.setText(organisation.getAddress());
-            //Context context = holder.image.getContext();
-            //Picasso.with(context).load(PICASSO_BASEURL + organisation.getLogoUrl()).into(holder.image);
+
+            if(organisation.getLogoURL().charAt(1)=='/'){
+                new ImageDownloader(holder.image).execute(R.string.resourceUrl + organisation.getLogoURL());
+            } else {
+                new ImageDownloader(holder.image).execute(organisation.getLogoURL());
+            }
+
         }
 
         public void replaceData(List<Organisation> organisations) {
@@ -169,11 +172,10 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
 
         private void setList(List<Organisation> organisations) {
             mOrganisations.clear();
-            for (Organisation o : organisations){
+            for (Organisation o : organisations) {
                 mOrganisations.add(o);
             }
         }
-
 
 
         public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -218,5 +220,7 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
     public interface OrganisationItemListener {
         void onOrganisationClick(Organisation clickOrganisation);
     }
+
+
 }
 

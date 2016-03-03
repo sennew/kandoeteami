@@ -84,7 +84,7 @@ public class OrganisationFragment extends Fragment implements OrganisationContra
         tvOrganisationTitle.setText(organisation.getOrganisationName());
         tvOrganisationDescription.setText(organisation.getAddress());
         //Context context = imgOrganisation.getContext();
-        //Picasso.with(context).load(PICASSO_BASEURL + organisation.getLogoUrl()).into(imgOrganisation);
+        //Picasso.with(context).load(PICASSO_BASEURL + organisation.getLogoURL()).into(imgOrganisation);
     }
 
     @Override
