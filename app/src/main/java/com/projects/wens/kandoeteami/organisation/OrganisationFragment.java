@@ -1,19 +1,17 @@
 package com.projects.wens.kandoeteami.organisation;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.projects.wens.kandoeteami.R;
-import com.projects.wens.kandoeteami.images.ImageDownloader;
 import com.projects.wens.kandoeteami.organisation.data.Organisation;
 import com.projects.wens.kandoeteami.retrofit.ServiceGenerator;
 import com.projects.wens.kandoeteami.retrofit.service.OrganisationService;
@@ -23,9 +21,6 @@ import java.util.List;
 
 import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
-import retrofit.Callback;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
 
 public class OrganisationFragment extends Fragment implements OrganisationContract.View {
     private static final String PICASSO_BASEURL = "http://wildfly-teamiip2kdgbe.rhcloud.com/";
@@ -35,6 +30,7 @@ public class OrganisationFragment extends Fragment implements OrganisationContra
     private TextView tvOrganisationTitle;
     private TextView tvOrganisationDescription;
     private ImageView imgOrganisation;
+    private CollapsingToolbarLayout collapsing;
     private int organisationId;
 
 
@@ -69,7 +65,9 @@ public class OrganisationFragment extends Fragment implements OrganisationContra
         View root = inflater.inflate(R.layout.fragment_organisation_item, container, false);
         tvOrganisationTitle = (TextView) root.findViewById(R.id.org_title);
         tvOrganisationDescription = (TextView) root.findViewById(R.id.org_description);
-        imgOrganisation = (ImageView) root.findViewById(R.id.org_img);
+
+        imgOrganisation = (ImageView) getActivity().findViewById(R.id.header_img);
+        collapsing = (CollapsingToolbarLayout) getActivity().findViewById(R.id.collapsing_toolbar);
 
         return root;
     }
@@ -85,11 +83,11 @@ public class OrganisationFragment extends Fragment implements OrganisationContra
         tvOrganisationTitle.setText(organisation.getOrganisationName());
         tvOrganisationDescription.setText(organisation.getAddress());
         if(organisation.getLogoURL().charAt(0)=='r'){
-            String url = "https://wildfly-teamiip2kdgbe.rhcloud.com/"+organisation.getLogoURL();
-            new ImageDownloader(imgOrganisation).execute(url);
+            Picasso.with(this.getContext()).load(PICASSO_BASEURL + organisation.getLogoURL()).into(imgOrganisation);
         } else {
-            new ImageDownloader(imgOrganisation).execute(organisation.getLogoURL());
+            Picasso.with(this.getContext()).load(organisation.getLogoURL()).into(imgOrganisation);
         }
+        collapsing.setTitle(organisation.getOrganisationName());
     }
 
     @Override
