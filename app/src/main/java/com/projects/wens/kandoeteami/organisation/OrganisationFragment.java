@@ -9,12 +9,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.projects.wens.kandoeteami.R;
+import com.projects.wens.kandoeteami.organisation.adapter.OrganisationMemberAdapter;
+import com.projects.wens.kandoeteami.organisation.adapter.OrganisationOrganiserAdapter;
 import com.projects.wens.kandoeteami.organisation.data.Organisation;
 import com.projects.wens.kandoeteami.retrofit.ServiceGenerator;
 import com.projects.wens.kandoeteami.retrofit.service.OrganisationService;
+import com.projects.wens.kandoeteami.user.data.User;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -32,7 +36,8 @@ public class OrganisationFragment extends Fragment implements OrganisationContra
     private ImageView imgOrganisation;
     private CollapsingToolbarLayout collapsing;
     private int organisationId;
-
+    private ListView lstMembers;
+    private ListView lstOrganisers;
 
 
     public static Fragment newInstance() {
@@ -44,6 +49,7 @@ public class OrganisationFragment extends Fragment implements OrganisationContra
         super.onCreate(savedInstanceState);
         service = ServiceGenerator.createService(OrganisationService.class, "http://wildfly-teamiip2kdgbe.rhcloud.com/api");
         organisationActionListener = new OrganisationPresenter(this, service);
+
 
         //TODO: GET ID from BUNDLE
         organisationId = (int) getActivity().getIntent().getExtras().get("ORGAID");
@@ -57,17 +63,22 @@ public class OrganisationFragment extends Fragment implements OrganisationContra
 
         //LOAD ORGANISATION METHOD?
         organisationActionListener.loadOrganisation(token, organisationId);
+        organisationActionListener.loadMembers(token, organisationId);
+        organisationActionListener.loadOrganisers(token, organisationId);
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_organisation_item, container, false);
-        tvOrganisationTitle = (TextView) root.findViewById(R.id.org_title);
         tvOrganisationDescription = (TextView) root.findViewById(R.id.org_description);
 
         imgOrganisation = (ImageView) getActivity().findViewById(R.id.header_img);
         collapsing = (CollapsingToolbarLayout) getActivity().findViewById(R.id.collapsing_toolbar);
+
+        lstMembers = (ListView) getActivity().findViewById(R.id.lstMembers);
+        lstOrganisers = (ListView) getActivity().findViewById(R.id.lstOrganisers);
+
 
         return root;
     }
@@ -80,9 +91,9 @@ public class OrganisationFragment extends Fragment implements OrganisationContra
 
     @Override
     public void showOrganisation(Organisation organisation) {
-        tvOrganisationTitle.setText(organisation.getOrganisationName());
+
         tvOrganisationDescription.setText(organisation.getAddress());
-        if(organisation.getLogoURL().charAt(0)=='r'){
+        if (organisation.getLogoURL().charAt(0) == 'r') {
             Picasso.with(this.getContext()).load(PICASSO_BASEURL + organisation.getLogoURL()).into(imgOrganisation);
         } else {
             Picasso.with(this.getContext()).load(organisation.getLogoURL()).into(imgOrganisation);
@@ -101,19 +112,28 @@ public class OrganisationFragment extends Fragment implements OrganisationContra
     }
 
     @Override
-    public List<String> getOrganisationMembers() {
-        //TODO ListView members
-        return null;
-    }
-
-    @Override
-    public List<String> getOrganisationOrganisers() {
-        //TODO ListView organisers
-        return null;
-    }
-
-    @Override
     public void showErrorMessage(String message) {
         Crouton.makeText(getActivity(), message, Style.ALERT).show();
+    }
+
+    @Override
+    public void showMembers(List<User> users) {
+        if (users != null && !users.isEmpty()) {
+            OrganisationMemberAdapter adapter = new OrganisationMemberAdapter(getActivity(), users);
+            if(lstMembers!=null) {
+                lstMembers.setAdapter(adapter);
+            }
+        }
+    }
+
+    @Override
+    public void showOrganisers(List<User> users) {
+        if (users != null && !users.isEmpty()) {
+            OrganisationOrganiserAdapter adapter = new OrganisationOrganiserAdapter(getActivity(), users);
+            if(lstOrganisers!=null) {
+                lstOrganisers.setAdapter(adapter);
+            }
+        }
+
     }
 }

@@ -2,6 +2,9 @@ package com.projects.wens.kandoeteami.organisation;
 
 import com.projects.wens.kandoeteami.organisation.data.Organisation;
 import com.projects.wens.kandoeteami.retrofit.service.OrganisationService;
+import com.projects.wens.kandoeteami.user.data.User;
+
+import java.util.List;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -19,7 +22,7 @@ public class OrganisationPresenter implements OrganisationContract.UserActionLis
 
 
     @Override
-    public void loadOrganisation(String token, int id) {
+    public void loadOrganisation(final String token, int id) {
 
         //loading progress
         service.getOrganisation("Bearer " + token, id, new Callback<Organisation>() {
@@ -27,11 +30,42 @@ public class OrganisationPresenter implements OrganisationContract.UserActionLis
             public void success(Organisation organisation, Response response) {
                 view.showOrganisation(organisation);
                 view.showSuccesMessage("Successfully loaded organisations");
+
             }
 
             @Override
             public void failure(RetrofitError error) {
                 view.showErrorMessage(error.getCause().toString());
+            }
+        });
+    }
+
+    @Override
+    public void loadMembers(String token, int organisationId) {
+        service.getOrganisationMembers("Bearer " + token, organisationId, new Callback<List<User>>() {
+            @Override
+            public void success(List<User> users, Response response) {
+                view.showMembers(users);
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                view.showErrorMessage(error.getMessage());
+            }
+        });
+    }
+
+    @Override
+    public void loadOrganisers(String token, int organisationId) {
+        service.getOrganisationOrganisers("Bearer " + token, organisationId, new Callback<List<User>>() {
+            @Override
+            public void success(List<User> users, Response response) {
+                view.showOrganisers(users);
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                view.showErrorMessage(error.getMessage());
             }
         });
     }
