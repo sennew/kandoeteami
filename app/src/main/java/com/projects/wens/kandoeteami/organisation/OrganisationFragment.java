@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.projects.wens.kandoeteami.R;
+import com.projects.wens.kandoeteami.images.ImageDownloader;
 import com.projects.wens.kandoeteami.organisation.data.Organisation;
 import com.projects.wens.kandoeteami.retrofit.ServiceGenerator;
 import com.projects.wens.kandoeteami.retrofit.service.OrganisationService;
@@ -83,8 +84,12 @@ public class OrganisationFragment extends Fragment implements OrganisationContra
     public void showOrganisation(Organisation organisation) {
         tvOrganisationTitle.setText(organisation.getOrganisationName());
         tvOrganisationDescription.setText(organisation.getAddress());
-        //Context context = imgOrganisation.getContext();
-        //Picasso.with(context).load(PICASSO_BASEURL + organisation.getLogoURL()).into(imgOrganisation);
+        if(organisation.getLogoURL().charAt(0)=='r'){
+            String url = "https://wildfly-teamiip2kdgbe.rhcloud.com/"+organisation.getLogoURL();
+            new ImageDownloader(imgOrganisation).execute(url);
+        } else {
+            new ImageDownloader(imgOrganisation).execute(organisation.getLogoURL());
+        }
     }
 
     @Override

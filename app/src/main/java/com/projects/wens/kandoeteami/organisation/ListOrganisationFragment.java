@@ -152,8 +152,9 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
             holder.title.setText(organisation.getOrganisationName());
             holder.description.setText(organisation.getAddress());
 
-            if(organisation.getLogoURL().charAt(1)=='/'){
-                new ImageDownloader(holder.image).execute(R.string.resourceUrl + organisation.getLogoURL());
+            if(organisation.getLogoURL().charAt(0)=='r'){
+                String url = "https://wildfly-teamiip2kdgbe.rhcloud.com/"+organisation.getLogoURL();
+                new ImageDownloader(holder.image).execute(url);
             } else {
                 new ImageDownloader(holder.image).execute(organisation.getLogoURL());
             }
