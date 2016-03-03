@@ -19,9 +19,9 @@ public interface UserService {
     void getCurrentUser(@Header("Authorization") String token, Callback<User> callback);
 
     @POST("/users/updateUser")
-    void updateCurrentUser(@Header("Authorization") String token, @Body User user);
+    void updateCurrentUser(@Header("Authorization") String token, @Body User user, Callback<User> userCallback);
 
     @POST("/users/changePassword")
-    void updateCurrentUserPassword(@Header("Authorization") String token, @Body User user);
+    void updateCurrentUserPassword(@Header("Authorization") String token, @Body User user, Callback<String> callback);
 
 }

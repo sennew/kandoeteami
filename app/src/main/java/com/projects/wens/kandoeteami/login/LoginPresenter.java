@@ -42,7 +42,7 @@ public class LoginPresenter implements LoginContract.UserActionListener {
 
                 @Override
                 public void failure(RetrofitError error) {
-                    view.showErrorMessage(error.getMessage());
+                    view.showErrorMessage("Login failed.");
                     view.stopProgress();
                 }
             });
