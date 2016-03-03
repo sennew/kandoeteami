@@ -1,6 +1,7 @@
 package com.projects.wens.kandoeteami.organisation;
 
 import com.projects.wens.kandoeteami.organisation.data.Organisation;
+import com.projects.wens.kandoeteami.user.data.User;
 
 import java.util.List;
 
@@ -18,14 +19,18 @@ public interface OrganisationContract {
 
         String getOrganisationDescription();
 
-        List<String> getOrganisationMembers();
-
-        List<String> getOrganisationOrganisers();
-
         void showErrorMessage(String message);
+
+        void showMembers(List<User> users);
+
+        void showOrganisers(List<User> users);
     }
 
     interface UserActionListener {
         void loadOrganisation(String token, int id);
+
+        void loadMembers(String token, int organisationId);
+
+        void loadOrganisers(String token, int organisationId);
     }
 }

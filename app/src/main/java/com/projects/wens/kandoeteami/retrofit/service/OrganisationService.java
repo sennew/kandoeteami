@@ -26,10 +26,10 @@ public interface OrganisationService {
     void getOrganisation(@Header("Authorization") String token, @Path("id") int organisationId, Callback<Organisation> callback);
 
     @GET("/organisations/{orgId}/members")
-    void getOrganisationMembers(@Header("Authorization") String token, @Path("orgId") int organisationId, Callback<User> userCallback);
+    void getOrganisationMembers(@Header("Authorization") String token, @Path("orgId") int organisationId, Callback<List<User>> userCallback);
 
     @GET("/organisations/{orgId}/organisers")
-    void getOrganisationOrganisers(@Header("Authorization") String token, @Path("orgId") int organisationId, Callback<User> userCallback);
+    void getOrganisationOrganisers(@Header("Authorization") String token, @Path("orgId") int organisationId, Callback<List<User>> userCallback);
 
     @POST("/organisations/{orgId}/addMember")
     void addOrganisationMember(@Header("Authorization") String token, @Path("orgId") int organisationId, @Body User user, Callback<User> userCallback);
