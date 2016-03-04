@@ -2,9 +2,7 @@ package com.projects.wens.kandoeteami.user.data;
 
 import java.util.List;
 
-/**
- * Created by michaelkees on 02/03/16.
- */
+
 public class User {
     private int userId;
     private String username;

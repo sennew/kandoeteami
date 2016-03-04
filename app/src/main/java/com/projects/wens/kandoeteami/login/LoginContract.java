@@ -26,7 +26,7 @@ public interface LoginContract {
     interface UserActionListener{
         void login();
 
-        void loginWithFacebook(String username);
+        void loginWithFacebook(String firstname, String lastname, String email);
     }
 
 }

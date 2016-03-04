@@ -2,8 +2,9 @@ package com.projects.wens.kandoeteami.login;
 
 import com.projects.wens.kandoeteami.login.data.LoginDTO;
 import com.projects.wens.kandoeteami.retrofit.service.LoginService;
-import com.projects.wens.kandoeteami.retrofit.service.UserService;
+import com.projects.wens.kandoeteami.user.data.Person;
 import com.projects.wens.kandoeteami.user.data.User;
+import com.projects.wens.kandoeteami.retrofit.service.UserService;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -35,22 +36,9 @@ public class LoginPresenter implements LoginContract.UserActionListener {
                 public void success(String accesToken, Response response) {
                     view.showSuccessMessage("Login correct");
                     view.saveToken(accesToken);
-
-                    userService.getCurrentUser(accesToken, new Callback<User>() {
-                        @Override
-                        public void success(User user, Response response) {
-                            view.saveUserDetails(user.getUsername(), user.getProfilePicture());
-                        }
-
-                        @Override
-                        public void failure(RetrofitError error) {
-                            view.showErrorMessage("Login failed");
-                            view.stopProgress();
-                        }
-                    });
-
                     view.stopProgress();
                     view.showOrganisationsActivity();
+
                 }
 
                 @Override
@@ -60,16 +48,33 @@ public class LoginPresenter implements LoginContract.UserActionListener {
                 }
             });
         }
-
-
-
-
-
     }
 
     @Override
-    public void loginWithFacebook(String username) {
-        //
+    public void loginWithFacebook(String firstName, String lastname, String email) {
+
+        User user = new User();
+        user.setUsername(firstName + lastname + "_facebook");
+        user.setPerson(new Person(firstName, lastname, null));
+
+
+            view.showProgressLogin();
+
+            service.loginFacebook(user, new Callback<String>() {
+                @Override
+                public void success(String accesToken, Response response) {
+                    view.saveToken(accesToken);
+                    view.stopProgress();
+                    view.showOrganisationsActivity();
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+
+                }
+            });
+
+
     }
 
     private boolean validate() {

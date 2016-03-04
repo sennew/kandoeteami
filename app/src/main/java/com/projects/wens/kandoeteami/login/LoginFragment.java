@@ -11,12 +11,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 import com.facebook.Profile;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.projects.wens.kandoeteami.R;
@@ -24,6 +28,11 @@ import com.projects.wens.kandoeteami.organisation.ListOrganisationActivity;
 import com.projects.wens.kandoeteami.retrofit.ServiceGenerator;
 import com.projects.wens.kandoeteami.retrofit.service.LoginService;
 import com.projects.wens.kandoeteami.retrofit.service.UserService;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Arrays;
 
 import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
@@ -71,7 +80,6 @@ public class LoginFragment extends Fragment implements LoginContract.view {
         FacebookSdk.sdkInitialize(getActivity());
         // especially, if you're using Facebook UI elements.
 
-
     }
 
     @Nullable
@@ -92,11 +100,34 @@ public class LoginFragment extends Fragment implements LoginContract.view {
         });
         loginButtonFB = (LoginButton) root.findViewById(R.id.login_button_facebook);
 
+        loginButtonFB.setReadPermissions("public_profile");
+        loginButtonFB.setReadPermissions("email");
         loginButtonFB.registerCallback(CALLBACK_MANAGER, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 Profile profile = Profile.getCurrentProfile();
-                mLoginActionListener.loginWithFacebook(profile.getName());
+                profile.getProfilePictureUri(50, 50);
+                Toast.makeText(getActivity(), profile.getProfilePictureUri(50, 50).getPath(), Toast.LENGTH_SHORT).show();
+                String firstname = profile.getFirstName();
+                String lastname = profile.getMiddleName() + " " + profile.getLastName();
+
+                final String[] emailProps = {""};
+                GraphRequest request = GraphRequest.newMeRequest(
+                        loginResult.getAccessToken(),
+                        new GraphRequest.GraphJSONObjectCallback() {
+                            @Override
+                            public void onCompleted(JSONObject object, GraphResponse response) {
+
+                                // Application code
+                                try {
+                                    emailProps[0] = object.getString("email");
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                String email = emailProps[0];
+                mLoginActionListener.loginWithFacebook(firstname, lastname, email);
             }
 
             @Override

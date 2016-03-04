@@ -11,6 +11,8 @@ import android.view.View;
 
 import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
 import com.projects.wens.kandoeteami.R;
 
 /**
@@ -46,6 +48,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         FacebookSdk.sdkInitialize(getApplicationContext());
+
 
 
     }
