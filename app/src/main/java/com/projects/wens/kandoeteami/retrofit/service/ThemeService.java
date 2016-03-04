@@ -14,9 +14,9 @@ import retrofit.http.Path;
  */
 public interface ThemeService {
 
-    //TODO: services ophalen themes, (TOKEN, ID ORGA, /currentUser?)
-    @GET("/organisations/{orgaId}/themes/currentUser")
-    void getThemes(@Header("Authorization") String token, @Path("orgaId") int orgaId, Callback<List<Theme>> callback);
+    @GET("/themes/currentUser")
+    void getThemes(@Header("Authorization") String token, Callback<List<Theme>> callback);
+
 
 
 }

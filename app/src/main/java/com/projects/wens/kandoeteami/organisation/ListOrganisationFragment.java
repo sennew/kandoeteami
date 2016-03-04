@@ -3,8 +3,6 @@ package com.projects.wens.kandoeteami.organisation;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -20,18 +18,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.projects.wens.kandoeteami.R;
-import com.projects.wens.kandoeteami.images.ImageDownloader;
 import com.projects.wens.kandoeteami.organisation.data.Organisation;
 import com.projects.wens.kandoeteami.retrofit.ServiceGenerator;
 import com.projects.wens.kandoeteami.retrofit.service.OrganisationService;
+import com.squareup.picasso.Picasso;
 
-import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class ListOrganisationFragment extends Fragment implements ListOrganisationContract.view {
+    private static final String PICASSO_BASEURL = "http://wildfly-teamiip2kdgbe.rhcloud.com/";
     public static final String PREFS_NAME = "MyPrefs";
     private ListOrganisationContract.UserActionListener mOrgaActionListener;
     private ContentAdapter mOrganisationAdapter;
@@ -49,7 +46,7 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
 
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mOrganisationAdapter = new ContentAdapter(new ArrayList<Organisation>(0), mItemListener);
+        mOrganisationAdapter = new ContentAdapter(new ArrayList<Organisation>(0), mItemListener, getActivity());
         service = ServiceGenerator.createService(
                 OrganisationService.class,
                 "http://wildfly-teamiip2kdgbe.rhcloud.com/api");
@@ -131,10 +128,12 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
     public static class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ViewHolder> {
         private List<Organisation> mOrganisations;
         private OrganisationItemListener mOrganisationListener;
+        private Context context;
 
-        public ContentAdapter(List<Organisation> organisations, OrganisationItemListener itemListener) {
+        public ContentAdapter(List<Organisation> organisations, OrganisationItemListener itemListener, Context context) {
             mOrganisations = organisations;
             mOrganisationListener = itemListener;
+            this.context = context;
         }
 
         @Override
@@ -152,11 +151,10 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
             holder.title.setText(organisation.getOrganisationName());
             holder.description.setText(organisation.getAddress());
 
-            if(organisation.getLogoURL().charAt(0)=='r'){
-                String url = "https://wildfly-teamiip2kdgbe.rhcloud.com/"+organisation.getLogoURL();
-                new ImageDownloader(holder.image).execute(url);
+            if (organisation.getLogoURL().charAt(0) == 'r') {
+                Picasso.with(context).load(PICASSO_BASEURL + organisation.getLogoURL()).into(holder.image);
             } else {
-                new ImageDownloader(holder.image).execute(organisation.getLogoURL());
+                Picasso.with(context).load(organisation.getLogoURL()).into(holder.image);
             }
 
         }
