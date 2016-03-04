@@ -15,6 +15,7 @@ import android.widget.EditText;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.Profile;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.projects.wens.kandoeteami.R;
@@ -88,13 +89,13 @@ public class LoginFragment extends Fragment implements LoginContract.view {
                 mLoginActionListener.login();
             }
         });
-        //loginButtonFB = (LoginButton) root.findViewById(R.id.login_button_facebook);
+        loginButtonFB = (LoginButton) root.findViewById(R.id.login_button_facebook);
 
-        /*loginButtonFB.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+        loginButtonFB.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                String userId = loginResult.getAccessToken().getUserId();
-                String token = loginResult.getAccessToken().getToken();
+                Profile profile = Profile.getCurrentProfile();
+                mLoginActionListener.loginWithFacebook(profile.getName());
             }
 
             @Override
@@ -104,9 +105,9 @@ public class LoginFragment extends Fragment implements LoginContract.view {
 
             @Override
             public void onError(FacebookException error) {
-
+                showErrorMessage(error.getMessage());
             }
-        });*/
+        });
         return root;
     }
 
