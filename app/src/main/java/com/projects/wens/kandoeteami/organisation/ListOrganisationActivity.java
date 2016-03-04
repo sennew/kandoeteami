@@ -41,7 +41,6 @@ public class ListOrganisationActivity extends AppCompatActivity {
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
 
-
         ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(this,  mDrawerLayout, toolbar, 0, 0);
 
         mDrawerLayout.setDrawerListener(mDrawerToggle);
@@ -65,7 +64,12 @@ public class ListOrganisationActivity extends AppCompatActivity {
         //Opvullen van de profielfoto
         CircleImageView circleImage = (CircleImageView) findViewById(R.id.profile_image);
         String profilePictureUrl = this.getSharedPreferences(PREFS_NAME,0).getString("profilepicture", null);
-        Picasso.with(this.getBaseContext()).load(PICASSO_BASEURL + profilePictureUrl).into(circleImage);
+        if (profilePictureUrl != null || profilePictureUrl != ""){
+            Picasso.with(this.getApplicationContext()).load(PICASSO_BASEURL + profilePictureUrl).into(circleImage);
+        }
+
+
+
     }
 
 
