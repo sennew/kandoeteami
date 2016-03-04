@@ -23,6 +23,7 @@ import com.projects.wens.kandoeteami.R;
 import com.projects.wens.kandoeteami.organisation.ListOrganisationActivity;
 import com.projects.wens.kandoeteami.retrofit.ServiceGenerator;
 import com.projects.wens.kandoeteami.retrofit.service.LoginService;
+import com.projects.wens.kandoeteami.retrofit.service.UserService;
 
 import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
@@ -31,6 +32,7 @@ import de.keyboardsurfer.android.widget.crouton.Style;
 public class LoginFragment extends Fragment implements LoginContract.view {
     private LoginContract.UserActionListener mLoginActionListener;
     private LoginService service;
+    private UserService userService;
     public static final String PREFS_NAME = "MyPrefs";
     private ProgressDialog progressDialog;
     private static final CallbackManager CALLBACK_MANAGER = CallbackManager.Factory.create();;
@@ -61,7 +63,8 @@ public class LoginFragment extends Fragment implements LoginContract.view {
         }
 
         service = ServiceGenerator.createService(LoginService.class, "http://wildfly-teamiip2kdgbe.rhcloud.com/api");
-        mLoginActionListener = new LoginPresenter(this,service);
+        userService = ServiceGenerator.createService(UserService.class, "http://wildfly-teamiip2kdgbe.rhcloud.com/api");
+        mLoginActionListener = new LoginPresenter(this,service, userService);
 
 
         // Initialize the SDK before executing any other operations,

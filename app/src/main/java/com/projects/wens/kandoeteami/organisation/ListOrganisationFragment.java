@@ -34,6 +34,8 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
     private ContentAdapter mOrganisationAdapter;
     private OrganisationService service;
 
+    //We m
+
 
     public ListOrganisationFragment() {
         //Requires empty public constructor

@@ -2,6 +2,8 @@ package com.projects.wens.kandoeteami.login;
 
 import com.projects.wens.kandoeteami.login.data.LoginDTO;
 import com.projects.wens.kandoeteami.retrofit.service.LoginService;
+import com.projects.wens.kandoeteami.retrofit.service.UserService;
+import com.projects.wens.kandoeteami.user.data.User;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -12,10 +14,12 @@ public class LoginPresenter implements LoginContract.UserActionListener {
 
     private final LoginContract.view view;
     private final LoginService service;
+    private final UserService userService;
 
-    public LoginPresenter(LoginContract.view view, LoginService service) {
+    public LoginPresenter(LoginContract.view view, LoginService service, UserService userservice) {
         this.view = view;
         this.service = service;
+        this.userService = userservice;
     }
 
 
@@ -31,9 +35,22 @@ public class LoginPresenter implements LoginContract.UserActionListener {
                 public void success(String accesToken, Response response) {
                     view.showSuccessMessage("Login correct");
                     view.saveToken(accesToken);
+
+                    userService.getCurrentUser(accesToken, new Callback<User>() {
+                        @Override
+                        public void success(User user, Response response) {
+                            view.saveUserDetails(user.getUsername(), user.getProfilePicture());
+                        }
+
+                        @Override
+                        public void failure(RetrofitError error) {
+                            view.showErrorMessage("Login failed");
+                            view.stopProgress();
+                        }
+                    });
+
                     view.stopProgress();
                     view.showOrganisationsActivity();
-
                 }
 
                 @Override
@@ -43,6 +60,11 @@ public class LoginPresenter implements LoginContract.UserActionListener {
                 }
             });
         }
+
+
+
+
+
     }
 
     @Override

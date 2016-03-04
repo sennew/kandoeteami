@@ -16,15 +16,19 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.projects.wens.kandoeteami.R;
-import com.projects.wens.kandoeteami.login.LoginActivity;
 import com.projects.wens.kandoeteami.start.SplashActivity;
 import com.projects.wens.kandoeteami.themes.ListThemeActivity;
 import com.projects.wens.kandoeteami.user.UserActivity;
+import com.squareup.picasso.Picasso;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class ListOrganisationActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
+    private static final String PICASSO_BASEURL = "http://wildfly-teamiip2kdgbe.rhcloud.com/";
     public static final String PREFS_NAME = "MyPrefs";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +61,11 @@ public class ListOrganisationActivity extends AppCompatActivity {
          String username = this.getSharedPreferences(PREFS_NAME, 0).getString("username", null);
          TextView tvUsername = (TextView)findViewById(R.id.nav_username);
          tvUsername.setText(username);
+
+        //Opvullen van de profielfoto
+        CircleImageView circleImage = (CircleImageView) findViewById(R.id.profile_image);
+        String profilePictureUrl = this.getSharedPreferences(PREFS_NAME,0).getString("profilepicture", null);
+        Picasso.with(this.getBaseContext()).load(PICASSO_BASEURL + profilePictureUrl).into(circleImage);
     }
 
 
