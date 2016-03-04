@@ -24,4 +24,6 @@ public interface UserService {
     @POST("/users/changePassword")
     void updateCurrentUserPassword(@Header("Authorization") String token, @Body User user, Callback<String> callback);
 
+
+
 }

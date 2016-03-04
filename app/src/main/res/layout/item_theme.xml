@@ -3,7 +3,7 @@
 
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="240dp"
+    android:layout_height="200dp"
     android:layout_gravity="center"
     android:layout_marginBottom="5dp"
     android:layout_marginLeft="5dp"
@@ -21,7 +21,7 @@
         <ImageView
             android:id="@+id/card_theme_image"
             android:layout_width="match_parent"
-            android:layout_height="140dp"
+            android:layout_height="100dp"
             android:scaleType="centerCrop"
             android:src="@drawable/placeholderdark" />
 
@@ -90,6 +90,7 @@
                 android:layout_weight="1">
                 <ImageButton
                     android:layout_width="wrap_content"
+                    android:visibility="invisible"
                     style="?android:attr/imageButtonStyle"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_share"

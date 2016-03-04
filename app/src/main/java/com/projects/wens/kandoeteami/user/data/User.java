@@ -10,6 +10,7 @@ public class User {
     private String username;
     private String password;
     private String oldPassword;
+    private boolean facebookAccount;
     private String email;
     private List<Object> roleTypes;
     private Person person;
@@ -29,6 +30,14 @@ public class User {
         this.person = person;
         this.profilePicture = profilePicture;
 
+    }
+
+    public boolean isFacebookAccount() {
+        return facebookAccount;
+    }
+
+    public void setFacebookAccount(boolean facebookAccount) {
+        this.facebookAccount = facebookAccount;
     }
 
     public void setUserId(int userId) {
