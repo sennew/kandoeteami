@@ -46,6 +46,11 @@ public class LoginPresenter implements LoginContract.UserActionListener {
         }
     }
 
+    @Override
+    public void loginWithFacebook(String username) {
+        //
+    }
+
     private boolean validate() {
         if (view.getUsername().isEmpty()) {
             view.showUsernameError("Username is empty");
