@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.facebook.login.widget.LoginButton;
 import com.projects.wens.kandoeteami.R;
 import com.projects.wens.kandoeteami.organisation.ListOrganisationActivity;
 import com.projects.wens.kandoeteami.retrofit.ServiceGenerator;
@@ -19,6 +20,8 @@ import com.projects.wens.kandoeteami.retrofit.service.LoginService;
 
 import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
+
+import com.facebook.FacebookSdk;
 
 
 public class LoginFragment extends Fragment implements LoginContract.view {
@@ -30,6 +33,7 @@ public class LoginFragment extends Fragment implements LoginContract.view {
 
     //DECLARATION COMPONENTS
     private Button mLogin_button;
+    private Button btnLoginFacebook;
     private EditText mUsername;
     private EditText mPassword;
 
@@ -54,6 +58,9 @@ public class LoginFragment extends Fragment implements LoginContract.view {
         service = ServiceGenerator.createService(LoginService.class, "http://wildfly-teamiip2kdgbe.rhcloud.com/api");
         mLoginActionListener = new LoginPresenter(this,service);
 
+        FacebookSdk.sdkInitialize(getActivity().getApplicationContext());
+        // Initialize the SDK before executing any other operations,
+        // especially, if you're using Facebook UI elements.
 
     }
 
@@ -73,6 +80,8 @@ public class LoginFragment extends Fragment implements LoginContract.view {
                 mLoginActionListener.login();
             }
         });
+        btnLoginFacebook = (LoginButton) root.findViewById(R.id.login_button_facebook);
+
         return root;
     }
 
