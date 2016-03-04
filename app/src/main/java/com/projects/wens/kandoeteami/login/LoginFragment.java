@@ -12,6 +12,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 import com.projects.wens.kandoeteami.R;
 import com.projects.wens.kandoeteami.organisation.ListOrganisationActivity;
 import com.projects.wens.kandoeteami.retrofit.ServiceGenerator;
@@ -19,6 +24,8 @@ import com.projects.wens.kandoeteami.retrofit.service.LoginService;
 
 import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
+
+import com.facebook.FacebookSdk;
 
 
 public class LoginFragment extends Fragment implements LoginContract.view {
@@ -30,8 +37,11 @@ public class LoginFragment extends Fragment implements LoginContract.view {
 
     //DECLARATION COMPONENTS
     private Button mLogin_button;
+    private LoginButton loginButtonFB;
     private EditText mUsername;
     private EditText mPassword;
+
+    private CallbackManager callbackManager;
 
 
     public LoginFragment(){
@@ -55,6 +65,11 @@ public class LoginFragment extends Fragment implements LoginContract.view {
         mLoginActionListener = new LoginPresenter(this,service);
 
 
+        // Initialize the SDK before executing any other operations,
+        FacebookSdk.sdkInitialize(getActivity());
+        // especially, if you're using Facebook UI elements.
+        callbackManager = CallbackManager.Factory.create();
+
     }
 
     @Nullable
@@ -73,6 +88,25 @@ public class LoginFragment extends Fragment implements LoginContract.view {
                 mLoginActionListener.login();
             }
         });
+        //loginButtonFB = (LoginButton) root.findViewById(R.id.login_button_facebook);
+
+        /*loginButtonFB.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                String userId = loginResult.getAccessToken().getUserId();
+                String token = loginResult.getAccessToken().getToken();
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+
+            }
+        });*/
         return root;
     }
 
