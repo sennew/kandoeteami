@@ -34,7 +34,7 @@ public class LoginFragment extends Fragment implements LoginContract.view {
     private LoginService service;
     public static final String PREFS_NAME = "MyPrefs";
     private ProgressDialog progressDialog;
-
+    private static final CallbackManager CALLBACK_MANAGER = CallbackManager.Factory.create();;
 
     //DECLARATION COMPONENTS
     private Button mLogin_button;
@@ -42,7 +42,6 @@ public class LoginFragment extends Fragment implements LoginContract.view {
     private EditText mUsername;
     private EditText mPassword;
 
-    private CallbackManager callbackManager;
 
 
     public LoginFragment(){
@@ -69,7 +68,7 @@ public class LoginFragment extends Fragment implements LoginContract.view {
         // Initialize the SDK before executing any other operations,
         FacebookSdk.sdkInitialize(getActivity());
         // especially, if you're using Facebook UI elements.
-        callbackManager = CallbackManager.Factory.create();
+
 
     }
 
@@ -91,7 +90,7 @@ public class LoginFragment extends Fragment implements LoginContract.view {
         });
         loginButtonFB = (LoginButton) root.findViewById(R.id.login_button_facebook);
 
-        loginButtonFB.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+        loginButtonFB.registerCallback(CALLBACK_MANAGER, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 Profile profile = Profile.getCurrentProfile();

@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
 import com.projects.wens.kandoeteami.R;
 
@@ -17,6 +18,8 @@ import com.projects.wens.kandoeteami.R;
  */
 public class LoginActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
+    private static final CallbackManager CALLBACK_MANAGER = CallbackManager.Factory.create();;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +46,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         FacebookSdk.sdkInitialize(getApplicationContext());
+
 
     }
 
