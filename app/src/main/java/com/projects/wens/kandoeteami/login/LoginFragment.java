@@ -64,8 +64,9 @@ public class LoginFragment extends Fragment implements LoginContract.view {
         service = ServiceGenerator.createService(LoginService.class, "http://wildfly-teamiip2kdgbe.rhcloud.com/api");
         mLoginActionListener = new LoginPresenter(this,service);
 
-        FacebookSdk.sdkInitialize(getActivity().getApplicationContext());
+
         // Initialize the SDK before executing any other operations,
+        FacebookSdk.sdkInitialize(getActivity());
         // especially, if you're using Facebook UI elements.
         callbackManager = CallbackManager.Factory.create();
 
@@ -87,9 +88,9 @@ public class LoginFragment extends Fragment implements LoginContract.view {
                 mLoginActionListener.login();
             }
         });
-        loginButtonFB = (LoginButton) root.findViewById(R.id.login_button_facebook);
+        //loginButtonFB = (LoginButton) root.findViewById(R.id.login_button_facebook);
 
-        loginButtonFB.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+        /*loginButtonFB.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 String userId = loginResult.getAccessToken().getUserId();
@@ -105,7 +106,7 @@ public class LoginFragment extends Fragment implements LoginContract.view {
             public void onError(FacebookException error) {
 
             }
-        });
+        });*/
         return root;
     }
 

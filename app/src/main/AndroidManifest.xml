@@ -15,9 +15,7 @@
 
         <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
 
-        <provider android:authorities="com.facebook.app.FacebookContentProvider1234"
-            android:name="com.facebook.FacebookContentProvider"
-            android:exported="true" />
+
 
         <activity android:name=".start.SplashActivity"
             android:label="Kandoe"
@@ -30,10 +28,8 @@
 
         <activity android:name=".login.LoginActivity"
             android:parentActivityName=".start.SplashActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:theme="@style/AppTheme.Dark"
             android:label="Login">
-
-
         </activity>
 
         <activity android:name=".register.RegisterActivity"
