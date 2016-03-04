@@ -1,7 +1,5 @@
 package com.projects.wens.kandoeteami.login;
 
-import com.projects.wens.kandoeteami.login.data.AccesToken;
-
 /**
  * Created by senne on 23/02/2016.
  */
@@ -22,7 +20,7 @@ public interface LoginContract {
 
         void showPasswordError(String message);
 
-        void saveUserDetails(String username);
+        void saveUserDetails(String username, String profilePicture);
     }
 
     interface UserActionListener{

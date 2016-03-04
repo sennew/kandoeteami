@@ -13,11 +13,13 @@ public class User {
     private String email;
     private List<Object> roleTypes;
     private Person person;
+    private String profilePicture;
 
     public User() {
     }
 
-    public User(int userId, String username, String password, String oldPassword, String email, List<Object> roleTypes, Person person) {
+
+    public User(int userId, String username, String password, String oldPassword, String email, List<Object> roleTypes, Person person, String profilePicture) {
         this.userId = userId;
         this.username = username;
         this.password = password;
@@ -25,6 +27,8 @@ public class User {
         this.email = email;
         this.roleTypes = roleTypes;
         this.person = person;
+        this.profilePicture = profilePicture;
+
     }
 
     public void setUserId(int userId) {
@@ -81,5 +85,13 @@ public class User {
 
     public Person getPerson() {
         return person;
+    }
+
+    public String getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(String profilePicture) {
+        this.profilePicture = profilePicture;
     }
 }

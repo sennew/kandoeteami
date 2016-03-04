@@ -15,6 +15,7 @@ import android.widget.EditText;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
 import com.facebook.Profile;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
@@ -25,8 +26,6 @@ import com.projects.wens.kandoeteami.retrofit.service.LoginService;
 
 import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
-
-import com.facebook.FacebookSdk;
 
 
 public class LoginFragment extends Fragment implements LoginContract.view {
@@ -183,13 +182,14 @@ public class LoginFragment extends Fragment implements LoginContract.view {
     }
 
     @Override
-    public void saveUserDetails(String username) {
+    public void saveUserDetails(String username,String profilepicture) {
         // Storing token
         // We need an Editor object to make preference changes.
         // All objects are from android.context.Context
         SharedPreferences settings = getActivity().getSharedPreferences(PREFS_NAME, 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.putString("username", username);
+        editor.putString("profilepicture", profilepicture);
 
         // Commit the edits!
         editor.commit();

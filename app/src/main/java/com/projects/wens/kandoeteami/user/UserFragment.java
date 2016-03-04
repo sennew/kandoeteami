@@ -16,16 +16,16 @@ import com.projects.wens.kandoeteami.R;
 import com.projects.wens.kandoeteami.retrofit.ServiceGenerator;
 import com.projects.wens.kandoeteami.retrofit.service.UserService;
 import com.projects.wens.kandoeteami.user.data.User;
+import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import de.keyboardsurfer.android.widget.crouton.Crouton;
-import de.keyboardsurfer.android.widget.crouton.Style;
 
 /**
  * Created by michaelkees on 01/03/16.
  */
 public class UserFragment extends Fragment implements UserContract.View{
 
+    private static final String PICASSO_BASEURL = "http://wildfly-teamiip2kdgbe.rhcloud.com/";
     public static final String PREFS_NAME = "MyPrefs";
     private UserService service;
     private UserContract.UserActionListener actionListener;
@@ -71,7 +71,7 @@ public class UserFragment extends Fragment implements UserContract.View{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_profile, container, false);
-        imgUser = (CircleImageView) root.findViewById(R.id.user_img);
+        imgUser = (CircleImageView) getActivity().findViewById(R.id.user_img);
         etUsername = (EditText) root.findViewById(R.id.user_username);
         etFirstName = (EditText) root.findViewById(R.id.user_firstname);
         etLastName = (EditText) root.findViewById(R.id.user_lastname);
@@ -115,6 +115,10 @@ public class UserFragment extends Fragment implements UserContract.View{
         etAddressNumber.setText(user.getPerson().getAddress().getNumber());
         etAddressCity.setText(user.getPerson().getAddress().getCity());
         etAddressZip.setText(user.getPerson().getAddress().getZip());
+        if (user.getProfilePicture() != null){
+            Picasso.with(this.getContext()).load(PICASSO_BASEURL + user.getProfilePicture()).into(imgUser);
+        }
+
     }
 
     @Override

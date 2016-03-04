@@ -31,7 +31,6 @@ public class LoginPresenter implements LoginContract.UserActionListener {
                 public void success(String accesToken, Response response) {
                     view.showSuccessMessage("Login correct");
                     view.saveToken(accesToken);
-                    view.saveUserDetails(username);
                     view.stopProgress();
                     view.showOrganisationsActivity();
 

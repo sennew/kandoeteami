@@ -17,14 +17,12 @@
         android:textColor="@color/black_alpha_40"
         tools:text="Karel de Grote Hogeschool" />
 
-    <ListView
-        android:id="@+id/lstOrganisers"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+    <ExpandableListView
+        android:id="@+id/users_list"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent">
+    </ExpandableListView>
 
-    <ListView
-        android:id="@+id/lstMembers"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+
 
 </LinearLayout>

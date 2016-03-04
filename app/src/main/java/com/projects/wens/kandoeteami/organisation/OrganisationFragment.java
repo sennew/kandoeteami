@@ -76,10 +76,6 @@ public class OrganisationFragment extends Fragment implements OrganisationContra
         imgOrganisation = (ImageView) getActivity().findViewById(R.id.header_img);
         collapsing = (CollapsingToolbarLayout) getActivity().findViewById(R.id.collapsing_toolbar);
 
-        lstMembers = (ListView) getActivity().findViewById(R.id.lstMembers);
-        lstOrganisers = (ListView) getActivity().findViewById(R.id.lstOrganisers);
-
-
         return root;
     }
 
