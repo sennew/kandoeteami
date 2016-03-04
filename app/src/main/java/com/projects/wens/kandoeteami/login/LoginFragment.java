@@ -12,6 +12,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.projects.wens.kandoeteami.R;
 import com.projects.wens.kandoeteami.organisation.ListOrganisationActivity;
@@ -33,9 +37,11 @@ public class LoginFragment extends Fragment implements LoginContract.view {
 
     //DECLARATION COMPONENTS
     private Button mLogin_button;
-    private Button btnLoginFacebook;
+    private LoginButton loginButtonFB;
     private EditText mUsername;
     private EditText mPassword;
+
+    private CallbackManager callbackManager;
 
 
     public LoginFragment(){
@@ -61,6 +67,7 @@ public class LoginFragment extends Fragment implements LoginContract.view {
         FacebookSdk.sdkInitialize(getActivity().getApplicationContext());
         // Initialize the SDK before executing any other operations,
         // especially, if you're using Facebook UI elements.
+        callbackManager = CallbackManager.Factory.create();
 
     }
 
@@ -80,8 +87,25 @@ public class LoginFragment extends Fragment implements LoginContract.view {
                 mLoginActionListener.login();
             }
         });
-        btnLoginFacebook = (LoginButton) root.findViewById(R.id.login_button_facebook);
+        loginButtonFB = (LoginButton) root.findViewById(R.id.login_button_facebook);
 
+        loginButtonFB.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                String userId = loginResult.getAccessToken().getUserId();
+                String token = loginResult.getAccessToken().getToken();
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+
+            }
+        });
         return root;
     }
 
