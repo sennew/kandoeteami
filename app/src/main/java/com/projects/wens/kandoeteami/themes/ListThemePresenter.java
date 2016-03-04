@@ -1,10 +1,14 @@
 package com.projects.wens.kandoeteami.themes;
 
+import com.projects.wens.kandoeteami.organisation.data.Organisation;
 import com.projects.wens.kandoeteami.retrofit.service.ThemeService;
+import com.projects.wens.kandoeteami.themes.data.Theme;
 
-/**
- * Created by michaelkees on 01/03/16.
- */
+import java.util.List;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
+
 public class ListThemePresenter implements ListThemeContract.UserActionListener {
 
     private ThemeService service;
@@ -16,4 +20,29 @@ public class ListThemePresenter implements ListThemeContract.UserActionListener 
         this.view = view;
     }
 
+    @Override
+    public void loadThemes(String token) {
+        if (view != null){
+            view.setProgressIndicator(true);
+        }
+        service.getThemes("Bearer " + token, new Callback<List<Theme>>() {
+            @Override
+            public void success(List<Theme> themes, Response response) {
+                if (view != null) {
+                    view.setProgressIndicator(false);
+                    view.showThemes(themes);
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                view.showErrorMessage(error.getResponse().getStatus());
+            }
+        });
+    }
+
+    @Override
+    public void openThemeDetail(Theme clickTheme) {
+        view.showThemeDetail(clickTheme.getThemeId());
+    }
 }

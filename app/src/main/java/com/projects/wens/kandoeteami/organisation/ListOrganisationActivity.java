@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.projects.wens.kandoeteami.R;
 import com.projects.wens.kandoeteami.login.LoginActivity;
+import com.projects.wens.kandoeteami.start.SplashActivity;
 import com.projects.wens.kandoeteami.themes.ListThemeActivity;
 import com.projects.wens.kandoeteami.user.UserActivity;
 
@@ -94,7 +95,7 @@ public class ListOrganisationActivity extends AppCompatActivity {
                                 // Commit the edits!
                                 editor.commit();
 
-                                i = new Intent(getApplicationContext(), LoginActivity.class);
+                                i = new Intent(getApplicationContext(), SplashActivity.class);
                                 startActivity(i);
                                 finish();
                                 break;
