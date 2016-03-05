@@ -11,9 +11,9 @@ public interface OrganisationContract {
     interface View{
         void showSuccesMessage(String message);
 
-        void showOrganisation(Organisation organisation);
+        void showOrganisation(Organisation organisation, GroupItem item);
 
-        void showUsers(GroupItem group);
+
 
         String getOrganisationName();
 
