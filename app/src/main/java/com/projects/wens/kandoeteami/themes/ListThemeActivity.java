@@ -104,10 +104,8 @@ public class ListThemeActivity extends AppCompatActivity {
                                 SharedPreferences.Editor editor = settings.edit();
                                 editor.putString("token", "");
                                 editor.remove("token");
-
                                 // Commit the edits!
                                 editor.commit();
-
                                 i = new Intent(getApplicationContext(), SplashActivity.class);
                                 startActivity(i);
                                 finish();
