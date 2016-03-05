@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
+import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -32,7 +35,9 @@ import com.projects.wens.kandoeteami.retrofit.service.UserService;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Console;
 import java.util.Arrays;
+import java.util.List;
 
 import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
@@ -44,7 +49,6 @@ public class LoginFragment extends Fragment implements LoginContract.view {
     private UserService userService;
     public static final String PREFS_NAME = "MyPrefs";
     private ProgressDialog progressDialog;
-    private static final CallbackManager CALLBACK_MANAGER = CallbackManager.Factory.create();;
 
     //DECLARATION COMPONENTS
     private Button mLogin_button;
@@ -53,12 +57,21 @@ public class LoginFragment extends Fragment implements LoginContract.view {
     private EditText mPassword;
 
 
+    //FACEBOOK
+    private CallbackManager callbackManager;
+    private AccessTokenTracker accessTokenTracker;
+    private AccessToken accessToken;
+    private String fBUserName;
+    private String fBEmail;
+    private String fBFirstName;
+    private String fBLastName;
 
-    public LoginFragment(){
+
+    public LoginFragment() {
         //Requires empty public contructor
     }
 
-    public static LoginFragment newInstance(){
+    public static LoginFragment newInstance() {
         return new LoginFragment();
     }
 
@@ -66,28 +79,44 @@ public class LoginFragment extends Fragment implements LoginContract.view {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        if(savedInstanceState != null){
+        if (savedInstanceState != null) {
             String email = getActivity().getIntent().getExtras().getString("EMAIL");
             mUsername.setText(email);
         }
 
         service = ServiceGenerator.createService(LoginService.class, "http://wildfly-teamiip2kdgbe.rhcloud.com/api");
         userService = ServiceGenerator.createService(UserService.class, "http://wildfly-teamiip2kdgbe.rhcloud.com/api");
-        mLoginActionListener = new LoginPresenter(this,service, userService);
+        mLoginActionListener = new LoginPresenter(this, service, userService);
 
-
-        // Initialize the SDK before executing any other operations,
+        // FACEBOOK : Initialize the SDK before executing any other operations,
         FacebookSdk.sdkInitialize(getActivity());
-        // especially, if you're using Facebook UI elements.
+        // especially, if you're using Facebook UI elements. --> LoginButton
 
+        accessTokenTracker = new AccessTokenTracker() {
+            @Override
+            protected void onCurrentAccessTokenChanged(
+                    AccessToken oldAccessToken,
+                    AccessToken currentAccessToken) {
+                // Set the access token using
+                // currentAccessToken when it's loaded or set.
+            }
+        };
+        accessTokenTracker.startTracking();
+        // If the access token is available already assign it.
+        accessToken = AccessToken.getCurrentAccessToken();
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_login, container, false);
+
+        //FACEBOOK  provide factory here --> due error 'please use provided factory'
+        callbackManager = CallbackManager.Factory.create();
+
         //SharedPreferences om user
-        String username = getActivity().getSharedPreferences(PREFS_NAME,0).getString("username", null);
+        String username = getActivity().getSharedPreferences(PREFS_NAME, 0).getString("username", null);
+
         mUsername = (EditText) root.findViewById(R.id.login_username);
         mUsername.setText(username);
         mPassword = (EditText) root.findViewById(R.id.login_password);
@@ -100,19 +129,26 @@ public class LoginFragment extends Fragment implements LoginContract.view {
         });
         loginButtonFB = (LoginButton) root.findViewById(R.id.login_button_facebook);
 
-        loginButtonFB.setReadPermissions("public_profile");
-        loginButtonFB.setReadPermissions("email");
-        loginButtonFB.registerCallback(CALLBACK_MANAGER, new FacebookCallback<LoginResult>() {
+        List<String> permissionNeeds = Arrays.asList("public_profile", "email",
+                "user_birthday");
+        loginButtonFB.setReadPermissions(permissionNeeds);
+
+        //LoginManager.getInstance().logInWithReadPermissions(this, permissionNeeds);
+
+        Log.d("FB","Facebook view created succesfully!");
+
+        loginButtonFB.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
+                Log.e("FB","Facebook login successfully!");
                 Profile profile = Profile.getCurrentProfile();
-                profile.getProfilePictureUri(50, 50);
-                Toast.makeText(getActivity(), profile.getProfilePictureUri(50, 50).getPath(), Toast.LENGTH_SHORT).show();
-                String firstname = profile.getFirstName();
-                String lastname = profile.getMiddleName() + " " + profile.getLastName();
-
-                final String[] emailProps = {""};
-                GraphRequest request = GraphRequest.newMeRequest(
+                //profile.getProfilePictureUri(50, 50);
+                //Toast.makeText(getActivity(), profile.getProfilePictureUri(50, 50).getPath(), Toast.LENGTH_SHORT).show();
+                fBFirstName= profile.getFirstName();
+                fBLastName = profile.getMiddleName() + " " + profile.getLastName();
+                fBUserName = fBFirstName+fBLastName+"_facebook";
+                //final String[] emailProps = {""};
+                /*GraphRequest request = GraphRequest.newMeRequest(
                         loginResult.getAccessToken(),
                         new GraphRequest.GraphJSONObjectCallback() {
                             @Override
@@ -126,24 +162,39 @@ public class LoginFragment extends Fragment implements LoginContract.view {
                                 }
                             }
                         });
-                String email = emailProps[0];
-                mLoginActionListener.loginWithFacebook(firstname, lastname, email);
+
+                Bundle parameters = new Bundle();
+                parameters.putString("fields",
+                        "id,name,email,gender, birthday");
+                request.setParameters(parameters);
+                request.executeAsync();*/
+
+                //fBEmail = emailProps[0];
+                fBEmail = fBFirstName.toLowerCase()+"."+fBLastName.toLowerCase()+"@student.kdg.be";
+                loginWithFacebook();
             }
+
 
             @Override
             public void onCancel() {
-
+                Log.d("FB","Facebook login canceled!");
+                showErrorMessage("canceled!");
             }
 
             @Override
             public void onError(FacebookException error) {
+                Log.d("FB","Facebook login failed!");
                 showErrorMessage(error.getMessage());
             }
         });
         return root;
     }
 
-    public void onResume(){
+    private void loginWithFacebook() {
+        mLoginActionListener.loginWithFacebook();
+    }
+
+    public void onResume() {
         super.onResume();
     }
 
@@ -181,7 +232,6 @@ public class LoginFragment extends Fragment implements LoginContract.view {
     }
 
 
-
     @Override
     public String getUsername() {
         return mUsername.getText().toString();
@@ -216,7 +266,7 @@ public class LoginFragment extends Fragment implements LoginContract.view {
     }
 
     @Override
-    public void saveUserDetails(String username,String profilepicture) {
+    public void saveUserDetails(String username, String profilepicture) {
         // Storing token
         // We need an Editor object to make preference changes.
         // All objects are from android.context.Context
@@ -227,5 +277,41 @@ public class LoginFragment extends Fragment implements LoginContract.view {
 
         // Commit the edits!
         editor.commit();
+    }
+
+    @Override
+    public String getFBUserName() {
+        return fBUserName;
+    }
+
+    @Override
+    public String getFBEmail() {
+        return fBEmail;
+    }
+
+    @Override
+    public String getFBFirstName() {
+        return fBFirstName;
+    }
+
+    @Override
+    public String getFBLastName() {
+        return fBLastName;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d("FB", "Facebook onactivity result!");
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        accessTokenTracker.stopTracking();
+
     }
 }

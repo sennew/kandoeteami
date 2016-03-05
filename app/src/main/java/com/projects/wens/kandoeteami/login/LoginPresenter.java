@@ -51,15 +51,13 @@ public class LoginPresenter implements LoginContract.UserActionListener {
     }
 
     @Override
-    public void loginWithFacebook(String firstName, String lastname, String email) {
-
+    public void loginWithFacebook() {
         User user = new User();
-        user.setUsername(firstName + lastname + "_facebook");
-        user.setPerson(new Person(firstName, lastname, null));
-
-
+        user.setUsername(view.getFBUserName());
+        //TODO profile picture
+        user.setEmail(view.getFBEmail());
+        user.setPerson(new Person(view.getFBFirstName(), view.getFBLastName(), null));
             view.showProgressLogin();
-
             service.loginFacebook(user, new Callback<String>() {
                 @Override
                 public void success(String accesToken, Response response) {
@@ -70,7 +68,8 @@ public class LoginPresenter implements LoginContract.UserActionListener {
 
                 @Override
                 public void failure(RetrofitError error) {
-
+                    view.showErrorMessage("Failed to login with facebook");
+                    view.stopProgress();
                 }
             });
 

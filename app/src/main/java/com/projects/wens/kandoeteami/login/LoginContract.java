@@ -21,12 +21,18 @@ public interface LoginContract {
         void showPasswordError(String message);
 
         void saveUserDetails(String username, String profilePicture);
+
+        //FACEBOOK
+        String getFBUserName();
+        String getFBEmail();
+        String getFBFirstName();
+        String getFBLastName();
     }
 
     interface UserActionListener{
         void login();
 
-        void loginWithFacebook(String firstname, String lastname, String email);
+        void loginWithFacebook();
     }
 
 }
