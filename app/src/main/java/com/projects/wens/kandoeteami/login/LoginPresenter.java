@@ -4,6 +4,7 @@ import com.facebook.CallbackManager;
 import com.projects.wens.kandoeteami.login.data.LoginDTO;
 import com.projects.wens.kandoeteami.retrofit.service.LoginService;
 import com.projects.wens.kandoeteami.retrofit.service.UserService;
+import com.projects.wens.kandoeteami.user.data.Address;
 import com.projects.wens.kandoeteami.user.data.Person;
 import com.projects.wens.kandoeteami.user.data.User;
 
@@ -56,24 +57,28 @@ public class LoginPresenter implements LoginContract.UserActionListener {
         }
     }
 
+
     @Override
-    public void loginWithFacebook(String fbFirstName, String fbLastName, String fbUserName, String fbEmail) {
+    public void loginWithFacebook(String username, String firstname, String lastname, String email) {
         User user = new User();
-        user.setUsername(fbUserName);
-        user.setEmail(fbEmail);
-        user.setPerson(new Person(fbFirstName, fbLastName, null));
+        user.setUsername(username);
+        user.setEmail(email);
+        user.setPerson(new Person(firstname, lastname, new Address("", "", "", "")));
+        user.setFacebookAccount(true);
         view.showProgressLogin();
         service.loginFacebook(user, new Callback<String>() {
             @Override
             public void success(String accesToken, Response response) {
                 view.saveToken(accesToken);
                 view.stopProgress();
+                saveUserDetails(accesToken);
                 view.showOrganisationsActivity();
             }
 
             @Override
             public void failure(RetrofitError error) {
                 view.showErrorMessage("Failed to login with facebook");
+                view.logoutFacebook();
                 view.stopProgress();
             }
         });

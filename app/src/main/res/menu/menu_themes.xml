@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
+    <item
+        android:id="@+id/theme_menu_search"
+        app:showAsAction="ifRoom"
+        android:icon="@android:drawable/ic_menu_search"
+        android:title="Search"/>
+
+    <item
+        android:id="@+id/theme_menu_filter"
+        android:icon="@android:drawable/ic_menu_sort_by_size"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom"
+        android:title="Filter"/>
+</menu>

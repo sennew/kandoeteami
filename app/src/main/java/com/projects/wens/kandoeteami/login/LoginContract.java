@@ -22,17 +22,14 @@ public interface LoginContract {
 
         void saveUserDetails(String firstname, String lastname, String profilePicture, String email);
 
-        //FACEBOOK
-        String getFBUserName();
-        String getFBEmail();
-        String getFBFirstName();
-        String getFBLastName();
+
+        void logoutFacebook();
     }
 
     interface UserActionListener{
         void login();
 
-        void loginWithFacebook(String fbFirstName, String fbLastName, String fbUserName, String fbEmail);
+        void loginWithFacebook(String username, String firstname, String lastname, String email);
     }
 
 }

@@ -11,8 +11,9 @@ public class User {
     private boolean facebookAccount;
     private String email;
     private List<Object> roleTypes;
-    private Person person;
     private String profilePicture;
+    private Person person;
+
 
     public User() {
     }
@@ -25,8 +26,8 @@ public class User {
         this.oldPassword = oldPassword;
         this.email = email;
         this.roleTypes = roleTypes;
-        this.person = person;
         this.profilePicture = profilePicture;
+        this.person = person;
 
     }
 
