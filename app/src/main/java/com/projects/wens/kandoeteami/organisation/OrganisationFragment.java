@@ -8,16 +8,20 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ExpandableListView;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.projects.wens.kandoeteami.R;
+import com.projects.wens.kandoeteami.organisation.adapter.ExpandableListViewAdapter;
 import com.projects.wens.kandoeteami.organisation.data.GroupItem;
 import com.projects.wens.kandoeteami.organisation.data.Organisation;
 import com.projects.wens.kandoeteami.retrofit.ServiceGenerator;
 import com.projects.wens.kandoeteami.retrofit.service.OrganisationService;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
@@ -32,8 +36,8 @@ public class OrganisationFragment extends Fragment implements OrganisationContra
     private ImageView imgOrganisation;
     private CollapsingToolbarLayout collapsing;
     private int organisationId;
-    private ListView lstMembers;
-    private ListView lstOrganisers;
+    private ExpandableListViewAdapter adapter;
+    private ExpandableListView listview;
 
 
     public static Fragment newInstance() {
@@ -45,10 +49,12 @@ public class OrganisationFragment extends Fragment implements OrganisationContra
         super.onCreate(savedInstanceState);
         service = ServiceGenerator.createService(OrganisationService.class, "http://wildfly-teamiip2kdgbe.rhcloud.com/api");
         organisationActionListener = new OrganisationPresenter(this, service);
-
+        adapter = new ExpandableListViewAdapter(this.getContext());
 
         //TODO: GET ID from BUNDLE
         organisationId = (int) getActivity().getIntent().getExtras().get("ORGAID");
+
+
     }
 
     @Override
@@ -70,6 +76,18 @@ public class OrganisationFragment extends Fragment implements OrganisationContra
 
         imgOrganisation = (ImageView) getActivity().findViewById(R.id.header_img);
         collapsing = (CollapsingToolbarLayout) getActivity().findViewById(R.id.collapsing_toolbar);
+        listview = (ExpandableListView) root.findViewById(R.id.users_list);
+        listview.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+            @Override
+            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+                if (listview.isGroupExpanded(groupPosition)) {
+                    listview.collapseGroup(groupPosition);
+                } else {
+                    listview.expandGroup(groupPosition);
+                }
+                return true;
+            }
+        });
 
         return root;
     }
@@ -81,7 +99,7 @@ public class OrganisationFragment extends Fragment implements OrganisationContra
     }
 
     @Override
-    public void showOrganisation(Organisation organisation) {
+    public void showOrganisation(Organisation organisation, GroupItem item) {
 
         tvOrganisationDescription.setText(organisation.getAddress());
         if (organisation.getLogoURL().charAt(0) == 'r') {
@@ -90,10 +108,11 @@ public class OrganisationFragment extends Fragment implements OrganisationContra
             Picasso.with(this.getContext()).load(organisation.getLogoURL()).into(imgOrganisation);
         }
         collapsing.setTitle(organisation.getOrganisationName());
-    }
 
-    @Override
-    public void showUsers(GroupItem item) {
+        List<GroupItem> groupItems = new ArrayList<GroupItem>();
+        groupItems.add(item);
+        adapter.setData(groupItems);
+        listview.setAdapter(adapter);
 
 
     }
