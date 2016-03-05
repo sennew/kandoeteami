@@ -32,7 +32,7 @@ public interface LoginContract {
     interface UserActionListener{
         void login();
 
-        void loginWithFacebook();
+        void loginWithFacebook(String fbFirstName, String fbLastName, String fbUserName, String fbEmail);
     }
 
 }

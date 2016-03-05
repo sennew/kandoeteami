@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
@@ -20,10 +19,7 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
 import com.facebook.Profile;
-import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.projects.wens.kandoeteami.R;
@@ -32,10 +28,6 @@ import com.projects.wens.kandoeteami.retrofit.ServiceGenerator;
 import com.projects.wens.kandoeteami.retrofit.service.LoginService;
 import com.projects.wens.kandoeteami.retrofit.service.UserService;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.Console;
 import java.util.Arrays;
 import java.util.List;
 
@@ -135,25 +127,24 @@ public class LoginFragment extends Fragment implements LoginContract.view {
 
         //LoginManager.getInstance().logInWithReadPermissions(this, permissionNeeds);
 
-        Log.d("FB","Facebook view created succesfully!");
+        Log.d("FB", "Facebook view created succesfully!");
 
         loginButtonFB.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                Log.e("FB","Facebook login successfully!");
+                Log.e("FB", "Facebook login successfully!");
                 Profile profile = Profile.getCurrentProfile();
                 //profile.getProfilePictureUri(50, 50);
                 //Toast.makeText(getActivity(), profile.getProfilePictureUri(50, 50).getPath(), Toast.LENGTH_SHORT).show();
-                fBFirstName= profile.getFirstName();
+                fBFirstName = profile.getFirstName();
                 fBLastName = profile.getMiddleName() + " " + profile.getLastName();
-                fBUserName = fBFirstName+fBLastName+"_facebook";
+                fBUserName = fBFirstName + fBLastName + "_facebook";
                 //final String[] emailProps = {""};
                 /*GraphRequest request = GraphRequest.newMeRequest(
                         loginResult.getAccessToken(),
                         new GraphRequest.GraphJSONObjectCallback() {
                             @Override
                             public void onCompleted(JSONObject object, GraphResponse response) {
-
                                 // Application code
                                 try {
                                     emailProps[0] = object.getString("email");
@@ -162,7 +153,6 @@ public class LoginFragment extends Fragment implements LoginContract.view {
                                 }
                             }
                         });
-
                 Bundle parameters = new Bundle();
                 parameters.putString("fields",
                         "id,name,email,gender, birthday");
@@ -170,28 +160,27 @@ public class LoginFragment extends Fragment implements LoginContract.view {
                 request.executeAsync();*/
 
                 //fBEmail = emailProps[0];
-                fBEmail = fBFirstName.toLowerCase()+"."+fBLastName.toLowerCase()+"@student.kdg.be";
-                loginWithFacebook();
+                fBEmail = fBFirstName.toLowerCase() + "." + fBLastName.toLowerCase() + "@student.kdg.be";
+                mLoginActionListener.loginWithFacebook(fBFirstName,fBLastName,fBUserName,fBEmail);
             }
 
 
             @Override
             public void onCancel() {
-                Log.d("FB","Facebook login canceled!");
+                Log.d("FB", "Facebook login canceled!");
                 showErrorMessage("canceled!");
             }
 
             @Override
             public void onError(FacebookException error) {
-                Log.d("FB","Facebook login failed!");
+                Log.d("FB", "Facebook login failed!");
                 showErrorMessage(error.getMessage());
             }
         });
-        return root;
-    }
 
-    private void loginWithFacebook() {
-        mLoginActionListener.loginWithFacebook();
+
+
+        return root;
     }
 
     public void onResume() {

@@ -1,5 +1,6 @@
 package com.projects.wens.kandoeteami.login;
 
+import com.facebook.CallbackManager;
 import com.projects.wens.kandoeteami.login.data.LoginDTO;
 import com.projects.wens.kandoeteami.retrofit.service.LoginService;
 import com.projects.wens.kandoeteami.retrofit.service.UserService;
@@ -16,11 +17,16 @@ public class LoginPresenter implements LoginContract.UserActionListener {
     private final LoginContract.view view;
     private final LoginService service;
     private final UserService userService;
+    //FACEBOOK  provide factory here --> due error 'please use provided factory'
+    private final CallbackManager manager;
+
+
 
     public LoginPresenter(LoginContract.view view, LoginService service, UserService userservice) {
         this.view = view;
         this.service = service;
         this.userService = userservice;
+        this.manager = CallbackManager.Factory.create();
     }
 
 
@@ -50,8 +56,31 @@ public class LoginPresenter implements LoginContract.UserActionListener {
         }
     }
 
+    @Override
+    public void loginWithFacebook(String fbFirstName, String fbLastName, String fbUserName, String fbEmail) {
+        User user = new User();
+        user.setUsername(fbUserName);
+        user.setEmail(fbEmail);
+        user.setPerson(new Person(fbFirstName, fbLastName, null));
+        view.showProgressLogin();
+        service.loginFacebook(user, new Callback<String>() {
+            @Override
+            public void success(String accesToken, Response response) {
+                view.saveToken(accesToken);
+                view.stopProgress();
+                view.showOrganisationsActivity();
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                view.showErrorMessage("Failed to login with facebook");
+                view.stopProgress();
+            }
+        });
+    }
+
     private void saveUserDetails(String accesToken){
-        userService.getCurrentUser("Bearer " +accesToken, new Callback<User>() {
+        userService.getCurrentUser("Bearer " + accesToken, new Callback<User>() {
             @Override
             public void success(User user, Response response) {
                 view.showSuccessMessage("Login correct");
@@ -68,31 +97,6 @@ public class LoginPresenter implements LoginContract.UserActionListener {
         });
     }
 
-    @Override
-    public void loginWithFacebook() {
-        User user = new User();
-        user.setUsername(view.getFBUserName());
-        //TODO profile picture
-        user.setEmail(view.getFBEmail());
-        user.setPerson(new Person(view.getFBFirstName(), view.getFBLastName(), null));
-            view.showProgressLogin();
-            service.loginFacebook(user, new Callback<String>() {
-                @Override
-                public void success(String accesToken, Response response) {
-                    view.saveToken(accesToken);
-                    view.stopProgress();
-                    view.showOrganisationsActivity();
-                }
-
-                @Override
-                public void failure(RetrofitError error) {
-                    view.showErrorMessage("Failed to login with facebook");
-                    view.stopProgress();
-                }
-            });
-
-
-    }
 
     private boolean validate() {
         if (view.getUsername().isEmpty()) {
