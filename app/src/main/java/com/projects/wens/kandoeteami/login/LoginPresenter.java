@@ -55,7 +55,7 @@ public class LoginPresenter implements LoginContract.UserActionListener {
             @Override
             public void success(User user, Response response) {
                 view.showSuccessMessage("Login correct");
-                view.saveUserDetails(user.getUsername(), user.getProfilePicture());
+                view.saveUserDetails(user.getPerson().getFirstname(), user.getPerson().getLastname(), user.getProfilePicture(), user.getEmail());
                 view.stopProgress();
                 view.showOrganisationsActivity();
             }

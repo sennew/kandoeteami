@@ -20,7 +20,7 @@ public interface LoginContract {
 
         void showPasswordError(String message);
 
-        void saveUserDetails(String username, String profilePicture);
+        void saveUserDetails(String firstname, String lastname, String profilePicture, String email);
 
         //FACEBOOK
         String getFBUserName();

@@ -41,40 +41,42 @@ public class ListOrganisationActivity extends AppCompatActivity {
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
 
-        ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(this,  mDrawerLayout, toolbar, 0, 0);
+        ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, 0, 0);
 
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         mDrawerToggle.syncState();
 
-        if (navigationView != null){
+        if (navigationView != null) {
             setupDrawerContent(navigationView);
         }
 
-        if (null == savedInstanceState){
+        if (null == savedInstanceState) {
             initFragment(ListOrganisationFragment.newInstance());
         }
 
         //DRAWER
-         String username = this.getSharedPreferences(PREFS_NAME, 0).getString("username", null);
-         TextView tvUsername = (TextView)findViewById(R.id.nav_username);
-         tvUsername.setText(username);
+        String firstname = this.getSharedPreferences(PREFS_NAME, 0).getString("firstname", null);
+        String lastname = this.getSharedPreferences(PREFS_NAME, 0).getString("lastname", null);
+        String email = this.getSharedPreferences(PREFS_NAME, 0).getString("email", null);
+        TextView tvUsername = (TextView) findViewById(R.id.nav_username);
+        tvUsername.setText(firstname+" "+lastname);
+        TextView tvEmail = (TextView) findViewById(R.id.nav_email);
+        tvEmail.setText(email);
 
         //Opvullen van de profielfoto
         CircleImageView circleImage = (CircleImageView) findViewById(R.id.profile_image);
-        String profilePictureUrl = this.getSharedPreferences(PREFS_NAME,0).getString("profilepicture", null);
-        if (profilePictureUrl != null || profilePictureUrl != ""){
+        String profilePictureUrl = this.getSharedPreferences(PREFS_NAME, 0).getString("profilepicture", null);
+        if (profilePictureUrl != null || profilePictureUrl != "") {
             Picasso.with(this.getApplicationContext()).load(PICASSO_BASEURL + profilePictureUrl).into(circleImage);
         }
-
 
 
     }
 
 
-
-    private void initFragment(Fragment listOrganisationFrag){
+    private void initFragment(Fragment listOrganisationFrag) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.add(R.id.contentFrame, listOrganisationFrag);
@@ -89,7 +91,7 @@ public class ListOrganisationActivity extends AppCompatActivity {
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
                         //TODO: UITWERKING MENU OPTIES
                         Intent i;
-                        switch (menuItem.getItemId()){
+                        switch (menuItem.getItemId()) {
                             case R.id.nav_ic_organisaitons:
                                 i = new Intent(getApplicationContext(), ListOrganisationActivity.class);
                                 startActivity(i);

@@ -266,14 +266,16 @@ public class LoginFragment extends Fragment implements LoginContract.view {
     }
 
     @Override
-    public void saveUserDetails(String username, String profilepicture) {
+    public void saveUserDetails(String firstname, String lastname, String profilepicture, String email) {
         // Storing token
         // We need an Editor object to make preference changes.
         // All objects are from android.context.Context
         SharedPreferences settings = getActivity().getSharedPreferences(PREFS_NAME, 0);
         SharedPreferences.Editor editor = settings.edit();
-        editor.putString("username", username);
+        editor.putString("firstname", firstname);
+        editor.putString("lastname", lastname);
         editor.putString("profilepicture", profilepicture);
+        editor.putString("email", email);
 
         // Commit the edits!
         editor.commit();

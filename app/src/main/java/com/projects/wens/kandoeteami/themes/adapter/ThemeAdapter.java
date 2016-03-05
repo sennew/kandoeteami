@@ -46,7 +46,6 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.ViewHolder> 
         } else {
             Picasso.with(context).load(theme.getIconURL()).into(holder.image);
         }
-
     }
 
     public void replaceData(List<Theme> themes) {
