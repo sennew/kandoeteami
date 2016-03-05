@@ -13,15 +13,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.projects.wens.kandoeteami.R;
-import com.projects.wens.kandoeteami.organisation.adapter.OrganisationMemberAdapter;
-import com.projects.wens.kandoeteami.organisation.adapter.OrganisationOrganiserAdapter;
+import com.projects.wens.kandoeteami.organisation.data.GroupItem;
 import com.projects.wens.kandoeteami.organisation.data.Organisation;
 import com.projects.wens.kandoeteami.retrofit.ServiceGenerator;
 import com.projects.wens.kandoeteami.retrofit.service.OrganisationService;
-import com.projects.wens.kandoeteami.user.data.User;
 import com.squareup.picasso.Picasso;
-
-import java.util.List;
 
 import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
@@ -63,8 +59,7 @@ public class OrganisationFragment extends Fragment implements OrganisationContra
 
         //LOAD ORGANISATION METHOD?
         organisationActionListener.loadOrganisation(token, organisationId);
-        organisationActionListener.loadMembers(token, organisationId);
-        organisationActionListener.loadOrganisers(token, organisationId);
+
     }
 
     @Nullable
@@ -98,6 +93,12 @@ public class OrganisationFragment extends Fragment implements OrganisationContra
     }
 
     @Override
+    public void showUsers(GroupItem item) {
+
+
+    }
+
+    @Override
     public String getOrganisationName() {
         return tvOrganisationTitle.getText().toString();
     }
@@ -112,24 +113,4 @@ public class OrganisationFragment extends Fragment implements OrganisationContra
         Crouton.makeText(getActivity(), message, Style.ALERT).show();
     }
 
-    @Override
-    public void showMembers(List<User> users) {
-        if (users != null && !users.isEmpty()) {
-            OrganisationMemberAdapter adapter = new OrganisationMemberAdapter(getActivity(), users);
-            if(lstMembers!=null) {
-                lstMembers.setAdapter(adapter);
-            }
-        }
-    }
-
-    @Override
-    public void showOrganisers(List<User> users) {
-        if (users != null && !users.isEmpty()) {
-            OrganisationOrganiserAdapter adapter = new OrganisationOrganiserAdapter(getActivity(), users);
-            if(lstOrganisers!=null) {
-                lstOrganisers.setAdapter(adapter);
-            }
-        }
-
-    }
 }

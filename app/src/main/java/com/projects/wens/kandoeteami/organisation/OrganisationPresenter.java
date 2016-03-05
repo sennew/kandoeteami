@@ -1,5 +1,7 @@
 package com.projects.wens.kandoeteami.organisation;
 
+import com.projects.wens.kandoeteami.organisation.data.ChildItem;
+import com.projects.wens.kandoeteami.organisation.data.GroupItem;
 import com.projects.wens.kandoeteami.organisation.data.Organisation;
 import com.projects.wens.kandoeteami.retrofit.service.OrganisationService;
 import com.projects.wens.kandoeteami.user.data.User;
@@ -41,32 +43,44 @@ public class OrganisationPresenter implements OrganisationContract.UserActionLis
     }
 
     @Override
-    public void loadMembers(String token, int organisationId) {
-        service.getOrganisationMembers("Bearer " + token, organisationId, new Callback<List<User>>() {
+    public void loadUsers(String token, int organisationId) {
+        final GroupItem item = new GroupItem("Group Members");
+        service.getOrganisationMembers(token, organisationId, new Callback<List<User>>() {
             @Override
             public void success(List<User> users, Response response) {
-                view.showMembers(users);
+                for (User u: users){
+                    ChildItem child = new ChildItem(u.getPerson().getFirstname(), u.getPerson().getLastname(), "member", u.getProfilePicture());
+                    item.addChildren(child);
+                }
             }
 
             @Override
             public void failure(RetrofitError error) {
-                view.showErrorMessage(error.getMessage());
+                //TODO: error message als members niet correct worden opgehaald.
             }
         });
-    }
 
-    @Override
-    public void loadOrganisers(String token, int organisationId) {
-        service.getOrganisationOrganisers("Bearer " + token, organisationId, new Callback<List<User>>() {
+        service.getOrganisationOrganisers(token, organisationId, new Callback<List<User>>() {
             @Override
             public void success(List<User> users, Response response) {
-                view.showOrganisers(users);
+                for (User u: users){
+                    ChildItem child = new ChildItem(u.getPerson().getFirstname(), u.getPerson().getLastname(), "organiser", u.getProfilePicture());
+                    item.addChildren(child);
+                }
+                view.showUsers(item);
             }
 
             @Override
             public void failure(RetrofitError error) {
-                view.showErrorMessage(error.getMessage());
+                //TODO: error message als organisers niet correct geladen worden
             }
         });
+
+
     }
+
+
+
+
+
 }

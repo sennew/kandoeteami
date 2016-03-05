@@ -2,9 +2,9 @@ package com.projects.wens.kandoeteami.login;
 
 import com.projects.wens.kandoeteami.login.data.LoginDTO;
 import com.projects.wens.kandoeteami.retrofit.service.LoginService;
+import com.projects.wens.kandoeteami.retrofit.service.UserService;
 import com.projects.wens.kandoeteami.user.data.Person;
 import com.projects.wens.kandoeteami.user.data.User;
-import com.projects.wens.kandoeteami.retrofit.service.UserService;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -29,15 +29,14 @@ public class LoginPresenter implements LoginContract.UserActionListener {
         final String username = view.getUsername();
         String password = view.getPassword();
         LoginDTO login = new LoginDTO(username, password);
+        final String token;
         if (validate()) {
             view.showProgressLogin();
             service.login(login, new Callback<String>() {
                 @Override
                 public void success(String accesToken, Response response) {
-                    view.showSuccessMessage("Login correct");
                     view.saveToken(accesToken);
-                    view.stopProgress();
-                    view.showOrganisationsActivity();
+                    saveUserDetails(accesToken);
 
                 }
 
@@ -47,7 +46,26 @@ public class LoginPresenter implements LoginContract.UserActionListener {
                     view.stopProgress();
                 }
             });
+
         }
+    }
+
+    private void saveUserDetails(String accesToken){
+        userService.getCurrentUser("Bearer " +accesToken, new Callback<User>() {
+            @Override
+            public void success(User user, Response response) {
+                view.showSuccessMessage("Login correct");
+                view.saveUserDetails(user.getUsername(), user.getProfilePicture());
+                view.stopProgress();
+                view.showOrganisationsActivity();
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                view.showErrorMessage("Login failed.");
+                view.stopProgress();
+            }
+        });
     }
 
     @Override
