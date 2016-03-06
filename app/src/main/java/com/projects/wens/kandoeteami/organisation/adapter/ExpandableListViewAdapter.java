@@ -18,9 +18,6 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-/**
- * Created by senne on 04/03/2016.
- */
 public class ExpandableListViewAdapter extends BaseExpandableListAdapter {
     private static final String PICASSO_BASEURL = "http://wildfly-teamiip2kdgbe.rhcloud.com/";
     private LayoutInflater inflater;

@@ -5,12 +5,14 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.projects.wens.kandoeteami.R;
 import com.projects.wens.kandoeteami.organisation.adapter.ExpandableListViewAdapter;
@@ -49,7 +51,7 @@ public class OrganisationFragment extends Fragment implements OrganisationContra
         super.onCreate(savedInstanceState);
         service = ServiceGenerator.createService(OrganisationService.class, "http://wildfly-teamiip2kdgbe.rhcloud.com/api");
         organisationActionListener = new OrganisationPresenter(this, service);
-        adapter = new ExpandableListViewAdapter(this.getContext());
+        adapter = new ExpandableListViewAdapter(getActivity());
 
         //TODO: GET ID from BUNDLE
         organisationId = (int) getActivity().getIntent().getExtras().get("ORGAID");
@@ -100,7 +102,7 @@ public class OrganisationFragment extends Fragment implements OrganisationContra
 
     @Override
     public void showOrganisation(Organisation organisation, GroupItem item) {
-
+        Log.e("SIZE", "SIZE: " + item.getChildren().size());
         tvOrganisationDescription.setText(organisation.getAddress());
         if (organisation.getLogoURL().charAt(0) == 'r') {
             Picasso.with(this.getContext()).load(PICASSO_BASEURL + organisation.getLogoURL()).into(imgOrganisation);
@@ -111,6 +113,7 @@ public class OrganisationFragment extends Fragment implements OrganisationContra
 
         List<GroupItem> groupItems = new ArrayList<GroupItem>();
         groupItems.add(item);
+        Toast.makeText(getActivity(), "GROUP ITEMS: " + groupItems.size(), Toast.LENGTH_SHORT).show();
         adapter.setData(groupItems);
         listview.setAdapter(adapter);
 
