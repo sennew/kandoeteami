@@ -25,14 +25,17 @@ public class OrganisationPresenter implements OrganisationContract.UserActionLis
 
     @Override
     public void loadOrganisation(final String token, int id) {
-
+        final Organisation orga = new Organisation();
         //loading progress
         service.getOrganisation("Bearer " + token, id, new Callback<Organisation>() {
             @Override
             public void success(Organisation organisation, Response response) {
-                view.showOrganisation(organisation);
                 view.showSuccesMessage("Successfully loaded organisations");
-
+                orga.setOrganisationId(organisation.getOrganisationId());
+                orga.setLogoURL(organisation.getLogoURL());
+                orga.setAddress(organisation.getAddress());
+                orga.setLinks(organisation.getLinks());
+                orga.setOrganisationName(organisation.getOrganisationName());
             }
 
             @Override
@@ -40,16 +43,13 @@ public class OrganisationPresenter implements OrganisationContract.UserActionLis
                 view.showErrorMessage(error.getCause().toString());
             }
         });
-    }
 
-    @Override
-    public void loadUsers(String token, int organisationId) {
-        final GroupItem item = new GroupItem("Group Members");
-        service.getOrganisationMembers(token, organisationId, new Callback<List<User>>() {
+        final GroupItem item = new GroupItem("MEMBERS GROUP");
+        service.getOrganisationMembers("Bearer " + token, id, new Callback<List<User>>() {
             @Override
             public void success(List<User> users, Response response) {
                 for (User u: users){
-                    ChildItem child = new ChildItem(u.getPerson().getFirstname(), u.getPerson().getLastname(), "member", u.getProfilePicture());
+                    ChildItem child = new ChildItem(u.getPerson().getFirstname(), u.getPerson().getLastname(), "MEMBER", u.getProfilePicture());
                     item.addChildren(child);
                 }
             }
@@ -60,14 +60,14 @@ public class OrganisationPresenter implements OrganisationContract.UserActionLis
             }
         });
 
-        service.getOrganisationOrganisers(token, organisationId, new Callback<List<User>>() {
+        service.getOrganisationOrganisers("Bearer " + token, id, new Callback<List<User>>() {
             @Override
             public void success(List<User> users, Response response) {
-                for (User u: users){
-                    ChildItem child = new ChildItem(u.getPerson().getFirstname(), u.getPerson().getLastname(), "organiser", u.getProfilePicture());
+                for (User u : users) {
+                    ChildItem child = new ChildItem(u.getPerson().getFirstname(), u.getPerson().getLastname(), "ORGANISER", u.getProfilePicture());
                     item.addChildren(child);
                 }
-                view.showUsers(item);
+                view.showOrganisation(orga, item);
             }
 
             @Override
@@ -75,7 +75,10 @@ public class OrganisationPresenter implements OrganisationContract.UserActionLis
                 //TODO: error message als organisers niet correct geladen worden
             }
         });
+    }
 
+    @Override
+    public void loadUsers(String token, int organisationId) {
 
     }
 
