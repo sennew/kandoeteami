@@ -2,7 +2,7 @@ package com.projects.wens.kandoeteami.organisation;
 
 import android.support.annotation.NonNull;
 
-import com.projects.wens.kandoeteami.organisation.data.OrganisationList;
+import com.projects.wens.kandoeteami.organisation.data.Organisation;
 
 import java.util.List;
 
@@ -12,13 +12,13 @@ import java.util.List;
 public interface ListOrganisationContract {
     interface view{
         void setProgressIndicator(boolean active);
-        void showOrganisations(List<OrganisationList> organisations);
+        void showOrganisations(List<Organisation> organisations);
         void showOrganisationDetailUi(Integer noteId);
         void showErrorMessage(int status);
     }
 
     interface UserActionListener{
         void loadOrganisations(boolean forceUpdate, String token);
-        void openOrganisationThema(@NonNull OrganisationList requestOrga);
+        void openOrganisationThema(@NonNull Organisation requestOrga);
     }
 }

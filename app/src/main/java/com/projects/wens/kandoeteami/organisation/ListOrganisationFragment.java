@@ -19,7 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.projects.wens.kandoeteami.R;
-import com.projects.wens.kandoeteami.organisation.data.OrganisationList;
+import com.projects.wens.kandoeteami.organisation.data.Organisation;
 import com.projects.wens.kandoeteami.retrofit.ServiceGenerator;
 import com.projects.wens.kandoeteami.retrofit.service.OrganisationService;
 import com.squareup.picasso.Picasso;
@@ -49,7 +49,7 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
 
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mOrganisationAdapter = new ContentAdapter(new ArrayList<OrganisationList>(0), mItemListener, getActivity());
+        mOrganisationAdapter = new ContentAdapter(new ArrayList<Organisation>(0), mItemListener, getActivity());
         service = ServiceGenerator.createService(
                 OrganisationService.class,
                 "http://wildfly-teamiip2kdgbe.rhcloud.com/api");
@@ -109,7 +109,7 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
     }
 
     @Override
-    public void showOrganisations(List<OrganisationList> organisations) {
+    public void showOrganisations(List<Organisation> organisations) {
         mOrganisationAdapter.replaceData(organisations);
     }
 
@@ -129,11 +129,11 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
     }
 
     public static class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ViewHolder> {
-        private List<OrganisationList> mOrganisations;
+        private List<Organisation> mOrganisations;
         private OrganisationItemListener mOrganisationListener;
         private Context context;
 
-        public ContentAdapter(List<OrganisationList> organisations, OrganisationItemListener itemListener, Context context) {
+        public ContentAdapter(List<Organisation> organisations, OrganisationItemListener itemListener, Context context) {
             mOrganisations = organisations;
             mOrganisationListener = itemListener;
             this.context = context;
@@ -150,10 +150,10 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
 
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
-            OrganisationList organisation = mOrganisations.get(position);
+            Organisation organisation = mOrganisations.get(position);
             holder.title.setText(organisation.getOrganisationName());
             holder.description.setText(organisation.getAddress());
-            holder.aantalUsersButton.setText(""+organisation.getAantalUsers());
+            holder.aantalUsersButton.setText(""+organisation.getCountUsers());
 
 
             if (organisation.getLogoURL().charAt(0) == 'r') {
@@ -164,7 +164,7 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
 
         }
 
-        public void replaceData(List<OrganisationList> organisations) {
+        public void replaceData(List<Organisation> organisations) {
             setList(organisations);
             notifyDataSetChanged();
         }
@@ -174,9 +174,9 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
             return mOrganisations.size();
         }
 
-        private void setList(List<OrganisationList> organisations) {
+        private void setList(List<Organisation> organisations) {
             mOrganisations.clear();
-            for (OrganisationList o : organisations) {
+            for (Organisation o : organisations) {
                 mOrganisations.add(o);
             }
         }
@@ -205,7 +205,7 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
             public void onClick(View v) {
 
                 int position = getAdapterPosition();
-                OrganisationList orga = mOrganisations.get(position);
+                Organisation orga = mOrganisations.get(position);
                 mOrganisationListener.onOrganisationClick(orga);
             }
         }
@@ -217,14 +217,14 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
     //IMPLEMENTATIE VOOR DE RECYCLERVIEW
     OrganisationItemListener mItemListener = new OrganisationItemListener() {
         @Override
-        public void onOrganisationClick(OrganisationList clickOrganisation) {
+        public void onOrganisationClick(Organisation clickOrganisation) {
             mOrgaActionListener.openOrganisationThema(clickOrganisation);
         }
     };
 
     //Interface voor weer te geven als er op een Organisatie wordt geklikt.
     public interface OrganisationItemListener {
-        void onOrganisationClick(OrganisationList clickOrganisation);
+        void onOrganisationClick(Organisation clickOrganisation);
     }
 
 

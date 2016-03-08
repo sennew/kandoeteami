@@ -10,6 +10,8 @@ public class Organisation {
     private String organisationName;
     private String address;
     private String logoURL;
+    private int countUsers;
+
     private List<Link> links;
 
     public Organisation() {
@@ -60,6 +62,14 @@ public class Organisation {
 
     public void setLinks(List<Link> links) {
         this.links = links;
+    }
+
+    public int getCountUsers() {
+        return countUsers;
+    }
+
+    public void setCountUsers(int countUsers) {
+        this.countUsers = countUsers;
     }
 
 }
