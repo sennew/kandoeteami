@@ -34,13 +34,15 @@
         <activity android:name=".login.LoginActivity"
             android:parentActivityName=".start.SplashActivity"
             android:theme="@style/AppTheme.Dark"
-            android:label="Login">
+            android:label="Login"
+            android:windowSoftInputMode="stateHidden">
         </activity>
 
         <activity android:name=".register.RegisterActivity"
             android:label="Register"
             android:parentActivityName=".start.SplashActivity"
-            android:theme="@style/AppTheme.Dark">
+            android:theme="@style/AppTheme.Dark"
+            android:windowSoftInputMode="stateHidden">
         </activity>
 
         <activity android:name=".organisation.ListOrganisationActivity"

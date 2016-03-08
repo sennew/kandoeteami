@@ -16,7 +16,7 @@
         <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="32dp"
             android:src="@drawable/ic_action_news" />
 
         <TextView
@@ -24,16 +24,12 @@
             android:layout_width="wrap_content"
             android:layout_height="70dp"
             android:layout_marginTop="6dp"
-            android:layout_marginLeft="100dp"
+            android:layout_marginLeft="97dp"
             android:layout_marginRight="20dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:textColor="@color/black_alpha_40"
             tools:text="Karel de Grote Hogeschool" />
     </RelativeLayout>
-    
-   
-    
-    
     
 
     <ExpandableListView
@@ -43,7 +39,5 @@
         android:layout_marginTop="100dp"
         tools:context=".organisation.OrganisationActivity">
     </ExpandableListView>
-
-
 
 </RelativeLayout>

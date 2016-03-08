@@ -13,12 +13,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.projects.wens.kandoeteami.R;
-import com.projects.wens.kandoeteami.organisation.data.Organisation;
+import com.projects.wens.kandoeteami.organisation.data.OrganisationList;
 import com.projects.wens.kandoeteami.retrofit.ServiceGenerator;
 import com.projects.wens.kandoeteami.retrofit.service.OrganisationService;
 import com.squareup.picasso.Picasso;
@@ -48,7 +49,7 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
 
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mOrganisationAdapter = new ContentAdapter(new ArrayList<Organisation>(0), mItemListener, getActivity());
+        mOrganisationAdapter = new ContentAdapter(new ArrayList<OrganisationList>(0), mItemListener, getActivity());
         service = ServiceGenerator.createService(
                 OrganisationService.class,
                 "http://wildfly-teamiip2kdgbe.rhcloud.com/api");
@@ -108,7 +109,7 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
     }
 
     @Override
-    public void showOrganisations(List<Organisation> organisations) {
+    public void showOrganisations(List<OrganisationList> organisations) {
         mOrganisationAdapter.replaceData(organisations);
     }
 
@@ -128,11 +129,11 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
     }
 
     public static class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ViewHolder> {
-        private List<Organisation> mOrganisations;
+        private List<OrganisationList> mOrganisations;
         private OrganisationItemListener mOrganisationListener;
         private Context context;
 
-        public ContentAdapter(List<Organisation> organisations, OrganisationItemListener itemListener, Context context) {
+        public ContentAdapter(List<OrganisationList> organisations, OrganisationItemListener itemListener, Context context) {
             mOrganisations = organisations;
             mOrganisationListener = itemListener;
             this.context = context;
@@ -149,9 +150,11 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
 
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
-            Organisation organisation = mOrganisations.get(position);
+            OrganisationList organisation = mOrganisations.get(position);
             holder.title.setText(organisation.getOrganisationName());
             holder.description.setText(organisation.getAddress());
+            holder.aantalUsersButton.setText(""+organisation.getAantalUsers());
+
 
             if (organisation.getLogoURL().charAt(0) == 'r') {
                 Picasso.with(context).load(PICASSO_BASEURL + organisation.getLogoURL()).into(holder.image);
@@ -161,7 +164,7 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
 
         }
 
-        public void replaceData(List<Organisation> organisations) {
+        public void replaceData(List<OrganisationList> organisations) {
             setList(organisations);
             notifyDataSetChanged();
         }
@@ -171,9 +174,9 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
             return mOrganisations.size();
         }
 
-        private void setList(List<Organisation> organisations) {
+        private void setList(List<OrganisationList> organisations) {
             mOrganisations.clear();
-            for (Organisation o : organisations) {
+            for (OrganisationList o : organisations) {
                 mOrganisations.add(o);
             }
         }
@@ -183,6 +186,7 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
             public TextView title;
             public TextView description;
             public ImageView image;
+            public Button aantalUsersButton;
 
             private OrganisationItemListener mOrganisationListener;
 
@@ -192,6 +196,7 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
                 title = (TextView) itemView.findViewById(R.id.card_title);
                 description = (TextView) itemView.findViewById(R.id.card_text);
                 image = (ImageView) itemView.findViewById(R.id.card_image);
+                aantalUsersButton = (Button) itemView.findViewById(R.id.button_totalusers);
                 itemView.setOnClickListener(this);
 
             }
@@ -200,7 +205,7 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
             public void onClick(View v) {
 
                 int position = getAdapterPosition();
-                Organisation orga = mOrganisations.get(position);
+                OrganisationList orga = mOrganisations.get(position);
                 mOrganisationListener.onOrganisationClick(orga);
             }
         }
@@ -212,14 +217,14 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
     //IMPLEMENTATIE VOOR DE RECYCLERVIEW
     OrganisationItemListener mItemListener = new OrganisationItemListener() {
         @Override
-        public void onOrganisationClick(Organisation clickOrganisation) {
+        public void onOrganisationClick(OrganisationList clickOrganisation) {
             mOrgaActionListener.openOrganisationThema(clickOrganisation);
         }
     };
 
     //Interface voor weer te geven als er op een Organisatie wordt geklikt.
     public interface OrganisationItemListener {
-        void onOrganisationClick(Organisation clickOrganisation);
+        void onOrganisationClick(OrganisationList clickOrganisation);
     }
 
 

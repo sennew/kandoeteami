@@ -79,8 +79,6 @@
                     android:drawableLeft="@drawable/ic_group_users"
                     tools:text="10"
                     android:textSize="12sp"
-
-
                     android:text="1"
                     android:textColor="@color/dark_grey" />
 
@@ -89,31 +87,14 @@
                     style="?android:attr/borderlessButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/ic_details"
-                    android:text="Details"
+                    android:drawableLeft="@drawable/ic_themes"
+                    android:drawablePadding="10dp"
+                    android:text="Themes"
+
                     android:textSize="12sp"
                     android:textColor="@color/dark_grey" />
 
             </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:padding="2dp"
-                android:layout_weight="1">
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    style="?android:attr/imageButtonStyle"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_share"
-
-                    android:layout_gravity="end"
-                    />
-            </LinearLayout>
-
-
 
         </LinearLayout>
 

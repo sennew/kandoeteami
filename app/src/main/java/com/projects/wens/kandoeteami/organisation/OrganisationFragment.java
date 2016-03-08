@@ -1,5 +1,6 @@
 package com.projects.wens.kandoeteami.organisation;
 
+import android.app.Dialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,6 +10,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -36,6 +39,9 @@ public class OrganisationFragment extends Fragment implements OrganisationContra
     private TextView tvOrganisationDescription;
     private ImageView imgOrganisation;
     private CollapsingToolbarLayout collapsing;
+    private Dialog allert;
+    private TextView dialogDescription;
+    private Button dialogButton;
     private int organisationId;
     private ExpandableListViewAdapter adapter;
     private ExpandableListView listview;
@@ -72,6 +78,12 @@ public class OrganisationFragment extends Fragment implements OrganisationContra
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_organisation_item, container, false);
         tvOrganisationDescription = (TextView) root.findViewById(R.id.org_description);
+        tvOrganisationDescription.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                allert.show();
+            }
+        });
 
         imgOrganisation = (ImageView) getActivity().findViewById(R.id.header_img);
         collapsing = (CollapsingToolbarLayout) getActivity().findViewById(R.id.collapsing_toolbar);
@@ -88,6 +100,19 @@ public class OrganisationFragment extends Fragment implements OrganisationContra
             }
         });
 
+
+
+        allert = new Dialog(getContext());
+        allert.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        allert.setContentView(inflater.inflate(R.layout.dialog, null));
+        dialogDescription = (TextView) allert.findViewById(R.id.dialog_description);
+        dialogButton = (Button) allert.findViewById(R.id.dialog_button);
+        dialogButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                allert.cancel();
+            }
+        });
         return root;
     }
 
@@ -100,7 +125,13 @@ public class OrganisationFragment extends Fragment implements OrganisationContra
     @Override
     public void showOrganisation(Organisation organisation, GroupItem item) {
         Log.e("SIZE", "SIZE: " + item.getChildren().size());
-        tvOrganisationDescription.setText(organisation.getAddress());
+        if (organisation.getAddress().length() > 33){
+            tvOrganisationDescription.setText(organisation.getAddress().substring(0, 33) + ".....");
+            dialogDescription.setText(organisation.getAddress());
+        } else {
+            tvOrganisationDescription.setText(organisation.getAddress());
+        }
+
         if (organisation.getLogoURL().charAt(0) == 'r') {
             Picasso.with(this.getContext()).load(PICASSO_BASEURL + organisation.getLogoURL()).into(imgOrganisation);
         } else {
