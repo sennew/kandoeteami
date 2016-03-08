@@ -2,8 +2,6 @@ package com.projects.wens.kandoeteami.organisation.data;
 
 import android.widget.TextView;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
 /**
  * Created by senne on 05/03/2016.
  */
@@ -11,7 +9,7 @@ public class ChildHolder {
     public TextView firstName;
     public TextView lastName;
     public TextView role;
-    public CircleImageView profilePicture;
+
 
     public ChildHolder() {
     }
@@ -28,7 +26,4 @@ public class ChildHolder {
         this.role = role;
     }
 
-    public void setProfilePicture(CircleImageView profilePicture) {
-        this.profilePicture = profilePicture;
-    }
 }

@@ -31,4 +31,5 @@ public class ChildItem {
     public String getProfilePictureUrl() {
         return profilePictureUrl;
     }
+
 }

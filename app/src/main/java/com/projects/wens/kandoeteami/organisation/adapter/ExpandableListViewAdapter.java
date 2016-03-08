@@ -18,9 +18,12 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+/**
+ * Created by senne on 04/03/2016.
+ */
 public class ExpandableListViewAdapter extends BaseExpandableListAdapter {
     private static final String PICASSO_BASEURL = "http://wildfly-teamiip2kdgbe.rhcloud.com/";
-    private LayoutInflater inflater;
+    private final LayoutInflater inflater;
     private List<GroupItem> items;
 
     public ExpandableListViewAdapter(Context context){
@@ -33,36 +36,10 @@ public class ExpandableListViewAdapter extends BaseExpandableListAdapter {
 
     @Override
     public ChildItem getChild(int groupPosition, int childPosition) {
-        return items.get(groupPosition).children.get(childPosition);
+        return items.get(groupPosition).getChildren().get(childPosition);
     }
 
 
-    @Override
-    public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        ChildHolder holder;
-        ChildItem item = getChild(groupPosition, childPosition);
-        if (convertView == null){
-            holder = new ChildHolder();
-            convertView = inflater.inflate(R.layout.expandable_list_item, parent, false);
-            holder.firstName = (TextView) convertView.findViewById(R.id.textVoornaam);
-            holder.lastName = (TextView) convertView.findViewById(R.id.textAchternaam);
-            holder.role = (TextView) convertView.findViewById(R.id.textMemberOrganisator);
-            holder.profilePicture = (CircleImageView) convertView.findViewById(R.id.user_img_expandable);
-            convertView.setTag(holder);
-        } else{
-            holder = (ChildHolder) convertView.getTag();
-        }
-
-        holder.firstName.setText(item.firstName);
-        holder.lastName.setText(item.lastName);
-        holder.role.setText(item.role);
-        if (item.profilePictureUrl.charAt(0) == 'h'){
-            Picasso.with(convertView.getContext()).load(item.profilePictureUrl).into(holder.profilePicture);
-        } else{
-            Picasso.with(convertView.getContext()).load(PICASSO_BASEURL + item.profilePictureUrl).into(holder.profilePicture);
-        }
-        return convertView;
-    }
 
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
@@ -81,6 +58,35 @@ public class ExpandableListViewAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
+    public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+        ChildHolder holder;
+        ChildItem item = getChild(groupPosition, childPosition);
+        TextView viewVoornaam;
+        TextView viewActernaam;
+        TextView viewOrganisator;
+        CircleImageView circleImageView;
+        if (convertView == null){
+            holder = new ChildHolder();
+            convertView = inflater.inflate(R.layout.expandable_list_item, parent, false);
+        }
+
+        viewVoornaam = (TextView) convertView.findViewById(R.id.textVoornaam);
+        viewActernaam = (TextView) convertView.findViewById(R.id.textAchternaam);
+        viewOrganisator = (TextView) convertView.findViewById(R.id.textMemberOrganisator);
+        circleImageView = (CircleImageView) convertView.findViewById(R.id.orga_user_img);
+
+        viewVoornaam.setText(item.getFirstName());
+        viewActernaam.setText(item.getLastName());
+        viewOrganisator.setText(item.getRole());
+        if (item.profilePictureUrl.charAt(0) == 'h'){
+            Picasso.with(convertView.getContext()).load(item.profilePictureUrl).into(circleImageView);
+        } else{
+            Picasso.with(convertView.getContext()).load(PICASSO_BASEURL + item.profilePictureUrl).into(circleImageView);
+        }
+        return convertView;
+    }
+
+    @Override
     public long getChildId(int groupPosition, int childPosition) {
         return childPosition;
     }
@@ -92,7 +98,7 @@ public class ExpandableListViewAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return items.get(groupPosition).getChildren().size();
+        return items.get(groupPosition).children.size();
     }
 
     @Override
@@ -109,11 +115,11 @@ public class ExpandableListViewAdapter extends BaseExpandableListAdapter {
 
     @Override
     public boolean hasStableIds() {
-        return true;
+        return false;
     }
 
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {
-        return true;
+        return false;
     }
 }

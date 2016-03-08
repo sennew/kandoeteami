@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.projects.wens.kandoeteami.R;
 import com.projects.wens.kandoeteami.organisation.adapter.ExpandableListViewAdapter;
@@ -51,12 +50,10 @@ public class OrganisationFragment extends Fragment implements OrganisationContra
         super.onCreate(savedInstanceState);
         service = ServiceGenerator.createService(OrganisationService.class, "http://wildfly-teamiip2kdgbe.rhcloud.com/api");
         organisationActionListener = new OrganisationPresenter(this, service);
-        adapter = new ExpandableListViewAdapter(getActivity());
+        adapter = new ExpandableListViewAdapter(getContext());
 
         //TODO: GET ID from BUNDLE
         organisationId = (int) getActivity().getIntent().getExtras().get("ORGAID");
-
-
     }
 
     @Override
@@ -113,11 +110,8 @@ public class OrganisationFragment extends Fragment implements OrganisationContra
 
         List<GroupItem> groupItems = new ArrayList<GroupItem>();
         groupItems.add(item);
-        Toast.makeText(getActivity(), "GROUP ITEMS: " + groupItems.size(), Toast.LENGTH_SHORT).show();
         adapter.setData(groupItems);
         listview.setAdapter(adapter);
-
-
     }
 
     @Override

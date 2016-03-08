@@ -24,7 +24,5 @@ public interface OrganisationContract {
 
     interface UserActionListener {
         void loadOrganisation(String token, int id);
-
-        void loadUsers(String token, int organisationId);
     }
 }
