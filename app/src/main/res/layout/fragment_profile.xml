@@ -25,150 +25,175 @@
                 android:orientation="vertical"
                 android:padding="30dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="5dp"
-                    android:text="Username"
-                    android:textSize="16sp" />
-
-                <EditText
-                    android:id="@+id/user_username"
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="35dp"
-                    android:background="@drawable/border_set"
-                    android:enabled="false"
-                    android:inputType="text"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="10dp"
-                    android:text="Email"
-                    android:textSize="16sp" />
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp">
 
-                <EditText
-                    android:id="@+id/user_email"
+                    <EditText
+
+                        android:id="@+id/user_username"
+                        android:layout_width="fill_parent"
+                        android:layout_height="48sp"
+                        android:hint="Username"
+                        android:inputType="text"
+                        android:paddingBottom="8dp"
+                        android:paddingTop="8dp"
+                        android:enabled="false"/>
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="35dp"
-                    android:background="@drawable/border_set"
-                    android:enabled="false"
-                    android:inputType="textEmailAddress"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="10dp"
-                    android:text="First Name"
-                    android:textSize="16sp" />
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp">
 
-                <EditText
-                    android:id="@+id/user_firstname"
+                    <EditText
+
+                        android:id="@+id/user_email"
+                        android:layout_width="fill_parent"
+                        android:layout_height="48sp"
+                        android:hint="Enter email"
+                        android:inputType="text"
+                        android:paddingBottom="8dp"
+                        android:paddingTop="8dp"
+                        android:enabled="false"/>
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="35dp"
-                    android:background="@drawable/border_set"
-                    android:hint="First Name"
-                    android:inputType="text"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp" />
-
-
-                <TextView
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp">
 
-                    android:layout_marginTop="10dp"
-                    android:text="Last Name"
-                    android:textSize="16sp" />
+                    <EditText
 
-                <EditText
-                    android:id="@+id/user_lastname"
+                        android:id="@+id/user_firstname"
+                        android:layout_width="fill_parent"
+                        android:layout_height="48sp"
+                        android:hint="Firstname"
+                        android:inputType="text"
+                        android:paddingBottom="8dp"
+                        android:paddingTop="8dp"
+                        android:enabled="false"/>
+
+                </android.support.design.widget.TextInputLayout>
+
+
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="35dp"
-                    android:background="@drawable/border_set"
-                    android:hint="Last Name"
-                    android:inputType="text"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="10dp"
-                    android:text="Address"
-                    android:textSize="16sp" />
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp">
 
-                <LinearLayout
+                    <EditText
+
+                        android:id="@+id/user_lastname"
+                        android:layout_width="fill_parent"
+                        android:layout_height="48sp"
+                        android:hint="Lastname"
+                        android:inputType="text"
+                        android:paddingBottom="8dp"
+                        android:paddingTop="8dp"
+                        android:enabled="false"/>
+
+                </android.support.design.widget.TextInputLayout>
+
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <EditText
-                        android:id="@+id/user_address_street"
+                    <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="35dp"
-                        android:layout_marginRight="5dp"
-                        android:layout_weight="5"
-                        android:background="@drawable/border_set"
-                        android:hint="Street"
-                        android:inputType="text"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp" />
+                        android:layout_height="wrap_content"
+                        android:text="Address"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="4dp" />
 
-                    <EditText
-                        android:id="@+id/user_address_number"
-                        android:layout_width="wrap_content"
-                        android:layout_height="35dp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/border_set"
-                        android:hint="Number"
-                        android:inputType="number"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp" />
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/holder_address"
+                        android:layout_width="235dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginRight="10dp"
+                        >
 
-                </LinearLayout>
+                        <EditText
 
-                <LinearLayout
+                            android:id="@+id/user_address_street"
+                            android:layout_width="fill_parent"
+                            android:layout_height="48sp"
+                            android:hint="Street"
+                            android:inputType="text"
+                            android:enabled="false"/>
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="30dp">
+
+                        <EditText
+
+                            android:id="@+id/user_address_number"
+                            android:layout_width="fill_parent"
+                            android:layout_height="48sp"
+                            android:hint="Nr"
+                            android:inputType="text"
+                            android:paddingBottom="8dp"
+                            android:enabled="false"/>
+
+                    </android.support.design.widget.TextInputLayout>
+
+                </RelativeLayout>
+
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:orientation="horizontal">
 
-                    <EditText
-                        android:id="@+id/user_address_zip"
-                        android:layout_width="wrap_content"
-                        android:layout_height="35dp"
-                        android:layout_marginRight="5dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/border_set"
-                        android:hint="Zip"
-                        android:inputType="number"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp" />
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="190dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true">
 
-                    <EditText
-                        android:id="@+id/user_address_city"
-                        android:layout_width="wrap_content"
-                        android:layout_height="35dp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_weight="5"
-                        android:background="@drawable/border_set"
-                        android:hint="City"
-                        android:inputType="text"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp" />
+                        <EditText
 
-                </LinearLayout>
+                            android:id="@+id/user_address_city"
+                            android:layout_width="fill_parent"
+                            android:layout_height="48sp"
+                            android:hint="City"
+                            android:inputType="text"
+                            android:paddingBottom="8dp"
+                            android:enabled="false"/>
+
+                    </android.support.design.widget.TextInputLayout>
+
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true">
+
+                        <EditText
+
+                            android:id="@+id/user_address_zip"
+                            android:layout_width="fill_parent"
+                            android:layout_height="48sp"
+                            android:hint="Zip"
+                            android:inputType="text"
+                            android:paddingBottom="8dp"
+                            android:enabled="false"/>
+
+                    </android.support.design.widget.TextInputLayout>
+
+                </RelativeLayout>
 
 
                 <View
@@ -178,7 +203,7 @@
                     android:layout_marginTop="10dp"
                     android:background="#F2F2F2" />
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="50dp"
@@ -188,21 +213,32 @@
                         android:id="@+id/user_change_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
                         android:layout_weight="1"
-                        android:text="Save" />
+                        android:text="SAVE"
+                        android:visibility="invisible"/>
+
+                    <android.support.v7.widget.AppCompatButton
+                        android:id="@+id/user_edit_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="1"
+                        android:text="EDIT" />
 
                     <android.support.v7.widget.AppCompatButton
                         android:id="@+id/user_change_password_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Change password" />
+                        android:layout_marginRight="20dp"
+                        android:text="Change password"
+                        android:layout_alignParentRight="true"/>
 
-                </LinearLayout>
+                </RelativeLayout>
 
 
             </LinearLayout>
-
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 </ScrollView>

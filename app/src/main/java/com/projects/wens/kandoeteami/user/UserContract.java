@@ -9,7 +9,6 @@ public interface UserContract {
 
     interface View {
         void showUserDetails(User user);
-        void showChangePasswordActivity();
         String getUsername();
         String getFirstName();
         String getLastName();
@@ -18,14 +17,16 @@ public interface UserContract {
         String getAddressNumber();
         String getAddressZip();
         String getAddressCity();
-
+        String getOldPassword();
+        String getNewPassword();
+        void closeDialog();
         void showErrorMessage(String message);
-
         void showSuccesMessage(String s);
     }
 
     interface UserActionListener {
         void loadUser(String token);
         void updateUser(String token, User user);
+        void updatePassword(String token, User currentUser);
     }
 }
