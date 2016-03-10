@@ -33,7 +33,7 @@ public class OrganisationPresenter implements OrganisationContract.UserActionLis
                 view.showSuccesMessage("Successfully loaded organisations");
                 orga.setOrganisationId(organisation.getOrganisationId());
                 orga.setLogoURL(organisation.getLogoURL());
-                orga.setAddress("Hallo ik ben senne wens en ik woon in Retie");
+                orga.setAddress(organisation.getAddress());
                 orga.setLinks(organisation.getLinks());
                 orga.setOrganisationName(organisation.getOrganisationName());
                 getOrganisers(token,id,orga);
@@ -52,12 +52,14 @@ public class OrganisationPresenter implements OrganisationContract.UserActionLis
         service.getOrganisationOrganisers("Bearer " + token, id, new Callback<List<User>>() {
             @Override
             public void success(List<User> users, Response response) {
-                for (User u : users) {
-                    ChildItem child = new ChildItem(u.getPerson().getFirstname(), u.getPerson().getLastname(), "ORGANISER", u.getProfilePicture());
-                    item.addChildren(child);
+                if (users != null){
+                    for (User u : users) {
+                        ChildItem child = new ChildItem(u.getPerson().getFirstname(), u.getPerson().getLastname(), "ORGANISER", u.getProfilePicture());
+                        item.addChildren(child);
+                    }
                 }
-                getMembers(token, id,orga,item);
 
+                getMembers(token, id,orga,item);
             }
             @Override
             public void failure(RetrofitError error) {
@@ -73,11 +75,13 @@ public class OrganisationPresenter implements OrganisationContract.UserActionLis
         service.getOrganisationMembers("Bearer " + token, id, new Callback<List<User>>() {
             @Override
             public void success(List<User> users, Response response) {
-                for (User u : users) {
-                    ChildItem child = new ChildItem(u.getPerson().getFirstname(), u.getPerson().getLastname(), "MEMBER", u.getProfilePicture());
-                    item.addChildren(child);
-                    view.showOrganisation(organi, item);
+                if (users != null){
+                    for (User u : users) {
+                        ChildItem child = new ChildItem(u.getPerson().getFirstname(), u.getPerson().getLastname(), "MEMBER", u.getProfilePicture());
+                        item.addChildren(child);
+                    }
                 }
+                view.showOrganisation(organi, item);
             }
             @Override
             public void failure(RetrofitError error) {
