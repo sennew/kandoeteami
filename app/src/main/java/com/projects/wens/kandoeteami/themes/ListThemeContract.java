@@ -19,6 +19,7 @@ public interface ListThemeContract {
 
     interface UserActionListener {
         void loadThemes(String token);
+        void loadThemesForOrganisation(String token, int organisationId);
         void openThemeDetail(Theme clickTheme);
     }
 }

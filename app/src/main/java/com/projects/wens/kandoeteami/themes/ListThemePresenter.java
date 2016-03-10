@@ -1,10 +1,10 @@
 package com.projects.wens.kandoeteami.themes;
 
-import com.projects.wens.kandoeteami.organisation.data.Organisation;
 import com.projects.wens.kandoeteami.retrofit.service.ThemeService;
 import com.projects.wens.kandoeteami.themes.data.Theme;
 
 import java.util.List;
+
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -39,6 +39,29 @@ public class ListThemePresenter implements ListThemeContract.UserActionListener 
                 view.showErrorMessage(error.getResponse().getStatus());
             }
         });
+    }
+
+    @Override
+    public void loadThemesForOrganisation(String token, int organisationId) {
+        if (view != null){
+            view.setProgressIndicator(true);
+        }
+
+        service.getThemesOfOrganisation("Bearer " + token,organisationId, new Callback<List<Theme>>() {
+            @Override
+            public void success(List<Theme> themes, Response response) {
+                if (view != null){
+                    view.setProgressIndicator(false);
+                    view.showThemes(themes);
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                view.showErrorMessage(error.getResponse().getStatus());
+            }
+        });
+
     }
 
     @Override

@@ -46,7 +46,6 @@ public class OrganisationFragment extends Fragment implements OrganisationContra
     private ExpandableListViewAdapter adapter;
     private ExpandableListView listview;
 
-
     public static Fragment newInstance() {
         return new OrganisationFragment();
     }

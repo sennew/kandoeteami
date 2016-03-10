@@ -8,18 +8,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.projects.wens.kandoeteami.R;
-import com.projects.wens.kandoeteami.login.LoginActivity;
 import com.projects.wens.kandoeteami.organisation.ListOrganisationActivity;
-import com.projects.wens.kandoeteami.organisation.ListOrganisationFragment;
 import com.projects.wens.kandoeteami.start.SplashActivity;
 import com.projects.wens.kandoeteami.user.UserActivity;
 import com.squareup.picasso.Picasso;
@@ -71,7 +67,10 @@ public class ListThemeActivity extends AppCompatActivity {
         }
 
         if (null == savedInstanceState) {
-            initFragment(ListThemeFragment.newInstance());
+            Bundle b = getIntent().getExtras();
+            Boolean all = b.getBoolean("allThemes");
+            int organisationId = b.getInt("organisationId");
+            initFragment(ListThemeFragment.newInstance(all,organisationId));
         }
 
         //DRAWER
@@ -134,6 +133,8 @@ public class ListThemeActivity extends AppCompatActivity {
                                 break;
                             case R.id.nav_ic_themes:
                                 i = new Intent(getApplicationContext(), ListThemeActivity.class);
+                                i.putExtra("allThemes", true);
+                                i.putExtra("organisationId",0);
                                 startActivity(i);
                                 break;
                             case R.id.nav_ic_help:

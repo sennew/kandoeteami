@@ -17,6 +17,6 @@ public interface ThemeService {
     @GET("/themes/currentUser")
     void getThemes(@Header("Authorization") String token, Callback<List<Theme>> callback);
 
-
-
+    @GET("/organisations/{id}/themes")
+    void getThemesOfOrganisation(@Header("Authorization") String token,@Path("id") int organisationId, Callback<List<Theme>> callback);
 }

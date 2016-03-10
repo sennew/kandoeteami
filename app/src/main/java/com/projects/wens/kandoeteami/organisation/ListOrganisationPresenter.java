@@ -33,15 +33,16 @@ public class ListOrganisationPresenter implements ListOrganisationContract.UserA
             view.setProgressIndicator(true);
         }
 
-        service.getOrganisations("Bearer "+token, new Callback<List<Organisation>>() {
+        service.getOrganisations("Bearer " + token, new Callback<List<Organisation>>() {
             @Override
             public void success(List<Organisation> organisations, Response response) {
-                if (view != null){
+                if (view != null) {
                     view.setProgressIndicator(false);
                     view.showOrganisations(organisations);
                 }
 
             }
+
             @Override
             public void failure(RetrofitError error) {
                 view.showErrorMessage(error.getResponse().getStatus());
@@ -50,8 +51,15 @@ public class ListOrganisationPresenter implements ListOrganisationContract.UserA
 
     }
 
+
+
     @Override
     public void openOrganisationThema(@NonNull Organisation requestOrga) {
+        view.showOrganisationThemesUi(requestOrga.getOrganisationId());
+    }
+
+    @Override
+    public void openOrganisationDetail(@NonNull Organisation requestOrga) {
         view.showOrganisationDetailUi(requestOrga.getOrganisationId());
     }
 }

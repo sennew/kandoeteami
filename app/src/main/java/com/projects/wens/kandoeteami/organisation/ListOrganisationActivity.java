@@ -120,6 +120,8 @@ public class ListOrganisationActivity extends AppCompatActivity {
                                 break;
                             case R.id.nav_ic_themes:
                                 i = new Intent(getApplicationContext(), ListThemeActivity.class);
+                                i.putExtra("allThemes", true);
+                                i.putExtra("organisationId",0);
                                 startActivity(i);
                                 break;
                             case R.id.nav_ic_help:

@@ -83,7 +83,7 @@
                     android:textColor="@color/dark_grey" />
 
                 <Button
-                    android:id="@+id/button_details"
+                    android:id="@+id/button_themes"
                     style="?android:attr/borderlessButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

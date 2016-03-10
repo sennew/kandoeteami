@@ -12,10 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.projects.wens.kandoeteami.R;
-import com.projects.wens.kandoeteami.organisation.ListOrganisationFragment;
-import com.projects.wens.kandoeteami.organisation.data.Organisation;
 import com.projects.wens.kandoeteami.retrofit.ServiceGenerator;
-import com.projects.wens.kandoeteami.retrofit.service.OrganisationService;
 import com.projects.wens.kandoeteami.retrofit.service.ThemeService;
 import com.projects.wens.kandoeteami.themes.adapter.ThemeAdapter;
 import com.projects.wens.kandoeteami.themes.adapter.ThemeItemListener;
@@ -33,6 +30,8 @@ public class ListThemeFragment extends Fragment implements ListThemeContract.Vie
     private ThemeAdapter themeAdapter;
     private ThemeService service;
 
+    public static ListThemeFragment fragment;
+
     //IMPLEMENTATIE VOOR DE RECYCLERVIEW
     ThemeItemListener mItemListener = new ThemeItemListener() {
         @Override
@@ -44,8 +43,13 @@ public class ListThemeFragment extends Fragment implements ListThemeContract.Vie
     public ListThemeFragment() {
     }
 
-    public static Fragment newInstance() {
-        return new ListThemeFragment();
+    public static Fragment newInstance(Boolean all, int organisationId) {
+        fragment = new ListThemeFragment();
+        Bundle bundle = new Bundle();
+        bundle.putBoolean("allThemes", all);
+        bundle.putInt("organisationId", organisationId);
+        fragment.setArguments(bundle);
+        return fragment;
     }
 
     @Override
@@ -71,10 +75,18 @@ public class ListThemeFragment extends Fragment implements ListThemeContract.Vie
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                //Get preferences token
-                SharedPreferences settings = getActivity().getSharedPreferences(PREFS_NAME, 0);
-                String token = settings.getString("token", null);
-                actionListener.loadThemes(token);
+                Boolean all = fragment.getArguments().getBoolean("allThemes");
+                if (!all){
+                    int id = fragment.getArguments().getInt("organisationId");
+                    SharedPreferences settings = getActivity().getSharedPreferences(PREFS_NAME, 0);
+                    String token = settings.getString("token", null);
+                    actionListener.loadThemesForOrganisation(token,id);
+
+                } else {
+                    SharedPreferences settings = getActivity().getSharedPreferences(PREFS_NAME, 0);
+                    String token = settings.getString("token", null);
+                    actionListener.loadThemes(token);
+                }
             }
         });
         return root;
@@ -84,10 +96,18 @@ public class ListThemeFragment extends Fragment implements ListThemeContract.Vie
     @Override
     public void onResume() {
         super.onResume();
+        Boolean all = fragment.getArguments().getBoolean("allThemes");
+        if (!all){
+            int id = fragment.getArguments().getInt("organisationId");
+            SharedPreferences settings = getActivity().getSharedPreferences(PREFS_NAME, 0);
+            String token = settings.getString("token", null);
+            actionListener.loadThemesForOrganisation(token,id);
 
-        SharedPreferences settings = getActivity().getSharedPreferences(PREFS_NAME, 0);
-        String token = settings.getString("token", null);
-        actionListener.loadThemes(token);
+        } else {
+            SharedPreferences settings = getActivity().getSharedPreferences(PREFS_NAME, 0);
+            String token = settings.getString("token", null);
+            actionListener.loadThemes(token);
+        }
     }
 
     @Override

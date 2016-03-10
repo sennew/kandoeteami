@@ -22,6 +22,7 @@ import com.projects.wens.kandoeteami.R;
 import com.projects.wens.kandoeteami.organisation.data.Organisation;
 import com.projects.wens.kandoeteami.retrofit.ServiceGenerator;
 import com.projects.wens.kandoeteami.retrofit.service.OrganisationService;
+import com.projects.wens.kandoeteami.themes.ListThemeActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -114,12 +115,20 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
     }
 
     @Override
-    public void showOrganisationDetailUi(Integer noteId) {
-        Toast.makeText(getContext(), "showOrgaDetail: " + noteId, Toast.LENGTH_SHORT).show();
+    public void showOrganisationDetailUi(Integer organisationId) {
+        Toast.makeText(getContext(), "showOrgaDetail: " + organisationId, Toast.LENGTH_SHORT).show();
         Intent i = new Intent(getContext(), OrganisationActivity.class);
         Bundle mBundle = new Bundle();
-        mBundle.putInt("ORGAID", noteId);
+        mBundle.putInt("ORGAID", organisationId);
         i.putExtras(mBundle);
+        startActivity(i);
+    }
+
+    @Override
+    public void showOrganisationThemesUi(Integer organisationId) {
+        Intent i = new Intent(getContext(), ListThemeActivity.class);
+        i.putExtra("allThemes", false);
+        i.putExtra("organisationId", organisationId);
         startActivity(i);
     }
 
@@ -187,6 +196,7 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
             public TextView description;
             public ImageView image;
             public Button aantalUsersButton;
+            public Button themesButton;
 
             private OrganisationItemListener mOrganisationListener;
 
@@ -197,13 +207,21 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
                 description = (TextView) itemView.findViewById(R.id.card_text);
                 image = (ImageView) itemView.findViewById(R.id.card_image);
                 aantalUsersButton = (Button) itemView.findViewById(R.id.button_totalusers);
+                themesButton = (Button) itemView.findViewById(R.id.button_themes);
+                themesButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int position = getAdapterPosition();
+                        Organisation orga = mOrganisations.get(position);
+                        mOrganisationListener.onThemeButtonClick(orga);
+                    }
+                });
                 itemView.setOnClickListener(this);
 
             }
 
             @Override
             public void onClick(View v) {
-
                 int position = getAdapterPosition();
                 Organisation orga = mOrganisations.get(position);
                 mOrganisationListener.onOrganisationClick(orga);
@@ -218,6 +236,11 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
     OrganisationItemListener mItemListener = new OrganisationItemListener() {
         @Override
         public void onOrganisationClick(Organisation clickOrganisation) {
+            mOrgaActionListener.openOrganisationDetail(clickOrganisation);
+        }
+
+        @Override
+        public void onThemeButtonClick(Organisation clickOrganisation) {
             mOrgaActionListener.openOrganisationThema(clickOrganisation);
         }
     };
@@ -225,6 +248,7 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
     //Interface voor weer te geven als er op een Organisatie wordt geklikt.
     public interface OrganisationItemListener {
         void onOrganisationClick(Organisation clickOrganisation);
+        void onThemeButtonClick(Organisation clickOrganisation);
     }
 
 

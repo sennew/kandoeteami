@@ -13,12 +13,14 @@ public interface ListOrganisationContract {
     interface view{
         void setProgressIndicator(boolean active);
         void showOrganisations(List<Organisation> organisations);
-        void showOrganisationDetailUi(Integer noteId);
+        void showOrganisationDetailUi(Integer organisationId);
+        void showOrganisationThemesUi(Integer organisationId);
         void showErrorMessage(int status);
     }
 
     interface UserActionListener{
         void loadOrganisations(boolean forceUpdate, String token);
         void openOrganisationThema(@NonNull Organisation requestOrga);
+        void openOrganisationDetail(@NonNull Organisation requestOrga);
     }
 }
