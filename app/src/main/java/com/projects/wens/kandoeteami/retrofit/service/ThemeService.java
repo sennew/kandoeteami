@@ -1,5 +1,6 @@
 package com.projects.wens.kandoeteami.retrofit.service;
 
+import com.projects.wens.kandoeteami.session.data.SessionDTO;
 import com.projects.wens.kandoeteami.themes.data.Theme;
 
 import java.util.List;
@@ -19,4 +20,11 @@ public interface ThemeService {
 
     @GET("/organisations/{id}/themes")
     void getThemesOfOrganisation(@Header("Authorization") String token,@Path("id") int organisationId, Callback<List<Theme>> callback);
+
+    @GET("/themes/{themeId}")
+    void getTheme(@Header("Authorization") String token, @Path("themeId") int themeId, Callback<Theme> callback);
+
+    @GET("/sessions/theme/{themeId}")
+    void getSessionOfTheme(@Header("Authorization") String token, @Path("themeId") int themeId, Callback<List<SessionDTO>> callback);
+
 }

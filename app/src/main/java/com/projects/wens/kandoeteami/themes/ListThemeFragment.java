@@ -1,5 +1,6 @@
 package com.projects.wens.kandoeteami.themes;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -134,7 +135,9 @@ public class ListThemeFragment extends Fragment implements ListThemeContract.Vie
 
     @Override
     public void showThemeDetail(Integer themeId) {
-        //INTENT
+        Intent i = new Intent(getContext(), ThemeDetailActivity.class);
+        i.putExtra("ThemeId", themeId);
+        startActivity(i);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.projects.wens.kandoeteami.organisation;
+package com.projects.wens.kandoeteami.themes;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -7,26 +7,19 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Toast;
 
 import com.projects.wens.kandoeteami.R;
 
-
 /**
- * Created by michaelkees on 29/02/16.
+ * Created by senne on 10/03/2016.
  */
-public class OrganisationActivity extends AppCompatActivity {
-    private int organisationId;
+public class ThemeDetailActivity extends AppCompatActivity {
+    private int themeId;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_noside_toolbarcollapse);
-
-        if(savedInstanceState!=null){
-             organisationId = savedInstanceState.getInt("ORGAID");
-             Toast.makeText(this, "ORGA: " + organisationId, Toast.LENGTH_SHORT).show();
-        }
+        setContentView(R.layout.activity_main_noside_littletoolbar);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -42,9 +35,10 @@ public class OrganisationActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         if (null == savedInstanceState){
-            initFragment(OrganisationFragment.newInstance());
+            Bundle b = getIntent().getExtras();
+            themeId = b.getInt("ThemeId");
+            initFragment(ThemeDetailFragment.newInstance(themeId));
         }
-
     }
 
     private void initFragment(Fragment fragment) {
@@ -54,7 +48,7 @@ public class OrganisationActivity extends AppCompatActivity {
         transaction.commit();
     }
 
-    public int getOrganisationId() {
-        return organisationId;
+    public int getThemeId(){
+        return themeId;
     }
 }

@@ -43,6 +43,7 @@ public class OrganisationFragment extends Fragment implements OrganisationContra
     private TextView dialogDescription;
     private Button dialogButton;
     private int organisationId;
+    private int descriptionlength;
     private ExpandableListViewAdapter adapter;
     private ExpandableListView listview;
 
@@ -77,13 +78,6 @@ public class OrganisationFragment extends Fragment implements OrganisationContra
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_organisation_item, container, false);
         tvOrganisationDescription = (TextView) root.findViewById(R.id.org_description);
-        tvOrganisationDescription.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                allert.show();
-            }
-        });
-
         imgOrganisation = (ImageView) getActivity().findViewById(R.id.header_img);
         collapsing = (CollapsingToolbarLayout) getActivity().findViewById(R.id.collapsing_toolbar);
         listview = (ExpandableListView) root.findViewById(R.id.users_list);
@@ -124,9 +118,16 @@ public class OrganisationFragment extends Fragment implements OrganisationContra
     @Override
     public void showOrganisation(Organisation organisation, GroupItem item) {
         Log.e("SIZE", "SIZE: " + item.getChildren().size());
-        if (organisation.getAddress().length() > 33){
+        descriptionlength = organisation.getAddress().length();
+        if (descriptionlength > 33){
             tvOrganisationDescription.setText(organisation.getAddress().substring(0, 33) + ".....");
             dialogDescription.setText(organisation.getAddress());
+            tvOrganisationDescription.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    allert.show();
+                }
+            });
         } else {
             tvOrganisationDescription.setText(organisation.getAddress());
         }

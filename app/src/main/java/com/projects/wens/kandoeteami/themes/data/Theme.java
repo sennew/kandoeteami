@@ -2,6 +2,8 @@ package com.projects.wens.kandoeteami.themes.data;
 
 import com.projects.wens.kandoeteami.organisation.data.Organisation;
 
+import java.util.List;
+
 /**
  * Created by michaelkees on 01/03/16.
  */
@@ -11,6 +13,8 @@ public class Theme {
     private String description;
     private String iconURL;
     private Organisation organisation;
+    private List<Card> cards;
+    private int countSubthemes;
 
     public Theme() {
     }
@@ -54,4 +58,21 @@ public class Theme {
     public void setOrganisation(Organisation organisation) {
         this.organisation = organisation;
     }
+
+    public List<Card> getCards() {
+        return cards;
+    }
+
+    public void setCards(List<Card> cards) {
+        this.cards = cards;
+    }
+
+    public int getCountSubthemes() {
+        return countSubthemes;
+    }
+
+    public void setCountSubthemes(int countSubthemes) {
+        this.countSubthemes = countSubthemes;
+    }
+
 }
