@@ -46,6 +46,12 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.ViewHolder> 
         } else {
             Picasso.with(context).load(theme.getIconURL()).into(holder.image);
         }
+        if (theme.getCountSubthemes() == 0){
+            holder.countSubthemes.setText("none");
+        } else {
+            holder.countSubthemes.setText(theme.getCountSubthemes());
+        }
+
     }
 
     public void replaceData(List<Theme> themes) {
@@ -70,6 +76,7 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.ViewHolder> 
         public TextView title;
         public TextView description;
         public ImageView image;
+        public TextView countSubthemes;
 
         private ThemeItemListener themeItemListener;
 
@@ -79,6 +86,13 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.ViewHolder> 
             title = (TextView) itemView.findViewById(R.id.card__theme_title);
             description = (TextView) itemView.findViewById(R.id.card_theme_text);
             image = (ImageView) itemView.findViewById(R.id.card_theme_image);
+            countSubthemes = (TextView) itemView.findViewById(R.id.theme_subthemes);
+            countSubthemes.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //TODO: ONCLICKLISTENER OM NAAR SUBTHEMAS TE GAAN
+                }
+            });
             itemView.setOnClickListener(this);
         }
 

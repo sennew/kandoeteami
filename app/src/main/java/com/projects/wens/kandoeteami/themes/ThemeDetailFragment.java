@@ -57,6 +57,10 @@ public class ThemeDetailFragment extends Fragment implements ThemeDetailContract
 
     private LinearLayout horizontalScrollLayout;
 
+    private TextView activeSessions;
+    private TextView countSessions;
+    private TextView subThemas;
+
     public static ThemeDetailFragment fragment;
 
     public static Fragment newInstance(int themeId) {
@@ -126,6 +130,12 @@ public class ThemeDetailFragment extends Fragment implements ThemeDetailContract
         });
 
         horizontalScrollLayout = (LinearLayout) root.findViewById(R.id.theme_cards_gallery);
+
+        activeSessions = (TextView) root.findViewById(R.id.theme_active_session);
+        countSessions = (TextView) root.findViewById(R.id.theme_sessions);
+        subThemas = (TextView) root.findViewById(R.id.theme_subthemes);
+
+
         return root;
     }
 
@@ -135,7 +145,7 @@ public class ThemeDetailFragment extends Fragment implements ThemeDetailContract
     }
 
     @Override
-    public void showTheme(Theme theme, List<GroupItem> item) {
+    public void showTheme(Theme theme, List<GroupItem> item, int activeSession, int countSession) {
         int descriptionLength = theme.getDescription().length();
         if (descriptionLength > 33){
             themeDescription.setText(theme.getDescription().substring(0,33) + "....");
@@ -156,6 +166,15 @@ public class ThemeDetailFragment extends Fragment implements ThemeDetailContract
         } else {
             Picasso.with(this.getContext()).load(theme.getIconURL()).into(imgTheme);
         }
+
+        countSessions.setText(""+countSession);
+        activeSessions.setText(""+activeSession);
+        if (theme.getCountSubthemes() == 0){
+            subThemas.setText("none");
+        }else {
+            subThemas.setText(theme.getCountSubthemes());
+        }
+
 
         //Opvragen cards van een thema
         List<Card> cards = theme.getCards();

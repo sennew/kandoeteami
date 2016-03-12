@@ -11,7 +11,7 @@ import java.util.List;
 public interface ThemeDetailContract {
     interface View{
         void showSuccesMessage(String message);
-        void showTheme(Theme theme, List<GroupItem> items);
+        void showTheme(Theme theme, List<GroupItem> items, int activeSession, int countSession);
         void showErrorMessage(String message);
     }
 

@@ -55,8 +55,8 @@ public class ThemeDetailPresenter implements ThemeDetailContract.UserActionListe
                     }
                     groupItems.add(item);
                 }
-
-                view.showTheme(thema,groupItems);
+                int dtoSize = sessionDTOs.size();
+                view.showTheme(thema,groupItems, dtoSize, dtoSize);
             }
 
             @Override
