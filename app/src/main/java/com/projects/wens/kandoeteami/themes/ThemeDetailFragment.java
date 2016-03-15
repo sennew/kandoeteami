@@ -86,6 +86,7 @@ public class ThemeDetailFragment extends Fragment implements ThemeDetailContract
     @Override
     public void onResume() {
         super.onResume();
+        horizontalScrollLayout.removeAllViews();
         SharedPreferences settings = getActivity().getSharedPreferences(PREFS_NAME, 0);
         String token = settings.getString("token", null);
 

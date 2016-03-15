@@ -13,6 +13,7 @@ public interface ListThemeContract {
         void setProgressIndicator(boolean active);
         void showThemes(List<Theme> themes);
         void showThemeDetail(Integer themeId);
+        void showSubThemes(Integer themeId);
         void showErrorMessage(int status);
 
     }
@@ -20,6 +21,7 @@ public interface ListThemeContract {
     interface UserActionListener {
         void loadThemes(String token);
         void loadThemesForOrganisation(String token, int organisationId);
+        void loadSubThemesForTheme(int themeId);
         void openThemeDetail(Theme clickTheme);
     }
 }

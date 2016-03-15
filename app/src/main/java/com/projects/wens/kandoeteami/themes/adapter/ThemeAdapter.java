@@ -91,6 +91,9 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.ViewHolder> 
                 @Override
                 public void onClick(View v) {
                     //TODO: ONCLICKLISTENER OM NAAR SUBTHEMAS TE GAAN
+                    int position = getAdapterPosition();
+                    Theme theme = mThemes.get(position);
+                    themeItemListener.onSubthemesClick(theme.getThemeId());
                 }
             });
             itemView.setOnClickListener(this);

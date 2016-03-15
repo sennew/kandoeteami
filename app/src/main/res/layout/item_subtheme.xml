@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="180dp"
+    android:layout_gravity="center"
+    android:layout_marginBottom="5dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:layout_marginTop="5dp"
+    android:background="@color/colorAccent"
+    android:foreground="?attr/selectableItemBackground"
+    android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <ImageView
+            android:id="@+id/card_subtheme_image"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/placeholderdark" />
+
+
+
+        <LinearLayout
+            android:id="@+id/lay_content"
+            android:layout_width="match_parent"
+            android:layout_height="135dp"
+            android:layout_toRightOf="@id/card_subtheme_image"
+            android:padding="8dp"
+            android:background="@drawable/border_set"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/card__subtheme_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                tools:text="Karel De Grote"/>
+
+            <TextView
+                android:id="@+id/card_subtheme_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:singleLine="true"
+                tools:text="Start met voorsprong. Groep van studenten voor het kiezen van beslissingen van Karel de Grote Hogeschool"
+                android:inputType="textMultiLine"
+                android:lines="4"
+                android:textColor="@color/dark_grey"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/rel_theme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:paddingBottom="10dp"
+            android:layout_below="@+id/lay_content"
+            android:layout_marginLeft="158dp"
+
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginTop="7dp"
+                android:text="THEME: "
+                android:textSize="15dp"/>
+
+            <TextView
+                android:id="@+id/theme_themeName"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginLeft="65dp"
+                android:layout_marginRight="20dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                android:textColor="@color/black_alpha_40"
+                tools:text="5" />
+        </RelativeLayout>
+
+
+
+    </RelativeLayout>
+
+
+</android.support.v7.widget.CardView>

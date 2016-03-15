@@ -65,6 +65,11 @@ public class ListThemePresenter implements ListThemeContract.UserActionListener 
     }
 
     @Override
+    public void loadSubThemesForTheme(int themeId) {
+        view.showSubThemes(themeId);
+    }
+
+    @Override
     public void openThemeDetail(Theme clickTheme) {
         view.showThemeDetail(clickTheme.getThemeId());
     }

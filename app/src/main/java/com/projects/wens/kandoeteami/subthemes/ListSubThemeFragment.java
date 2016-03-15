@@ -1,6 +1,5 @@
-package com.projects.wens.kandoeteami.themes;
+package com.projects.wens.kandoeteami.subthemes;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,47 +13,43 @@ import android.view.ViewGroup;
 
 import com.projects.wens.kandoeteami.R;
 import com.projects.wens.kandoeteami.retrofit.ServiceGenerator;
-import com.projects.wens.kandoeteami.retrofit.service.ThemeService;
-import com.projects.wens.kandoeteami.subthemes.ListSubThemeActivity;
-import com.projects.wens.kandoeteami.themes.adapter.ThemeAdapter;
-import com.projects.wens.kandoeteami.themes.adapter.ThemeItemListener;
-import com.projects.wens.kandoeteami.themes.data.Theme;
+import com.projects.wens.kandoeteami.retrofit.service.SubThemaService;
+import com.projects.wens.kandoeteami.subthemes.adapter.ListSubThemeAdapter;
+import com.projects.wens.kandoeteami.subthemes.adapter.ListSubThemeListener;
+import com.projects.wens.kandoeteami.subthemes.data.SubTheme;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
-public class ListThemeFragment extends Fragment implements ListThemeContract.View {
+/**
+ * Created by senne on 14/03/2016.
+ */
+public class ListSubThemeFragment extends Fragment implements ListSubThemeContract.View {
     private static final String PREFS_NAME = "MyPrefs";
 
-    private ListThemeContract.UserActionListener actionListener;
+    private ListSubThemeContract.UserActionListener actionListener;
 
-    private ThemeAdapter themeAdapter;
-    private ThemeService service;
+    private ListSubThemeAdapter subThemeAdapter;
+    private SubThemaService service;
 
-    public static ListThemeFragment fragment;
+    public static ListSubThemeFragment fragment;
 
     //IMPLEMENTATIE VOOR DE RECYCLERVIEW
-    ThemeItemListener mItemListener = new ThemeItemListener() {
+    ListSubThemeListener mItemListener = new ListSubThemeListener() {
         @Override
-        public void onThemeClick(Theme clickTheme) {
-            actionListener.openThemeDetail(clickTheme);
-        }
-
-        @Override
-        public void onSubthemesClick(int idClickedTheme) {
-            actionListener.loadSubThemesForTheme(idClickedTheme);
+        public void onSubThemeClick(SubTheme clickTheme) {
+            actionListener.openSubThemeDetail(clickTheme);
         }
     };
 
-    public ListThemeFragment() {
+    public ListSubThemeFragment() {
     }
 
     public static Fragment newInstance(Boolean all, int organisationId) {
-        fragment = new ListThemeFragment();
+        fragment = new ListSubThemeFragment();
         Bundle bundle = new Bundle();
-        bundle.putBoolean("allThemes", all);
-        bundle.putInt("organisationId", organisationId);
+        bundle.putBoolean("allSubThemes", all);
+        bundle.putInt("themeId", organisationId);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -62,9 +57,9 @@ public class ListThemeFragment extends Fragment implements ListThemeContract.Vie
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        themeAdapter = new ThemeAdapter(new ArrayList<Theme>(0), mItemListener, getActivity());
-        service = ServiceGenerator.createService(ThemeService.class, "http://wildfly-teamiip2kdgbe.rhcloud.com/api");
-        actionListener = new ListThemePresenter(service, this);
+        subThemeAdapter = new ListSubThemeAdapter(new ArrayList<SubTheme>(0), mItemListener, getActivity());
+        service = ServiceGenerator.createService(SubThemaService.class, "http://wildfly-teamiip2kdgbe.rhcloud.com/api");
+        actionListener = new ListSubThemePresenter(service, this);
     }
 
     @Nullable
@@ -72,7 +67,7 @@ public class ListThemeFragment extends Fragment implements ListThemeContract.Vie
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_themes, container, false);
         RecyclerView recyclerView = (RecyclerView) root.findViewById(R.id.themes_list);
-        recyclerView.setAdapter(themeAdapter);
+        recyclerView.setAdapter(subThemeAdapter);
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -82,17 +77,17 @@ public class ListThemeFragment extends Fragment implements ListThemeContract.Vie
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                Boolean all = fragment.getArguments().getBoolean("allThemes");
-                if (!all){
-                    int id = fragment.getArguments().getInt("organisationId");
+                Boolean all = fragment.getArguments().getBoolean("allSubThemes");
+                if (!all) {
+                    int id = fragment.getArguments().getInt("themeId");
                     SharedPreferences settings = getActivity().getSharedPreferences(PREFS_NAME, 0);
                     String token = settings.getString("token", null);
-                    actionListener.loadThemesForOrganisation(token,id);
+                    actionListener.loadSubthemsForTheme(token, id);
 
                 } else {
                     SharedPreferences settings = getActivity().getSharedPreferences(PREFS_NAME, 0);
                     String token = settings.getString("token", null);
-                    actionListener.loadThemes(token);
+                    actionListener.loadSubthemes(token);
                 }
             }
         });
@@ -103,17 +98,17 @@ public class ListThemeFragment extends Fragment implements ListThemeContract.Vie
     @Override
     public void onResume() {
         super.onResume();
-        Boolean all = fragment.getArguments().getBoolean("allThemes");
+        Boolean all = fragment.getArguments().getBoolean("allSubThemes");
         if (!all){
-            int id = fragment.getArguments().getInt("organisationId");
+            int id = fragment.getArguments().getInt("themeId");
             SharedPreferences settings = getActivity().getSharedPreferences(PREFS_NAME, 0);
             String token = settings.getString("token", null);
-            actionListener.loadThemesForOrganisation(token,id);
+            actionListener.loadSubthemsForTheme(token, id);
 
         } else {
             SharedPreferences settings = getActivity().getSharedPreferences(PREFS_NAME, 0);
             String token = settings.getString("token", null);
-            actionListener.loadThemes(token);
+            actionListener.loadSubthemes(token);
         }
     }
 
@@ -135,22 +130,13 @@ public class ListThemeFragment extends Fragment implements ListThemeContract.Vie
     }
 
     @Override
-    public void showThemes(List<Theme> themes) {
-        themeAdapter.replaceData(themes);
+    public void showSubThemes(List<SubTheme> themes) {
+        subThemeAdapter.replaceData(themes);
     }
 
     @Override
-    public void showThemeDetail(Integer themeId) {
-        Intent i = new Intent(getContext(), ThemeDetailActivity.class);
-        i.putExtra("ThemeId", themeId);
-        startActivity(i);
-    }
-
-    @Override
-    public void showSubThemes(Integer themeId) {
-        Intent i = new Intent(getContext(), ListSubThemeActivity.class);
-        i.putExtra("ThemeId", themeId);
-        startActivity(i);
+    public void showSubThemeDetail(Integer themeId) {
+        //TODO: NAAR DE DETAIL PAGINA GAAN VAN EEN SUBTHEMA
     }
 
     @Override

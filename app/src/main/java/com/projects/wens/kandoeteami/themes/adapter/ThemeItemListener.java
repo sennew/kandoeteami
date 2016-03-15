@@ -7,4 +7,5 @@ import com.projects.wens.kandoeteami.themes.data.Theme;
  */
 public interface ThemeItemListener {
     void onThemeClick(Theme clickTheme);
+    void onSubthemesClick(int idClickedTheme);
 }
