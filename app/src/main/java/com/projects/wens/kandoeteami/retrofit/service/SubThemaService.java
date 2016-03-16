@@ -16,6 +16,6 @@ public interface SubThemaService {
     @GET("/subThemes")
     void getSubThemes(@Header("Authorization") String token, Callback<List<SubTheme>> callback);
 
-    @GET("/subThemes/{themeId}")
+    @GET("/themes/{themeId}/subThemes")
     void getSubThemesByThemeId(@Header("Authorization") String token, @Path("themeId") int id,Callback<List<SubTheme>> callback);
 }

@@ -170,10 +170,10 @@ public class ThemeDetailFragment extends Fragment implements ThemeDetailContract
 
         countSessions.setText(""+countSession);
         activeSessions.setText(""+activeSession);
-        if (theme.getCountSubthemes() == 0){
+        if (theme.getSubThemes().isEmpty()){
             subThemas.setText("none");
         }else {
-            subThemas.setText(theme.getCountSubthemes());
+            subThemas.setText(String.valueOf(theme.getSubThemes().size()));
         }
 
 

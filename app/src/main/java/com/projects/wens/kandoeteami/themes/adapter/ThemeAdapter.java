@@ -49,7 +49,7 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.ViewHolder> 
         if (theme.getCountSubthemes() == 0){
             holder.countSubthemes.setText("none");
         } else {
-            holder.countSubthemes.setText(theme.getCountSubthemes());
+            holder.countSubthemes.setText(String.valueOf(theme.getCountSubthemes()));
         }
 
     }
