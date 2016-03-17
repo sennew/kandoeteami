@@ -2,29 +2,35 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="50dp"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:paddingRight="10dp"
     android:paddingLeft="30dp"
-    android:background="@color/iron">
+    android:background="@color/dark_grey">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:id="@+id/img_elg"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:padding="5dp"
             android:layout_marginTop="5dp"
-            android:src="@drawable/ic_action_users"/>
+            android:src="@drawable/ic_organisations_white"
+            android:color="@android:color/white"/>
 
         <TextView
             android:id="@+id/expandable_title"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="65dp"
-
-            android:textSize="20dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@+id/img_elg"
+            android:paddingLeft="20dp"
+            android:paddingTop="8dp"
+            tools:text="GROUP MEMBERS"
+            android:textSize="20sp"
             android:textColor="@color/colorAccent"
             />
 

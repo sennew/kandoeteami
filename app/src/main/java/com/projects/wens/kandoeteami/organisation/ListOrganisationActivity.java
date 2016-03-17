@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.projects.wens.kandoeteami.R;
+import com.projects.wens.kandoeteami.session.SessionGameActivity;
 import com.projects.wens.kandoeteami.start.SplashActivity;
 import com.projects.wens.kandoeteami.themes.ListThemeActivity;
 import com.projects.wens.kandoeteami.user.UserActivity;
@@ -115,6 +116,9 @@ public class ListOrganisationActivity extends AppCompatActivity {
                                 finish();
                                 break;
                             case R.id.nav_ic_kandoes:
+                                i = new Intent(getApplicationContext(), SessionGameActivity.class);
+                                i.putExtra("SESSIONID", 1);
+                                startActivity(i);
                                 break;
                             case R.id.nav_ic_newkandoe:
                                 break;

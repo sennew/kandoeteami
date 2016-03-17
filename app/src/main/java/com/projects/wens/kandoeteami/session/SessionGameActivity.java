@@ -1,4 +1,5 @@
-package com.projects.wens.kandoeteami.organisation;
+package com.projects.wens.kandoeteami.session;
+
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -7,25 +8,19 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Toast;
 
 import com.projects.wens.kandoeteami.R;
 
-
 /**
- * Created by michaelkees on 29/02/16.
+ * Created by michaelkees on 16/03/16.
  */
-public class OrganisationActivity extends AppCompatActivity {
-    private int organisationId;
+public class SessionGameActivity extends AppCompatActivity {
+    private int sessionId;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_noside_toolbarcollapse);
-
-        if(savedInstanceState!=null){
-             organisationId = savedInstanceState.getInt("ORGAID");
-        }
+        setContentView(R.layout.activity_main_noside);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -41,10 +36,10 @@ public class OrganisationActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         if (null == savedInstanceState){
-            initFragment(OrganisationFragment.newInstance());
+            Bundle b = getIntent().getExtras();
+            sessionId = b.getInt("SESSIONID");
+            initFragment(SessionGameFragment.newInstance(sessionId));
         }
-
-
 
     }
 
@@ -55,7 +50,7 @@ public class OrganisationActivity extends AppCompatActivity {
         transaction.commit();
     }
 
-    public int getOrganisationId() {
-        return organisationId;
+    public int getSessionId(){
+        return sessionId;
     }
 }

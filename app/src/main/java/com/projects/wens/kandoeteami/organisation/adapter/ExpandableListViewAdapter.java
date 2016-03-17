@@ -53,6 +53,8 @@ public class ExpandableListViewAdapter extends BaseExpandableListAdapter {
         } else {
             holder = (GroupHolder) convertView.getTag();
         }
+
+
         holder.title.setText(item.getTitle());
         return convertView;
     }
@@ -69,6 +71,8 @@ public class ExpandableListViewAdapter extends BaseExpandableListAdapter {
             holder = new ChildHolder();
             convertView = inflater.inflate(R.layout.expandable_list_item, parent, false);
         }
+
+
 
         viewVoornaam = (TextView) convertView.findViewById(R.id.textVoornaam);
         viewActernaam = (TextView) convertView.findViewById(R.id.textAchternaam);

@@ -10,4 +10,6 @@
     <string name="login_button">Login</string>
     <string name="succes_get_organisation">Organisation HTTP 200</string>
     <string name="edit_user_info">Edit information</string>
+    <string name="ic_session_date_desc">Icon Session Date</string>
+    <string name="card_image_desc">Card Image</string>
 </resources>
