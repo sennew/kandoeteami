@@ -46,10 +46,11 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.ViewHolder> 
         } else {
             Picasso.with(context).load(theme.getIconURL()).into(holder.image);
         }
-        if (theme.getCountSubthemes() == 0){
+        int count = theme.getCountSubthemes();
+        if (count == 0){
             holder.countSubthemes.setText("none");
         } else {
-            holder.countSubthemes.setText(theme.getCountSubthemes());
+            holder.countSubthemes.setText(""+count);
         }
 
     }

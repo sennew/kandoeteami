@@ -1,5 +1,6 @@
 package com.projects.wens.kandoeteami.subthemes;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -49,7 +50,7 @@ public class ListSubThemeFragment extends Fragment implements ListSubThemeContra
         fragment = new ListSubThemeFragment();
         Bundle bundle = new Bundle();
         bundle.putBoolean("allSubThemes", all);
-        bundle.putInt("themeId", organisationId);
+        bundle.putInt("subThemeId", organisationId);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -79,10 +80,10 @@ public class ListSubThemeFragment extends Fragment implements ListSubThemeContra
             public void onRefresh() {
                 Boolean all = fragment.getArguments().getBoolean("allSubThemes");
                 if (!all) {
-                    int id = fragment.getArguments().getInt("themeId");
+                    int id = fragment.getArguments().getInt("subThemeId");
                     SharedPreferences settings = getActivity().getSharedPreferences(PREFS_NAME, 0);
                     String token = settings.getString("token", null);
-                    actionListener.loadSubthemsForTheme(token, id);
+                    actionListener.loadSubthemesForTheme(token, id);
 
                 } else {
                     SharedPreferences settings = getActivity().getSharedPreferences(PREFS_NAME, 0);
@@ -100,10 +101,10 @@ public class ListSubThemeFragment extends Fragment implements ListSubThemeContra
         super.onResume();
         Boolean all = fragment.getArguments().getBoolean("allSubThemes");
         if (!all){
-            int id = fragment.getArguments().getInt("themeId");
+            int id = fragment.getArguments().getInt("subThemeId");
             SharedPreferences settings = getActivity().getSharedPreferences(PREFS_NAME, 0);
             String token = settings.getString("token", null);
-            actionListener.loadSubthemsForTheme(token, id);
+            actionListener.loadSubthemesForTheme(token, id);
 
         } else {
             SharedPreferences settings = getActivity().getSharedPreferences(PREFS_NAME, 0);
@@ -135,8 +136,11 @@ public class ListSubThemeFragment extends Fragment implements ListSubThemeContra
     }
 
     @Override
-    public void showSubThemeDetail(Integer themeId) {
+    public void showSubThemeDetail(Integer subThemeId) {
         //TODO: NAAR DE DETAIL PAGINA GAAN VAN EEN SUBTHEMA
+        Intent i = new Intent(getContext(), SubThemeDetailActivity.class);
+        i.putExtra("subThemeId", subThemeId);
+        startActivity(i);
     }
 
     @Override

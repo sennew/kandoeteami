@@ -149,7 +149,8 @@ public class ListThemeFragment extends Fragment implements ListThemeContract.Vie
     @Override
     public void showSubThemes(Integer themeId) {
         Intent i = new Intent(getContext(), ListSubThemeActivity.class);
-        i.putExtra("ThemeId", themeId);
+        i.putExtra("allThemes", false);
+        i.putExtra("subThemeId", themeId);
         startActivity(i);
     }
 

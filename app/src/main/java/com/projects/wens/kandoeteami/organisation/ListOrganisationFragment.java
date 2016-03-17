@@ -164,7 +164,6 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
             holder.description.setText(organisation.getAddress());
             holder.aantalUsersButton.setText(""+organisation.getCountUsers());
 
-
             if (organisation.getLogoURL().charAt(0) == 'r') {
                 Picasso.with(context).load(PICASSO_BASEURL + organisation.getLogoURL()).into(holder.image);
             } else {

@@ -68,5 +68,6 @@
         <activity android:name=".themes.ThemeDetailActivity"></activity>
 
         <activity android:name=".subthemes.ListSubThemeActivity"></activity>
+        <activity android:name=".subthemes.SubThemeDetailActivity"></activity>
     </application>
 </manifest>

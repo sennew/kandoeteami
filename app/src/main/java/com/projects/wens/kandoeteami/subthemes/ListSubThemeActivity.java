@@ -37,6 +37,7 @@ public class ListSubThemeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("Subthemes");
         setSupportActionBar(toolbar);
 
         toolbar.inflateMenu(R.menu.menu_themes);
@@ -72,7 +73,7 @@ public class ListSubThemeActivity extends AppCompatActivity {
         if (null == savedInstanceState) {
             Bundle b = getIntent().getExtras();
             Boolean all = b.getBoolean("allSubthemes");
-            int themeId = b.getInt("themeId");
+            int themeId = b.getInt("subThemeId");
             initFragment(ListSubThemeFragment.newInstance(all, themeId));
         }
 

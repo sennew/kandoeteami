@@ -1,5 +1,6 @@
 package com.projects.wens.kandoeteami.retrofit.service;
 
+import com.projects.wens.kandoeteami.session.data.SessionDTO;
 import com.projects.wens.kandoeteami.subthemes.data.SubTheme;
 
 import java.util.List;
@@ -17,5 +18,11 @@ public interface SubThemaService {
     void getSubThemes(@Header("Authorization") String token, Callback<List<SubTheme>> callback);
 
     @GET("/subThemes/{themeId}")
-    void getSubThemesByThemeId(@Header("Authorization") String token, @Path("themeId") int id,Callback<List<SubTheme>> callback);
+    void getSubTheme(@Header("Authorization") String token, @Path("themeId") int id,Callback<SubTheme> callback);
+
+    @GET("/themes/{themeId}/subThemes")
+    void getSubthemesByThemeId(@Header("Authorization") String token, @Path("themeId") int id, Callback<List<SubTheme>> callback);
+
+    @GET("/sessions/subtheme/{subThemeId}")
+    void getSessionBySubThemeId(@Header("Authorization") String token, @Path("subThemeId") int id, Callback<List<SessionDTO>> callback);
 }

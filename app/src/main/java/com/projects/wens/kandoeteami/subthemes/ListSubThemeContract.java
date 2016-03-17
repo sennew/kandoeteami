@@ -11,13 +11,13 @@ public interface ListSubThemeContract {
     interface View{
         void setProgressIndicator(boolean active);
         void showSubThemes(List<SubTheme> themes);
-        void showSubThemeDetail(Integer themeId);
+        void showSubThemeDetail(Integer subThemeId);
         void showErrorMessage(int status);
     }
 
     interface UserActionListener{
         void loadSubthemes(String token);
-        void loadSubthemsForTheme(String token, int themeId);
+        void loadSubthemesForTheme(String token, int themeId);
         void openSubThemeDetail(SubTheme clickTheme);
     }
 }

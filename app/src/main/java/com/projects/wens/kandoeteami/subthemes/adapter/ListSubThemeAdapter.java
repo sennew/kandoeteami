@@ -49,6 +49,7 @@ public class ListSubThemeAdapter extends RecyclerView.Adapter<ListSubThemeAdapte
         } else {
             Picasso.with(context).load(subTheme.getIconURL()).into(holder.image);
         }
+        holder.theme.setText(""+subTheme.getSubThemeId());
     }
 
     public void replaceData(List<SubTheme> subThemes) {

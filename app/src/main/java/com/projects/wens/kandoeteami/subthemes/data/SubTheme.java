@@ -10,10 +10,10 @@ import java.util.List;
  * Created by senne on 14/03/2016.
  */
 public class SubTheme {
-    private int themeId;
+    private int subThemeId;
     private String subThemeName;
     private String description;
-    private String subIconURL;
+    private String iconURL;
     private Organisation organisation;
     private List<Card> cards;
     private Theme theme;
@@ -35,11 +35,11 @@ public class SubTheme {
     }
 
     public String getIconURL() {
-        return subIconURL;
+        return iconURL;
     }
 
     public void setIconURL(String iconURL) {
-        this.subIconURL = iconURL;
+        this.iconURL = iconURL;
     }
 
     public Organisation getOrganisation() {
@@ -58,13 +58,13 @@ public class SubTheme {
         this.cards = cards;
     }
 
-    public int getThemeId() {
+    public int getSubThemeId() {
 
-        return themeId;
+        return subThemeId;
     }
 
     public void setThemeId(int themeId) {
-        this.themeId = themeId;
+        this.subThemeId = themeId;
     }
 
     public Theme getTheme() {

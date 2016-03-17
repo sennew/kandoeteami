@@ -46,8 +46,8 @@ public class ListSubThemePresenter implements ListSubThemeContract.UserActionLis
     }
 
     @Override
-    public void loadSubthemsForTheme(String token, int themeId) {
-        service.getSubThemesByThemeId("Bearer " + token, themeId, new Callback<List<SubTheme>>() {
+    public void loadSubthemesForTheme(String token, int themeId) {
+        service.getSubthemesByThemeId("Bearer " + token, themeId, new Callback<List<SubTheme>>() {
             @Override
             public void success(List<SubTheme> subThemes, Response response) {
                 if (view != null){
@@ -67,6 +67,6 @@ public class ListSubThemePresenter implements ListSubThemeContract.UserActionLis
 
     @Override
     public void openSubThemeDetail(SubTheme clickTheme) {
-
+        view.showSubThemeDetail(clickTheme.getSubThemeId());
     }
 }
