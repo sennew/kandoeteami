@@ -24,7 +24,6 @@ import de.keyboardsurfer.android.widget.crouton.Style;
 
 public class RegisterFragment extends Fragment implements RegisterContract.view {
     public static final String PREFS_NAME = "MyPrefs";
-    public static final String PATH = "http://wildfly-teamiip2kdgbe.rhcloud.com/api";
     private RegisterContract.UserActionListener registerListener;
     private RegisterService service;
 
@@ -51,7 +50,7 @@ public class RegisterFragment extends Fragment implements RegisterContract.view 
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         //create service + presenter
-        service = ServiceGenerator.createService(RegisterService.class, PATH);
+        service = ServiceGenerator.createService(RegisterService.class, getResources().getString(R.string.baseURL));
         registerListener = new RegisterPresenter(this , service);
 
     }

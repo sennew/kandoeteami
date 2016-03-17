@@ -59,7 +59,7 @@ public class ListSubThemeFragment extends Fragment implements ListSubThemeContra
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         subThemeAdapter = new ListSubThemeAdapter(new ArrayList<SubTheme>(0), mItemListener, getActivity());
-        service = ServiceGenerator.createService(SubThemaService.class, "http://wildfly-teamiip2kdgbe.rhcloud.com/api");
+        service = ServiceGenerator.createService(SubThemaService.class, getResources().getString(R.string.baseURL));
         actionListener = new ListSubThemePresenter(service, this);
     }
 

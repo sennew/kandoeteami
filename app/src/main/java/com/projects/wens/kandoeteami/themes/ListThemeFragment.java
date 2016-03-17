@@ -63,7 +63,7 @@ public class ListThemeFragment extends Fragment implements ListThemeContract.Vie
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         themeAdapter = new ThemeAdapter(new ArrayList<Theme>(0), mItemListener, getActivity());
-        service = ServiceGenerator.createService(ThemeService.class, "http://wildfly-teamiip2kdgbe.rhcloud.com/api");
+        service = ServiceGenerator.createService(ThemeService.class, getResources().getString(R.string.baseURL));
         actionListener = new ListThemePresenter(service, this);
     }
 

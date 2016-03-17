@@ -74,7 +74,7 @@ public class ThemeDetailFragment extends Fragment implements ThemeDetailContract
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        service = ServiceGenerator.createService(ThemeService.class, "http://wildfly-teamiip2kdgbe.rhcloud.com/api");
+        service = ServiceGenerator.createService(ThemeService.class, getResources().getString(R.string.baseURL));
         themeActionListener = new ThemeDetailPresenter(this, service);
         adapter = new ExpandableListViewAdapter(getContext());
 

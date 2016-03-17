@@ -54,7 +54,7 @@ public class OrganisationFragment extends Fragment implements OrganisationContra
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        service = ServiceGenerator.createService(OrganisationService.class, "http://wildfly-teamiip2kdgbe.rhcloud.com/api");
+        service = ServiceGenerator.createService(OrganisationService.class, getResources().getString(R.string.baseURL));
         organisationActionListener = new OrganisationPresenter(this, service);
         adapter = new ExpandableListViewAdapter(getContext());
 

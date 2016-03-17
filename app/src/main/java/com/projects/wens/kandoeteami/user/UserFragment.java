@@ -62,7 +62,7 @@ public class UserFragment extends Fragment implements UserContract.View{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        service = ServiceGenerator.createService(UserService.class, "http://wildfly-teamiip2kdgbe.rhcloud.com/api");
+        service = ServiceGenerator.createService(UserService.class, getResources().getString(R.string.baseURL));
         actionListener = new UserPresenter(this, service);
     }
 

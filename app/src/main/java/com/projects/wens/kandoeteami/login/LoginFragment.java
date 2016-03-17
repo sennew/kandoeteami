@@ -85,8 +85,8 @@ public class LoginFragment extends Fragment implements LoginContract.view {
             mUsername.setText(email);
         }
 
-        service = ServiceGenerator.createService(LoginService.class, "http://wildfly-teamiip2kdgbe.rhcloud.com/api");
-        userService = ServiceGenerator.createService(UserService.class, "http://wildfly-teamiip2kdgbe.rhcloud.com/api");
+        service = ServiceGenerator.createService(LoginService.class, getResources().getString(R.string.baseURL));
+        userService = ServiceGenerator.createService(UserService.class, getResources().getString(R.string.baseURL));
         mLoginActionListener = new LoginPresenter(this, service, userService);
 
         // FACEBOOK : Initialize the SDK before executing any other operations,

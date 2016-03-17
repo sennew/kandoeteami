@@ -53,7 +53,7 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
         mOrganisationAdapter = new ContentAdapter(new ArrayList<Organisation>(0), mItemListener, getActivity());
         service = ServiceGenerator.createService(
                 OrganisationService.class,
-                "http://wildfly-teamiip2kdgbe.rhcloud.com/api");
+                getResources().getString(R.string.baseURL));
         mOrgaActionListener = new ListOrganisationPresenter(this, service);
     }
 
