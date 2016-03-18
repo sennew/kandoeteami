@@ -45,10 +45,6 @@
             android:windowSoftInputMode="stateHidden">
         </activity>
 
-        <activity android:name=".organisation.ListOrganisationActivity"
-            android:label="My Organisations">
-        </activity>
-
         <activity android:name=".organisation.OrganisationActivity"
             android:parentActivityName=".organisation.ListOrganisationActivity"
             android:label="My Organisations">
@@ -61,17 +57,33 @@
             >
         </activity>
 
+        <activity android:name=".organisation.ListOrganisationActivity"
+            android:label="My Organisations">
+        </activity>
+
+
         <activity android:name=".themes.ListThemeActivity"
             android:label="My Themes">
         </activity>
 
-        <activity android:name=".themes.ThemeDetailActivity"></activity>
+        <activity android:name=".themes.ThemeDetailActivity">
+        </activity>
 
-        <activity android:name=".subthemes.ListSubThemeActivity"></activity>
+        <activity android:name=".subthemes.ListSubThemeActivity">
+        </activity>
 
-        <activity android:name=".session.SessionGameActivity"></activity>
+        <activity android:name=".session.ListSessionActivity"
+            android:label="My Kandoes">
+        </activity>
 
+        <activity android:name=".session.SessionGameActivity">
+        </activity>
 
-        <activity android:name=".subthemes.SubThemeDetailActivity"></activity>
+        <activity android:name=".session.SessionDetailActivity"
+            android:label="Session detail">
+        </activity>
+
+        <activity android:name=".subthemes.SubThemeDetailActivity">
+        </activity>
     </application>
 </manifest>

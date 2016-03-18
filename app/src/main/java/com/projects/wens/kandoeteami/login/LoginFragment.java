@@ -32,6 +32,7 @@ import com.projects.wens.kandoeteami.organisation.ListOrganisationActivity;
 import com.projects.wens.kandoeteami.retrofit.ServiceGenerator;
 import com.projects.wens.kandoeteami.retrofit.service.LoginService;
 import com.projects.wens.kandoeteami.retrofit.service.UserService;
+import com.projects.wens.kandoeteami.session.ListSessionActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -161,7 +162,7 @@ public class LoginFragment extends Fragment implements LoginContract.view {
     @Override
     public void showOrganisationsActivity() {
 
-        Intent i = new Intent(getContext(), ListOrganisationActivity.class);
+        Intent i = new Intent(getContext(), ListSessionActivity.class);
         startActivity(i);
         getActivity().finish();
     }

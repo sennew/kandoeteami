@@ -1,5 +1,4 @@
-package com.projects.wens.kandoeteami.organisation;
-
+package com.projects.wens.kandoeteami.session;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,8 +15,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.projects.wens.kandoeteami.R;
-import com.projects.wens.kandoeteami.session.ListSessionActivity;
-import com.projects.wens.kandoeteami.session.SessionGameActivity;
+import com.projects.wens.kandoeteami.organisation.ListOrganisationActivity;
 import com.projects.wens.kandoeteami.start.SplashActivity;
 import com.projects.wens.kandoeteami.themes.ListThemeActivity;
 import com.projects.wens.kandoeteami.user.UserActivity;
@@ -25,12 +23,13 @@ import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-
-public class ListOrganisationActivity extends AppCompatActivity {
+/**
+ * Created by michaelkees on 18/03/16.
+ */
+public class ListSessionActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private static final String PICASSO_BASEURL = "http://wildfly-teamiip2kdgbe.rhcloud.com/";
     public static final String PREFS_NAME = "MyPrefs";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +54,7 @@ public class ListOrganisationActivity extends AppCompatActivity {
         }
 
         if (null == savedInstanceState) {
-            initFragment(ListOrganisationFragment.newInstance());
+            initFragment(ListSessionFragment.newInstance());
         }
 
         //DRAWER
@@ -77,7 +76,6 @@ public class ListOrganisationActivity extends AppCompatActivity {
 
     }
 
-
     private void initFragment(Fragment listOrganisationFrag) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -85,7 +83,7 @@ public class ListOrganisationActivity extends AppCompatActivity {
         transaction.commit();
     }
 
-    private void setupDrawerContent(final NavigationView navigationView) {
+    private void setupDrawerContent(NavigationView navigationView) {
         //Hier gaan de menu opties uitgewerkt worden
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
@@ -95,7 +93,7 @@ public class ListOrganisationActivity extends AppCompatActivity {
                         Intent i;
                         switch (menuItem.getItemId()) {
                             case R.id.nav_ic_organisaitons:
-                                i = new Intent(getApplicationContext(), this.getClass());
+                                i = new Intent(getApplicationContext(), ListOrganisationActivity.class);
                                 startActivity(i);
                                 break;
                             case R.id.nav_ic_profile:
@@ -117,7 +115,7 @@ public class ListOrganisationActivity extends AppCompatActivity {
                                 finish();
                                 break;
                             case R.id.nav_ic_kandoes:
-                                i = new Intent(getApplicationContext(), ListSessionActivity.class);
+                                i = new Intent(getApplicationContext(), this.getClass());
                                 startActivity(i);
                                 break;
                             case R.id.nav_ic_newkandoe:
@@ -142,4 +140,6 @@ public class ListOrganisationActivity extends AppCompatActivity {
                 }
         );
     }
+
+
 }
