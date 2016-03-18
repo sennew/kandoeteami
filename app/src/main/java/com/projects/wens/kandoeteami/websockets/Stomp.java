@@ -1,5 +1,7 @@
 package com.projects.wens.kandoeteami.websockets;
 
+import android.util.Log;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -7,12 +9,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import android.util.Log;
-
-import com.projects.wens.kandoeteami.websockets.Frame;
-import com.projects.wens.kandoeteami.websockets.ListenerSubscription;
-import com.projects.wens.kandoeteami.websockets.ListenerWSNetwork;
-import com.projects.wens.kandoeteami.websockets.Subscription;
 
 import de.roderick.weberknecht.WebSocket;
 import de.roderick.weberknecht.WebSocketEventHandler;
@@ -20,12 +16,14 @@ import de.roderick.weberknecht.WebSocketMessage;
 
 public class Stomp {
 
+
     private static final String TAG = Stomp.class.getSimpleName();
 
     public static final int CONNECTED = 1;//Connection completely established
     public static final int NOT_AGAIN_CONNECTED = 2;//Connection process is ongoing
     public static final int DECONNECTED_FROM_OTHER = 3;//Error, no more internet connection, etc.
     public static final int DECONNECTED_FROM_APP = 4;//application explicitely ask for shut down the connection
+    public static final String SOCKET_FINISH = "\"SOCKFIN\"";
 
     private static final String PREFIX_ID_SUBSCIPTION = "sub-";
     private static final String ACCEPT_VERSION_NAME = "accept-version";
@@ -65,23 +63,29 @@ public class Stomp {
 
     private ListenerWSNetwork networkListener;
 
+    public Map<String, String> getHeaders() {
+        return headers;
+    }
+
     /**
      * Constructor of a stomp object. Only url used to set up a connection with a server can be instantiate
-     *
      * @param url
      *      the url of the server to connect with
      */
+
     public Stomp(String url, Map<String,String> headersSetup, ListenerWSNetwork stompStates){
         try {
+            Log.i("LAL", headersSetup.get("Cookie"));
             this.websocket = new WebSocket(new URI(url), null, headersSetup);
             this.counter = 0;
 
-            this.headers = new HashMap<String, String>();
+            this.headers = headersSetup;
             this.maxWebSocketFrameSize = 16 * 1024;
             this.connection = NOT_AGAIN_CONNECTED;
             this.networkListener = stompStates;
             this.networkListener.onState(NOT_AGAIN_CONNECTED);
             this.subscriptions = new HashMap<String, Subscription>();
+
 
             this.websocket.setEventHandler(new WebSocketEventHandler() {
                 @Override
@@ -105,7 +109,7 @@ public class Stomp {
                         Stomp.this.connection = CONNECTED;
                         Stomp.this.networkListener.onState(CONNECTED);
 
-                        Log.d(TAG, "connected to server : " + frame.getHeaders().get("server"));
+                        Log.d(TAG, "connected to server : " + frame.getHeaders().get("user-name"));
                         isMessageConnected = true;
 
                     } else if(frame.getCommand().equals(COMMAND_MESSAGE)){
@@ -116,15 +120,13 @@ public class Stomp {
                             onReceive.onMessage(frame.getHeaders(), frame.getBody());
                         } else{
                             Log.e(TAG, "Error : Subscription with id = " + subscription + " had not been subscribed");
-                            //ACTION TO DETERMINE TO MANAGE SUBCRIPTION ERROR
+
                         }
 
                     } else if(frame.getCommand().equals(COMMAND_RECEIPT)){
-                        //I DON'T KNOW WHAT A RECEIPT STOMP MESSAGE IS
 
                     } else if(frame.getCommand().equals(COMMAND_ERROR)){
                         Log.e(TAG, "Error : Headers = " + frame.getHeaders() + ", Body = " + frame.getBody());
-                        //ACTION TO DETERMINE TO MANAGE ERROR MESSAGE
 
                     } else {
 
@@ -166,8 +168,12 @@ public class Stomp {
         }
     }
 
+    public int getConnection() {
+        return connection;
+    }
+
     /**
-     * Send a message to server thanks to websocket
+     * Send a message to server through websocket
      *
      * @param command
      *      one of a frame property, see {@link Frame} for more details
@@ -176,6 +182,7 @@ public class Stomp {
      * @param body
      *      one of a frame property, see {@link Frame} for more details
      */
+
     private void transmit(String command, Map<String, String> headers, String body){
         String out = Frame.marshall(command, headers, body);
         Log.d(TAG, ">>> " + out);
@@ -205,7 +212,7 @@ public class Stomp {
     }
 
     /**
-     * disconnection come from the server, without any intervention of client side. Operations order is very important
+     * Closing connection from server side
      */
     private void disconnectFromServer(){
         if(this.connection == CONNECTED){
@@ -216,7 +223,7 @@ public class Stomp {
     }
 
     /**
-     * disconnection come from the app, because the public method disconnect was called
+     * Closing connection from application
      */
     private void disconnectFromApp(){
         if(this.connection == DECONNECTED_FROM_APP){
@@ -226,7 +233,7 @@ public class Stomp {
     }
 
     /**
-     * Close the web socket connection with the server. Operations order is very important
+     * Close the web socket connection with the server
      */
     public void disconnect(){
         if(this.connection == CONNECTED){
@@ -236,9 +243,7 @@ public class Stomp {
     }
 
     /**
-     * Send a simple message to the server thanks to the body parameter
-     *
-     *
+     * Send a message to the server
      * @param destination
      *      The destination through a Stomp message will be send to the server
      * @param headers
@@ -247,6 +252,8 @@ public class Stomp {
      *      body of a message
      */
     public void send(String destination, Map<String,String> headers, String body){
+
+
         if(this.connection == CONNECTED){
             if(headers == null)
                 headers = new HashMap<String, String>();
@@ -254,16 +261,20 @@ public class Stomp {
             if(body == null)
                 body = "";
 
+
+
             headers.put(SUBSCRIPTION_DESTINATION, destination);
 
             transmit(COMMAND_SEND, headers, body);
+        }
+        else{
+            Log.i("destination nisam spoj", destination);
         }
     }
 
     /**
      * Allow a client to send a subscription message to the server independently of the initialization of the web socket.
      * If connection have not been already done, just save the subscription
-     *
      * @param subscription
      *      a subscription object
      */
@@ -281,9 +292,7 @@ public class Stomp {
     }
 
     /**
-     * Subscribe to a Stomp channel, through messages will be send and received. A message send from a determine channel
-     * can not be receive in an another.
-     *
+     * Subscribe to a Stomp channel, through messages will be send and received.
      */
     private void subscribe(){
         if(this.connection == CONNECTED){
@@ -308,7 +317,6 @@ public class Stomp {
 
     /**
      * Destroy a subscription with its id
-     *
      * @param id
      *      the id of the subscription. This id is automatically setting up in the subscribe method
      */
@@ -322,3 +330,5 @@ public class Stomp {
         }
     }
 }
+
+
