@@ -46,9 +46,7 @@ public class SessionContentAdapter extends RecyclerView.Adapter<SessionContentAd
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
-        //TODO: ITEM XML
         View cardSessionView = inflater.inflate(R.layout.item_session, parent, false);
-
         return new ViewHolder(cardSessionView, itemListener);
     }
 
@@ -71,6 +69,7 @@ public class SessionContentAdapter extends RecyclerView.Adapter<SessionContentAd
             end = sdf.parse(sessionDTO.getEndTime());
 
             if(start.getTime() > now.getTime()) {
+                holder.sessionStartTimePrefix.setText("Starting in:");
                 long different = start.getTime() - now.getTime();
                 long secondsInMilli = 1000;
                 long minutesInMilli = secondsInMilli * 60;
@@ -88,18 +87,56 @@ public class SessionContentAdapter extends RecyclerView.Adapter<SessionContentAd
 
                 long elapsedSeconds = different / secondsInMilli;
 
-                String time = String.format("%d days, %d hours, %d minutes", elapsedDays, elapsedHours, elapsedMinutes);
-                Log.i("TIME", time);
-                holder.startTime.setText(time);
-            } else if (now.getTime() > start.getTime()) {
-                if(sessionDTO.getState() == SessionState.IN_PROGRESS) {
-                    holder.startTime.setText("Session in progress");
-                } else  if(sessionDTO.getState() == SessionState.FINISHED){
-                    holder.startTime.setText("Session finished");
-                }else  if(sessionDTO.getState() == SessionState.CREATED){
-                    holder.startTime.setText("Session created");
+                String timeStringToShow="";
+                if (elapsedDays == 0) {
+                    if(elapsedHours == 0) {
+                        if (elapsedMinutes == 0) {
+                            timeStringToShow = String.format("Wait a few seconds");
+                        } else {
+                            timeStringToShow = String.format("%d minutes", elapsedMinutes);
+                        }
+                    } else {
+                        timeStringToShow = String.format("%d hours, %d minutes", elapsedHours, elapsedMinutes);
+                    }
+                } else {
+                    timeStringToShow = String.format("%d days, %d hours, %d minutes",elapsedDays, elapsedHours, elapsedMinutes);
                 }
-                Log.i("TIME", "progress");
+                Log.i("TIME", timeStringToShow );
+                holder.startTime.setText(timeStringToShow);
+            } else if (now.getTime() > start.getTime()) {
+                holder.sessionStartTimePrefix.setText("Session time:");
+
+                long different = now.getTime() - start.getTime();
+                long secondsInMilli = 1000;
+                long minutesInMilli = secondsInMilli * 60;
+                long hoursInMilli = minutesInMilli * 60;
+                long daysInMilli = hoursInMilli * 24;
+
+                long elapsedDays = different / daysInMilli;
+                different = different % daysInMilli;
+
+                long elapsedHours = different / hoursInMilli;
+                different = different % hoursInMilli;
+
+                long elapsedMinutes = different / minutesInMilli;
+                different = different % minutesInMilli;
+
+                String timeStringToShow="";
+                if (elapsedDays == 0) {
+                    if(elapsedHours == 0) {
+                        if (elapsedMinutes == 0) {
+                            timeStringToShow = String.format("Some seconds");
+                        } else {
+                            timeStringToShow = String.format("%d minutes", elapsedMinutes);
+                        }
+                    } else {
+                        timeStringToShow = String.format("%d hours, %d minutes", elapsedHours, elapsedMinutes);
+                    }
+                } else {
+                    timeStringToShow = String.format("%d days, %d hours, %d minutes",elapsedDays, elapsedHours, elapsedMinutes);
+                }
+                holder.startTime.setText(timeStringToShow);
+
             } else if(now.getTime() == start.getTime()){
                 holder.startTime.setText("Session in progress");
             }
@@ -109,11 +146,10 @@ public class SessionContentAdapter extends RecyclerView.Adapter<SessionContentAd
         }
 
 
-        List<User> users = new ArrayList<>();
+
         User currentUser = new User();
-        users = sessionDTO.getUsers();
-        for(User u : users){
-            if(u.getPosition() == 1) {
+        for(User u : sessionDTO.getUsers()){
+            if(u.getPosition() == 0) {
                 currentUser = u;
             }
         }
@@ -122,7 +158,7 @@ public class SessionContentAdapter extends RecyclerView.Adapter<SessionContentAd
 
         if(sessionDTO.getState() == SessionState.CREATED) {
             holder.sessionState.setBackgroundResource(R.color.darkblue);
-            holder.sessionState.setText("PENDING");
+            holder.sessionState.setText("STARTED");
         } else if (sessionDTO.getState() == SessionState.IN_PROGRESS){
             holder.sessionState.setBackgroundResource(R.color.green);
             holder.sessionState.setText("ACTIVE");
@@ -171,6 +207,7 @@ public class SessionContentAdapter extends RecyclerView.Adapter<SessionContentAd
         public TextView sessionCurrentUser;
         public TextView startTime;
         public TextView sessionState;
+        public TextView sessionStartTimePrefix;
         public ImageView themeImage;
 
         public Button detailButton;
@@ -184,6 +221,7 @@ public class SessionContentAdapter extends RecyclerView.Adapter<SessionContentAd
             themeImage = (ImageView) itemView.findViewById(R.id.session_theme_image);
             startTime = (TextView) itemView.findViewById(R.id.session_starttime);
             sessionState = (TextView) itemView.findViewById(R.id.session_state);
+            sessionStartTimePrefix = (TextView) itemView.findViewById(R.id.session_start_prefix);
             sessionCurrentUser = (TextView) itemView.findViewById(R.id.session_currentuser);
             detailButton = (Button) itemView.findViewById(R.id.button_session_detail);
             detailButton.setOnClickListener(new View.OnClickListener() {

@@ -86,8 +86,14 @@
                             android:scaleType="centerCrop"
                             android:src="@drawable/ic_time" />
 
+
+                        <LinearLayout android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            >
+
+
                         <TextView
-                            android:id="@+id/session_starttime"
+                            android:id="@+id/session_start_prefix"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="left"
@@ -95,11 +101,28 @@
                             android:gravity="center"
                             android:paddingBottom="5dp"
                             android:paddingLeft="10dp"
+                            android:paddingTop="5dp"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                            android:textColor="@color/dark_grey"
+                            tools:text="Starting in:" />
+
+                        <TextView
+                            android:id="@+id/session_starttime"
+                            android:layout_width="wrap_content"
+                            android:textStyle="bold"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:foregroundGravity="left"
+                            android:drawablePadding="5dp"
+                            android:gravity="center"
+                            android:paddingBottom="5dp"
+                            android:paddingLeft="8dp"
                             android:paddingRight="10dp"
                             android:paddingTop="5dp"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                             android:textColor="@color/dark_grey"
-                            tools:text="Tue, 12 Mar, 12:00AM" />
+                            tools:text="12:00AM" />
+                        </LinearLayout>
                     </TableRow>
                     <TableRow>
                         <ImageView
@@ -109,6 +132,10 @@
                             android:scaleType="centerCrop"
                             android:src="@drawable/ic_profile" />
 
+
+                        <LinearLayout android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            >
                         <TextView
                             android:id="@+id/session_currentuser"
                             android:layout_width="wrap_content"
@@ -118,11 +145,26 @@
                             android:paddingBottom="5dp"
                             android:paddingLeft="10dp"
 
-                            android:paddingRight="10dp"
+                            android:paddingRight="2dp"
                             android:paddingTop="5dp"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                             android:textColor="@color/dark_grey"
                             tools:text="Current User" />
+
+                        <TextView
+                            android:id="@+id/session_user_prefix"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="left"
+                            android:drawablePadding="5dp"
+                            android:gravity="center"
+                            android:paddingBottom="5dp"
+                            android:paddingLeft="2dp"
+                            android:paddingTop="5dp"
+                            android:textSize="10sp"
+                            android:textColor="@color/green"
+                            android:text="(ACTIVE)" />
+                        </LinearLayout>
                     </TableRow>
                 </TableLayout>
 
