@@ -75,8 +75,8 @@ public class Stomp {
 
     public Stomp(String url, Map<String,String> headersSetup, ListenerWSNetwork stompStates){
         try {
-            Log.i("LAL", headersSetup.get("Cookie"));
-            this.websocket = new WebSocket(new URI(url), null, headersSetup);
+            //Log.i("LAL", headersSetup.get("Cookie"));
+            this.websocket = new WebSocket(new URI(url));
             this.counter = 0;
 
             this.headers = headersSetup;
@@ -101,6 +101,7 @@ public class Stomp {
 
                 @Override
                 public void onMessage(WebSocketMessage message) {
+                    System.out.println("We recieved: " + message.getText());
                     Log.d(TAG, "<<< " + message.getText());
                     Frame frame = Frame.fromString(message.getText());
                     boolean isMessageConnected = false;
@@ -184,6 +185,7 @@ public class Stomp {
      */
 
     private void transmit(String command, Map<String, String> headers, String body){
+        System.out.println("transmitting to server");
         String out = Frame.marshall(command, headers, body);
         Log.d(TAG, ">>> " + out);
         while (true) {
@@ -205,6 +207,8 @@ public class Stomp {
             Log.d(TAG, "Opening Web Socket...");
             try{
                 this.websocket.connect();
+                //TODO
+                System.out.println("Web Socket Connected/Openned");
             } catch (Exception e){
                 Log.w(TAG, "Impossible to establish a connection : " + e.getClass() + ":" + e.getMessage());
             }
@@ -279,22 +283,29 @@ public class Stomp {
      *      a subscription object
      */
     public void subscribe(Subscription subscription){
+        System.out.println("subscribing with parameters");
         subscription.setId(PREFIX_ID_SUBSCIPTION + this.counter++);
+        System.out.println("Connection: " + this.connection);
+        System.out.println("Subscription: " + subscription);
         this.subscriptions.put(subscription.getId(), subscription);
 
         if(this.connection == CONNECTED){
+            System.out.println("if statement succeeded");
             Map<String, String> headers = new HashMap<String, String>();
             headers.put(SUBSCRIPTION_ID, subscription.getId());
             headers.put(SUBSCRIPTION_DESTINATION, subscription.getDestination());
 
             subscribe(headers);
+            System.out.println("Subscribed successfully");
         }
+        System.out.println("Out of if statement");
     }
 
     /**
      * Subscribe to a Stomp channel, through messages will be send and received.
      */
     private void subscribe(){
+        System.out.println("Subscribe without methods");
         if(this.connection == CONNECTED){
             for(Subscription subscription : this.subscriptions.values()){
                 Map<String, String> headers = new HashMap<String, String>();
@@ -302,6 +313,7 @@ public class Stomp {
                 headers.put(SUBSCRIPTION_DESTINATION, subscription.getDestination());
 
                 subscribe(headers);
+                System.out.println("Subscribed");
             }
         }
     }
@@ -312,6 +324,7 @@ public class Stomp {
      *      header of a subscribe STOMP message
      */
     private void subscribe(Map<String, String> headers){
+        System.out.println("Subscribe transmit");
         transmit(COMMAND_SUBSCRIBE, headers, null);
     }
 

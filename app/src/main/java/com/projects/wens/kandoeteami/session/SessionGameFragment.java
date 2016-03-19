@@ -82,7 +82,7 @@ public class SessionGameFragment extends Fragment implements SessionGameContract
 
         HashMap<String, ListenerSubscription> subscriptionHashMap = new HashMap<>();
         subscriptionHashMap.put(MOVE_PATH, subscription);
-        socket = new SessionGameConnection(subscriptionHashMap, "");
+        socket = new SessionGameConnection();
 
     }
 
@@ -123,6 +123,7 @@ public class SessionGameFragment extends Fragment implements SessionGameContract
 
         Toast.makeText(getActivity(), "SIZE CARDS: " + session.getCards().size(), Toast.LENGTH_SHORT).show();
         cardAdapter.replaceData(session.getCards());
+
     }
 
 
