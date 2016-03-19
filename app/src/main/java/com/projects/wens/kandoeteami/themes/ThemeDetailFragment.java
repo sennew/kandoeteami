@@ -168,13 +168,17 @@ public class ThemeDetailFragment extends Fragment implements ThemeDetailContract
             Picasso.with(this.getContext()).load(theme.getIconURL()).into(imgTheme);
         }
 
-        countSessions.setText(""+countSession);
-        activeSessions.setText(""+activeSession);
+        countSessions.setText(countSession + " total");
+        activeSessions.setText(activeSession + " active");
         int count = theme.getSubThemes().size();
         if (count == 0){
             subThemas.setText("none");
         }else {
-            subThemas.setText(""+count);
+            if(count == 1) {
+                subThemas.setText(count + " theme");
+            } else {
+                subThemas.setText(count + " themes");
+            }
         }
 
 

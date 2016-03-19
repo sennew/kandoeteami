@@ -8,40 +8,55 @@
     android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
     <RelativeLayout
+        android:id="@+id/linear_descr"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/linear_descr"
         android:layout_marginBottom="5dp"
-        android:background="@drawable/border_set_shadow"
-        >
+        android:padding="10dp"
+        android:background="@drawable/border_set">
 
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:src="@drawable/ic_action_news" />
-
-        <TextView
-            android:id="@+id/org_description"
+        <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="97dp"
-            android:layout_marginRight="20dp"
-            android:textSize="15sp"
-            android:textColor="@color/dark_grey"
-            tools:text="Karel de Grote Hogeschool" />
+            android:layout_height="wrap_content"
+
+            android:stretchColumns="1">
+
+            <TableRow>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/ic_session_date_desc"
+                    android:scaleType="centerCrop"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_info" />
+
+                <TextView
+                    android:id="@+id/org_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:gravity="center"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="10dp"
+
+                    android:paddingRight="10dp"
+                    android:paddingTop="5dp"
+                    android:textSize="20sp"
+                    android:textColor="@color/dark_grey"
+                    tools:text="Karel de Grote Hogeschool" />
+            </TableRow>
+        </TableLayout>
+
     </RelativeLayout>
-    
+
 
     <ExpandableListView
         android:id="@+id/users_list"
-        android:layout_below="@id/linear_descr"
         android:layout_width="match_parent"
-        android:groupIndicator="@color/light_grey"
         android:layout_height="400dp"
+        android:layout_below="@id/linear_descr"
         android:layout_marginTop="0dp"
-        tools:context=".organisation.OrganisationActivity">
-    </ExpandableListView>
+        tools:context=".organisation.OrganisationActivity"></ExpandableListView>
 
 </RelativeLayout>

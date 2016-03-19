@@ -12,4 +12,7 @@
     <string name="edit_user_info">Edit information</string>
     <string name="ic_session_date_desc">Icon Session Date</string>
     <string name="card_image_desc">Card Image</string>
+    <string name="kandoe_theme">Kandoes</string>
+    <string name="subthemes_theme">Subthemes</string>
+    <string name="cards_theme">Cards</string>
 </resources>

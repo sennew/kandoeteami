@@ -144,7 +144,7 @@ public class SessionDetailFragment extends Fragment implements SessionDetailCont
             if (session.getSubTheme().getIconURL().charAt(0) == 'r'){
                 Picasso.with(getActivity()).load(PICASSO_BASEURL +  session.getSubTheme().getIconURL()).into(imgSession);
             } else {
-                Picasso.with(this.getContext()).load(session.getTheme().getIconURL()).into(imgSession);
+                Picasso.with(this.getContext()).load(session.getSubTheme().getIconURL()).into(imgSession);
             }
         }
 

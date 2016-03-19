@@ -42,7 +42,7 @@ public class SessionDetailPresenter implements SessionDetailContract.UserActionL
                     item.addChildren(child);
                 }
                 groupItems.add(item);
-                
+
                 int dtoSize = users.size();
                 view.showSession(sessionDTO, groupItems, dtoSize, dtoSize);
             }
