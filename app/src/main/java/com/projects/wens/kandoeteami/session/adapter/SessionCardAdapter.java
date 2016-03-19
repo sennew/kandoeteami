@@ -46,7 +46,6 @@ public class SessionCardAdapter extends RecyclerView.Adapter<SessionCardAdapter.
         Card card = cards.get(position);
         holder.cardDescription.setText(card.getDescription());
 
-
         if (card.getImageUrl().charAt(0) == 'r') {
             Picasso.with(context).load(PICASSO_BASEURL + card.getImageUrl()).into(holder.sessionCardImage);
         } else {

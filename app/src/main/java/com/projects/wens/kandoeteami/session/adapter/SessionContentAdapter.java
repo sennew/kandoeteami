@@ -54,6 +54,16 @@ public class SessionContentAdapter extends RecyclerView.Adapter<SessionContentAd
     public void onBindViewHolder(ViewHolder holder, int position) {
         SessionDTO sessionDTO = mSessions.get(position);
         holder.sessionName.setText(sessionDTO.getSessionName());
+        if(sessionDTO.getState() == SessionState.CREATED) {
+            holder.sessionState.setBackgroundResource(R.color.darkblue);
+            holder.sessionState.setText("STARTED");
+        } else if (sessionDTO.getState() == SessionState.IN_PROGRESS){
+            holder.sessionState.setBackgroundResource(R.color.green);
+            holder.sessionState.setText("ACTIVE");
+        } else if (sessionDTO.getState() == SessionState.FINISHED) {
+            holder.sessionState.setBackgroundResource(R.color.orange);
+            holder.sessionState.setText("FINISHED");
+        }
 
         String format = "yyyy-MM-dd'T'HH:mm:ss";
         SimpleDateFormat sdf = new SimpleDateFormat(format, Locale.US);
@@ -70,6 +80,7 @@ public class SessionContentAdapter extends RecyclerView.Adapter<SessionContentAd
 
             if(start.getTime() > now.getTime()) {
                 holder.sessionStartTimePrefix.setText("Starting in:");
+                holder.sessionState.setText("CREATED");
                 long different = start.getTime() - now.getTime();
                 long secondsInMilli = 1000;
                 long minutesInMilli = secondsInMilli * 60;
@@ -156,16 +167,7 @@ public class SessionContentAdapter extends RecyclerView.Adapter<SessionContentAd
         holder.sessionCurrentUser.setText(currentUser.getUsername());
         //de usersession met position 0
 
-        if(sessionDTO.getState() == SessionState.CREATED) {
-            holder.sessionState.setBackgroundResource(R.color.darkblue);
-            holder.sessionState.setText("STARTED");
-        } else if (sessionDTO.getState() == SessionState.IN_PROGRESS){
-            holder.sessionState.setBackgroundResource(R.color.green);
-            holder.sessionState.setText("ACTIVE");
-        } else if (sessionDTO.getState() == SessionState.FINISHED) {
-            holder.sessionState.setBackgroundResource(R.color.orange);
-            holder.sessionState.setText("FINISHED");
-        }
+
 
         if(sessionDTO.getTheme()!=null){
             if (sessionDTO.getTheme().getIconURL().charAt(0) == 'r') {

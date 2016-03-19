@@ -42,7 +42,7 @@ public class ListSubThemeActivity extends AppCompatActivity {
         toolbar.setTitle("Subthemes");
         setSupportActionBar(toolbar);
 
-        toolbar.inflateMenu(R.menu.menu_themes);
+        toolbar.inflateMenu(R.menu.menu_actions);
 
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override

@@ -38,7 +38,7 @@ public class ListThemeActivity extends AppCompatActivity {
          toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        toolbar.inflateMenu(R.menu.menu_themes);
+        toolbar.inflateMenu(R.menu.menu_actions);
 
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override

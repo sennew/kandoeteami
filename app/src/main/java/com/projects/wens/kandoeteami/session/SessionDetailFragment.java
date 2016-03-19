@@ -133,7 +133,6 @@ public class SessionDetailFragment extends Fragment implements SessionDetailCont
         tvSessionDate.setText(session.getStartTime());
         tvSessionTypeAndMode.setText(String.valueOf(session.getType() + " | " + session.getMode()));
 
-        //FIXME: Target must not be null getTheme().getIconUrl()
         if(session.getTheme()!=null){
             if (session.getTheme().getIconURL()!=null && session.getTheme().getIconURL().charAt(0) == 'r'){
                 Picasso.with(getActivity()).load(PICASSO_BASEURL +  session.getTheme().getIconURL()).into(imgSession);
