@@ -12,4 +12,5 @@
     <color name="iron">#CCCCCC</color>
     <color name="black_alpha_40">#66000000</color>
     <color name="text_shadow">#00000000</color>
+    <color name="grey">#BBBBBB</color>
 </resources>

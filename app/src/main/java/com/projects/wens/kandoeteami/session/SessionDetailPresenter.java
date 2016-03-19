@@ -1,7 +1,15 @@
 package com.projects.wens.kandoeteami.session;
 
+import android.util.Log;
+
+import com.projects.wens.kandoeteami.organisation.data.ChildItem;
+import com.projects.wens.kandoeteami.organisation.data.GroupItem;
 import com.projects.wens.kandoeteami.retrofit.service.SessionService;
 import com.projects.wens.kandoeteami.session.data.SessionDTO;
+import com.projects.wens.kandoeteami.user.data.User;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -21,10 +29,23 @@ public class SessionDetailPresenter implements SessionDetailContract.UserActionL
 
     @Override
     public void loadSession(String token, int sessionId) {
+        final List<GroupItem> groupItems = new ArrayList<>();
         service.getSessionById("Bearer " + token, sessionId, new Callback<SessionDTO>() {
             @Override
             public void success(SessionDTO sessionDTO, Response response) {
                 //view.showSession(sessionDTO);
+                GroupItem item = new GroupItem("SESSION " + sessionDTO.getSessionId() + " MEMBERS");
+
+                List<User> users = sessionDTO.getUsers();
+                for (User u : users) {
+                    ChildItem child = new ChildItem(u.getPerson().getFirstname(), u.getPerson().getLastname(), "MEMBER", u.getProfilePicture());
+                    item.addChildren(child);
+                }
+                groupItems.add(item);
+
+                Log.i("SESSIONTHEME:", sessionDTO.getTheme().getIconURL());
+                int dtoSize = users.size();
+                view.showSession(sessionDTO, groupItems, dtoSize, dtoSize);
             }
 
             @Override

@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -13,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
         android:background="@drawable/border_set"
         android:baselineAligned="false"
         android:orientation="vertical"
@@ -40,6 +40,30 @@
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/ic_session_date_desc"
                     android:scaleType="centerCrop"
+                    android:src="@drawable/ic_my_kandoes" />
+
+                <TextView
+                    android:id="@+id/txt_session_typeandmode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:drawablePadding="5dp"
+                    android:gravity="center"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="5dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textColor="@color/dark_grey"
+                    tools:text="IDEA | ASYNC" />
+            </TableRow>
+
+            <TableRow>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/ic_session_date_desc"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/ic_time" />
 
                 <TextView
@@ -58,9 +82,7 @@
                     tools:text="Tue, 12 Mar, 12:00AM" />
             </TableRow>
 
-
             <TableRow>
-
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -86,44 +108,57 @@
         </TableLayout>
     </LinearLayout>
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ExpandableListView
-            android:id="@+id/user_list"
-            android:layout_width="match_parent"
-            android:layout_height="350dp"
-            android:paddingTop="25dp">
-        </ExpandableListView>
-    </LinearLayout>
-
-
     <LinearLayout
         android:id="@+id/rel_cards"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:background="@drawable/border_set"
+        android:orientation="vertical"
+        android:padding="10dp">
+
 
         <TextView
             android:id="@+id/session_cards_text"
-            android:layout_width="match_parent"
-            android:textSize="23sp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="CARDS" />
+            android:padding="5dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textColor="@color/dark_grey"
+            android:text="Cards" />
 
         <HorizontalScrollView
             android:id="@+id/hor_scroll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:paddingTop="20dp">
+            android:background="@drawable/border_set"
+            android:layout_marginTop="5dp"
+            android:paddingTop="5dp">
 
             <LinearLayout
                 android:id="@+id/session_cards_gallery"
                 android:layout_width="wrap_content"
                 android:layout_height="150dp"
-                android:orientation="horizontal"></LinearLayout>
+                android:orientation="horizontal">
+            </LinearLayout>
+
         </HorizontalScrollView>
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp">
+
+        <ExpandableListView
+            android:id="@+id/session_user_list"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:paddingTop="5dp">
+        </ExpandableListView>
+
+    </LinearLayout>
+
+
+
 </LinearLayout>

@@ -49,11 +49,20 @@ public class SessionContentAdapter extends RecyclerView.Adapter<SessionContentAd
         //TODO: current user??
         holder.sessionCurrentUser.setText("Michael Kees");
 
-        if (sessionDTO.getTheme().getIconURL().charAt(0) == 'r') {
-            Picasso.with(context).load(PICASSO_BASEURL + sessionDTO.getTheme().getIconURL()).into(holder.themeImage);
-        } else {
-            Picasso.with(context).load(sessionDTO.getTheme().getIconURL()).into(holder.themeImage);
+        if(sessionDTO.getTheme()!=null){
+            if (sessionDTO.getTheme().getIconURL().charAt(0) == 'r') {
+                Picasso.with(context).load(PICASSO_BASEURL + sessionDTO.getTheme().getIconURL()).into(holder.themeImage);
+            } else {
+                Picasso.with(context).load(sessionDTO.getTheme().getIconURL()).into(holder.themeImage);
+            }
+        } else if (sessionDTO.getSubTheme()!=null){
+            if (sessionDTO.getSubTheme().getIconURL().charAt(0) == 'r') {
+                Picasso.with(context).load(PICASSO_BASEURL + sessionDTO.getSubTheme().getIconURL()).into(holder.themeImage);
+            } else {
+                Picasso.with(context).load(sessionDTO.getSubTheme().getIconURL()).into(holder.themeImage);
+            }
         }
+
 
     }
 

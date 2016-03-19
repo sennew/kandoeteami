@@ -16,6 +16,8 @@ import android.widget.TextView;
 
 import com.projects.wens.kandoeteami.R;
 import com.projects.wens.kandoeteami.organisation.ListOrganisationActivity;
+import com.projects.wens.kandoeteami.session.ListSessionActivity;
+import com.projects.wens.kandoeteami.session.SessionGameActivity;
 import com.projects.wens.kandoeteami.start.SplashActivity;
 import com.projects.wens.kandoeteami.user.UserActivity;
 import com.squareup.picasso.Picasso;
@@ -109,11 +111,15 @@ public class ListThemeActivity extends AppCompatActivity {
                         switch (menuItem.getItemId()) {
                             case R.id.nav_ic_organisaitons:
                                 i = new Intent(getApplicationContext(), ListOrganisationActivity.class);
+
                                 startActivity(i);
+                                finish();
                                 break;
                             case R.id.nav_ic_profile:
                                 i = new Intent(getApplicationContext(), UserActivity.class);
+
                                 startActivity(i);
+                                finish();
                                 break;
                             case R.id.nav_ic_logout:
                                 //Removing token
@@ -121,21 +127,31 @@ public class ListThemeActivity extends AppCompatActivity {
                                 SharedPreferences.Editor editor = settings.edit();
                                 editor.putString("token", "");
                                 editor.remove("token");
+
                                 // Commit the edits!
                                 editor.commit();
+
                                 i = new Intent(getApplicationContext(), SplashActivity.class);
                                 startActivity(i);
                                 finish();
                                 break;
                             case R.id.nav_ic_kandoes:
+                                i = new Intent(getApplicationContext(), ListSessionActivity.class);
+                                startActivity(i);
+                                finish();
                                 break;
                             case R.id.nav_ic_newkandoe:
+                                i = new Intent(getApplicationContext(), SessionGameActivity.class);
+                                i.putExtra("SESSIONID", 1);
+                                startActivity(i);
+                                finish();
                                 break;
                             case R.id.nav_ic_themes:
                                 i = new Intent(getApplicationContext(), ListThemeActivity.class);
                                 i.putExtra("allThemes", true);
                                 i.putExtra("organisationId",0);
                                 startActivity(i);
+                                finish();
                                 break;
                             case R.id.nav_ic_help:
                                 break;

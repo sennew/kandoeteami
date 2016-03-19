@@ -3,14 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@color/light_grey"
-    >
-
+    android:background="@color/light_grey">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/border_set"
+        android:background="@color/light_grey"
         android:paddingRight="10dp"
         android:paddingLeft="12dp">
 
@@ -38,7 +36,7 @@
             android:layout_marginBottom="8dp"
             android:layout_marginTop="45dp"
             android:paddingLeft="4dp"
-            android:textColor="@android:color/darker_gray"
+            android:textColor="@color/grey"
             android:text="ORGANISATOR"
              />
 

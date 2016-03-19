@@ -1,14 +1,21 @@
 package com.projects.wens.kandoeteami.session;
 
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
+import android.widget.Gallery;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
 
 import com.projects.wens.kandoeteami.R;
 import com.projects.wens.kandoeteami.organisation.adapter.ExpandableListViewAdapter;
@@ -16,6 +23,8 @@ import com.projects.wens.kandoeteami.organisation.data.GroupItem;
 import com.projects.wens.kandoeteami.retrofit.ServiceGenerator;
 import com.projects.wens.kandoeteami.retrofit.service.SessionService;
 import com.projects.wens.kandoeteami.session.data.SessionDTO;
+import com.projects.wens.kandoeteami.themes.data.Card;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -40,6 +49,11 @@ public class SessionDetailFragment extends Fragment implements SessionDetailCont
 
     private ExpandableListView expandUserList;
     private ExpandableListViewAdapter adapter;
+    private TextView tvSessionName;
+    private TextView tvSessionDate;
+    private TextView tvSessionCurUser;
+    private TextView tvSessionTypeAndMode;
+    private ImageView imgSession;
 
     private CollapsingToolbarLayout collapsing;
 
@@ -60,7 +74,7 @@ public class SessionDetailFragment extends Fragment implements SessionDetailCont
         adapter = new ExpandableListViewAdapter(getContext());
 
         //TODO: REQUEST FROM BUNDLE TO GET THEMEID FROM ACTIVITY
-        sessionId = fragment.getArguments().getInt("ThemeId");
+        sessionId = fragment.getArguments().getInt("SESSIONID");
 
     }
 
@@ -79,11 +93,16 @@ public class SessionDetailFragment extends Fragment implements SessionDetailCont
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_theme_item, container, false);
+        View root = inflater.inflate(R.layout.fragment_session_item, container, false);
 
+        tvSessionCurUser = (TextView) root.findViewById(R.id.txt_session_curuser);
+        tvSessionName = (TextView) root.findViewById(R.id.txt_session_name);
+        tvSessionDate = (TextView) root.findViewById(R.id.txt_session_date);
+        tvSessionTypeAndMode = (TextView) root.findViewById(R.id.txt_session_typeandmode);
+        imgSession = (ImageView) getActivity().findViewById(R.id.header_img);
 
         collapsing = (CollapsingToolbarLayout) getActivity().findViewById(R.id.collapsing_toolbar);
-        expandUserList = (ExpandableListView) root.findViewById(R.id.users_list);
+        expandUserList = (ExpandableListView) root.findViewById(R.id.session_user_list);
 
         expandUserList.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
             @Override
@@ -99,7 +118,6 @@ public class SessionDetailFragment extends Fragment implements SessionDetailCont
         expandUserList.setFocusable(false);
         horizontalScrollLayout = (LinearLayout) root.findViewById(R.id.session_cards_gallery);
 
-
         return root;
     }
 
@@ -109,12 +127,66 @@ public class SessionDetailFragment extends Fragment implements SessionDetailCont
     }
 
     @Override
-    public void showSession(SessionDTO theme, List<GroupItem> items, int activeSession, int countSession) {
+    public void showSession(SessionDTO session, List<GroupItem> items, int activeSession, int countSession) {
+        tvSessionName.setText(session.getSessionName());
+        tvSessionCurUser.setText(session.getUsers().get(0).getUsername());
+        tvSessionDate.setText(session.getStartTime());
+        tvSessionTypeAndMode.setText(String.valueOf(session.getType() + " | " + session.getMode()));
 
+        //FIXME: Target must not be null getTheme().getIconUrl()
+        if(session.getTheme()!=null){
+            if (session.getTheme().getIconURL()!=null && session.getTheme().getIconURL().charAt(0) == 'r'){
+                Picasso.with(getActivity()).load(PICASSO_BASEURL +  session.getTheme().getIconURL()).into(imgSession);
+            } else {
+                Picasso.with(this.getContext()).load(session.getTheme().getIconURL()).into(imgSession);
+            }
+        } else if (session.getSubTheme().getIconURL()!=null){
+            if (session.getSubTheme().getIconURL().charAt(0) == 'r'){
+                Picasso.with(getActivity()).load(PICASSO_BASEURL +  session.getSubTheme().getIconURL()).into(imgSession);
+            } else {
+                Picasso.with(this.getContext()).load(session.getTheme().getIconURL()).into(imgSession);
+            }
+        }
+
+        //Opvragen cards van een sesion
+        List<Card> cards = session.getCards();
+
+        for (Card c: cards){
+            RelativeLayout basis = new RelativeLayout(getContext());
+            basis.setLayoutParams(new RelativeLayout.LayoutParams(450, 350));
+            basis.setGravity(Gravity.CENTER);
+
+            ImageView imageView = new ImageView(getContext());
+            imageView.setLayoutParams(new Gallery.LayoutParams(425, 350));
+            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            if (c.getImageUrl().charAt(0) == 'r'){
+                Picasso.with(this.getContext()).load(PICASSO_BASEURL +  c.getImageUrl()).into(imageView);
+            } else {
+                Picasso.with(this.getContext()).load(c.getImageUrl()).into(imageView);
+            }
+
+            TextView textView = new TextView(getContext());
+            TableRow.LayoutParams params = new TableRow.LayoutParams(425,80);
+
+            textView.setLayoutParams(params);
+            textView.setBackgroundColor(Color.parseColor("#99000000"));
+            textView.setTextColor(Color.WHITE);
+            textView.setPadding(10, 0, 5, 0);
+            textView.setText(c.getDescription());
+
+            basis.addView(imageView);
+            basis.addView(textView);
+            horizontalScrollLayout.addView(basis);
+
+        }
+
+        collapsing.setTitle(session.getSessionName());
+        adapter.setData(items);
+        expandUserList.setAdapter(adapter);
     }
 
     @Override
     public void showErrorMessage(String message) {
-
+        //TODO: SNACKBAR
     }
 }

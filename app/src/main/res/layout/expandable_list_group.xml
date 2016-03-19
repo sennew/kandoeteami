@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:paddingRight="10dp"
     android:paddingLeft="30dp"
-    android:background="@color/dark_grey">
+    android:background="@drawable/border_set">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -17,21 +17,20 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:padding="5dp"
-            android:layout_marginTop="5dp"
-            android:src="@drawable/ic_organisations_white"
-            android:color="@android:color/white"/>
+            android:src="@drawable/ic_organisations"
+            android:color="@color/dark_grey"/>
 
         <TextView
             android:id="@+id/expandable_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="left|center"
+
             android:layout_toRightOf="@+id/img_elg"
             android:paddingLeft="20dp"
-            android:paddingTop="8dp"
-            tools:text="GROUP MEMBERS"
+            tools:text="Group members"
             android:textSize="20sp"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/dark_grey"
             />
 
 
