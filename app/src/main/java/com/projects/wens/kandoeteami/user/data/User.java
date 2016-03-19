@@ -13,6 +13,7 @@ public class User {
     private List<Object> roleTypes;
     private String profilePicture;
     private Person person;
+    private int position;
 
 
     public User() {
@@ -101,5 +102,13 @@ public class User {
 
     public void setProfilePicture(String profilePicture) {
         this.profilePicture = profilePicture;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
     }
 }

@@ -13,4 +13,8 @@
     <color name="black_alpha_40">#66000000</color>
     <color name="text_shadow">#00000000</color>
     <color name="grey">#BBBBBB</color>
+
+    <color name="green">#259f00</color>
+    <color name="darkblue">#3f5579</color>
+    <color name="orange">#FF9C44</color>
 </resources>

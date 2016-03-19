@@ -44,15 +44,14 @@ public class SessionCardAdapter extends RecyclerView.Adapter<SessionCardAdapter.
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Card card = cards.get(position);
-        //holder.sessionCardImage.set(theme.getThemeName());
         holder.cardDescription.setText(card.getDescription());
-        //holder.txtSessionCardVotes.setText(card.position());
 
-        /*if (card.getImageUrl().charAt(0) == 'r') {
+
+        if (card.getImageUrl().charAt(0) == 'r') {
             Picasso.with(context).load(PICASSO_BASEURL + card.getImageUrl()).into(holder.sessionCardImage);
         } else {
             Picasso.with(context).load(card.getImageUrl()).into(holder.sessionCardImage);
-        }*/
+        }
     }
 
     public void replaceData(List<Card> cards) {
@@ -87,7 +86,7 @@ public class SessionCardAdapter extends RecyclerView.Adapter<SessionCardAdapter.
             sessionCardPosition = (TextView) itemView.findViewById(R.id.session_card_position);
             cardDescription = (TextView) itemView.findViewById(R.id.card_description);
             txtSessionCardVotes = (TextView) itemView.findViewById(R.id.txt_session_card_votes);
-            sessionCardImage = (ImageView) itemView.findViewById(R.id.card_theme_image);
+            sessionCardImage = (ImageView) itemView.findViewById(R.id.card_session_img);
             imgVoteUp = (ImageView) itemView.findViewById(R.id.img_vote_up);
 
             imgVoteUp.setOnClickListener(new View.OnClickListener() {
