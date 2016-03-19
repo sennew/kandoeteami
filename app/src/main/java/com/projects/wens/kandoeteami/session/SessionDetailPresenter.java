@@ -42,8 +42,7 @@ public class SessionDetailPresenter implements SessionDetailContract.UserActionL
                     item.addChildren(child);
                 }
                 groupItems.add(item);
-
-                Log.i("SESSIONTHEME:", sessionDTO.getTheme().getIconURL());
+                
                 int dtoSize = users.size();
                 view.showSession(sessionDTO, groupItems, dtoSize, dtoSize);
             }
