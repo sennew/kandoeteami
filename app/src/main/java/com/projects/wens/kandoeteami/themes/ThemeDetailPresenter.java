@@ -4,6 +4,7 @@ import com.projects.wens.kandoeteami.organisation.data.ChildItem;
 import com.projects.wens.kandoeteami.organisation.data.GroupItem;
 import com.projects.wens.kandoeteami.retrofit.service.ThemeService;
 import com.projects.wens.kandoeteami.session.data.SessionDTO;
+import com.projects.wens.kandoeteami.session.data.SessionState;
 import com.projects.wens.kandoeteami.themes.data.Theme;
 import com.projects.wens.kandoeteami.user.data.User;
 
@@ -44,12 +45,16 @@ public class ThemeDetailPresenter implements ThemeDetailContract.UserActionListe
         service.getSessionOfTheme("Bearer " + token, id, new Callback<List<SessionDTO>>() {
             @Override
             public void success(List<SessionDTO> sessionDTOs, Response response) {
+                int inProgress = 0;
                 for (SessionDTO sDTO: sessionDTOs){
                     GroupItem item = new GroupItem("SESSION " + sDTO.getSessionId() + " MEMBERS");
                     List<User> users = sDTO.getUsers();
                     for (User u: users){
                         ChildItem child = new ChildItem(u.getPerson().getFirstname(), u.getPerson().getLastname(), "MEMBER", u.getProfilePicture());
                         item.addChildren(child);
+                    }
+                    if (sDTO.getState() == SessionState.IN_PROGRESS){
+                        inProgress++;
                     }
                     groupItems.add(item);
                 }
