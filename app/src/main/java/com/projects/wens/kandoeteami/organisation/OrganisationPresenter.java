@@ -47,7 +47,7 @@ public class OrganisationPresenter implements OrganisationContract.UserActionLis
     }
 
 
-    private void getOrganisers(final String token, final int id, final Organisation orga){
+    public void getOrganisers(final String token, final int id, final Organisation orga){
         final GroupItem item = new GroupItem("GROUP MEMBERS");
         service.getOrganisationOrganisers("Bearer " + token, id, new Callback<List<User>>() {
             @Override
@@ -58,7 +58,6 @@ public class OrganisationPresenter implements OrganisationContract.UserActionLis
                         item.addChildren(child);
                     }
                 }
-
                 getMembers(token, id,orga,item);
             }
             @Override
@@ -68,7 +67,7 @@ public class OrganisationPresenter implements OrganisationContract.UserActionLis
         });
     }
 
-    private void getMembers(String token, int id, Organisation orga, GroupItem group){
+    public void getMembers(String token, int id, Organisation orga, GroupItem group){
         final Organisation organi = orga;
         final GroupItem item = group;
 
