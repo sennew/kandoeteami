@@ -4,6 +4,7 @@ import com.projects.wens.kandoeteami.organisation.data.ChildItem;
 import com.projects.wens.kandoeteami.organisation.data.GroupItem;
 import com.projects.wens.kandoeteami.retrofit.service.SubThemaService;
 import com.projects.wens.kandoeteami.session.data.SessionDTO;
+import com.projects.wens.kandoeteami.session.data.SessionState;
 import com.projects.wens.kandoeteami.subthemes.data.SubTheme;
 import com.projects.wens.kandoeteami.user.data.User;
 
@@ -45,6 +46,7 @@ public class SubThemeDetailPresenter implements SubThemeDetailContract.UserActio
         service.getSessionBySubThemeId("Bearer " + token, id, new Callback<List<SessionDTO>>() {
             @Override
             public void success(List<SessionDTO> sessionDTOs, Response response) {
+                int inProgress = 0;
                 for (SessionDTO sDTO: sessionDTOs){
                     GroupItem item = new GroupItem("SESSION " + sDTO.getSessionId() + " MEMBERS");
                     List<User> users = sDTO.getUsers();
@@ -52,10 +54,13 @@ public class SubThemeDetailPresenter implements SubThemeDetailContract.UserActio
                         ChildItem childItem = new ChildItem(u.getPerson().getFirstname(), u.getPerson().getLastname(), "MEMBER" , u.getProfilePicture());
                         item.addChildren(childItem);
                     }
+                    if (sDTO.getState() == SessionState.IN_PROGRESS){
+                        inProgress++;
+                    }
                     groupItems.add(item);
                 }
                 int dtoSize = sessionDTOs.size();
-                view.showSubTheme(subTheme, groupItems, dtoSize, dtoSize);
+                view.showSubTheme(subTheme, groupItems, inProgress, dtoSize);
             }
 
             @Override
