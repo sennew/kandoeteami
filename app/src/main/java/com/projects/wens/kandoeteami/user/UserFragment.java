@@ -22,18 +22,12 @@ import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-/**
- * Created by michaelkees on 01/03/16.
- */
 public class UserFragment extends Fragment implements UserContract.View{
-
     private static final String PICASSO_BASEURL = "http://wildfly-teamiip2kdgbe.rhcloud.com/";
     public static final String PREFS_NAME = "MyPrefs";
     private UserService service;
     private UserContract.UserActionListener actionListener;
-
     private User currentUser;
-
     private CircleImageView imgUser;
     private EditText etUsername;
     private EditText etFirstName;
@@ -43,11 +37,9 @@ public class UserFragment extends Fragment implements UserContract.View{
     private EditText etAddressNumber;
     private EditText etAddressZip;
     private EditText etAddressCity;
-
     private Button btnChangeUser;
     private Button btnChangePassword;
     private Button btnEditUser;
-
     private Dialog changePasswordDialog;
     private EditText dialogOldPassword;
     private EditText dialogNewPassword;
@@ -69,7 +61,6 @@ public class UserFragment extends Fragment implements UserContract.View{
     @Override
     public void onResume() {
         super.onResume();
-        //load user again
         SharedPreferences settings = getActivity().getSharedPreferences(PREFS_NAME, 0);
         String token = settings.getString("token", null);
         actionListener.loadUser(token);

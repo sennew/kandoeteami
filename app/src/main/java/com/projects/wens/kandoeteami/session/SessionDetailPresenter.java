@@ -15,9 +15,6 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-/**
- * Created by michaelkees on 18/03/16.
- */
 public class SessionDetailPresenter implements SessionDetailContract.UserActionListener {
     private final SessionDetailContract.View view;
     private final SessionService service;
@@ -33,7 +30,6 @@ public class SessionDetailPresenter implements SessionDetailContract.UserActionL
         service.getSessionById("Bearer " + token, sessionId, new Callback<SessionDTO>() {
             @Override
             public void success(SessionDTO sessionDTO, Response response) {
-                //view.showSession(sessionDTO);
                 GroupItem item = new GroupItem("SESSION " + sessionDTO.getSessionId() + " MEMBERS");
 
                 List<User> users = sessionDTO.getUsers();

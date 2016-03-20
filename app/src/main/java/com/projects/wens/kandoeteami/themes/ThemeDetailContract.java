@@ -10,12 +10,35 @@ import java.util.List;
  */
 public interface ThemeDetailContract {
     interface View{
+        /**
+         *
+         * @param message
+         */
         void showSuccesMessage(String message);
+
+        /**
+         *
+         * @param theme
+         * @param items
+         * @param activeSession
+         * @param countSession
+         */
         void showTheme(Theme theme, List<GroupItem> items, int activeSession, int countSession);
+
+        /**
+         *
+         * @param message
+         */
         void showErrorMessage(String message);
     }
 
     interface UserActionListener {
+
+        /**
+         *
+         * @param token
+         * @param id
+         */
         void loadTheme(String token, int id);
     }
 }

@@ -18,18 +18,15 @@ import static android.support.test.espresso.core.deps.guava.base.Preconditions.c
 public class ListOrganisationPresenter implements ListOrganisationContract.UserActionListener {
     private final ListOrganisationContract.view view;
     private final OrganisationService service;
-    private List<Organisation> list = new ArrayList<>();
 
-
-    public ListOrganisationPresenter(ListOrganisationContract.view view, OrganisationService serviceOrga){
+    public ListOrganisationPresenter(ListOrganisationContract.view view, OrganisationService serviceOrga) {
         this.view = checkNotNull(view, "organisationsView cannot be null!");
         this.service = serviceOrga;
     }
 
-
     @Override
     public void loadOrganisations(boolean forceUpdate, final String token) {
-        if (view != null){
+        if (view != null) {
             view.setProgressIndicator(true);
         }
 
@@ -40,18 +37,17 @@ public class ListOrganisationPresenter implements ListOrganisationContract.UserA
                     view.setProgressIndicator(false);
                     view.showOrganisations(organisations);
                 }
-
             }
 
             @Override
             public void failure(RetrofitError error) {
-                view.showErrorMessage(error.getResponse().getStatus());
+                if (error != null) {
+                    view.showErrorMessage(error.getMessage());
+                }
             }
         });
 
     }
-
-
 
     @Override
     public void openOrganisationThema(@NonNull Organisation requestOrga) {

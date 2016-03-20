@@ -16,19 +16,14 @@ import android.widget.Toast;
 import com.projects.wens.kandoeteami.R;
 
 
-
-/**
- * Created by michaelkees on 16/03/16.
- */
 public class SessionGameActivity extends AppCompatActivity {
     private int sessionId;
-
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_noside);
+        setContentView(R.layout.activity_main_bottomtab);
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

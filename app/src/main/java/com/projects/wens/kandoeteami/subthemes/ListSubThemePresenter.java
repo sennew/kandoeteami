@@ -9,20 +9,14 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-/**
- * Created by senne on 14/03/2016.
- */
+
 public class ListSubThemePresenter implements ListSubThemeContract.UserActionListener {
-
     private SubThemaService service;
-
     private ListSubThemeContract.View view;
-
     public ListSubThemePresenter(SubThemaService service, ListSubThemeContract.View view){
         this.service = service;
         this.view = view;
     }
-
 
     public void loadSubthemes(String token) {
         if (view != null){
@@ -61,8 +55,6 @@ public class ListSubThemePresenter implements ListSubThemeContract.UserActionLis
                 view.showErrorMessage(error.getResponse().getStatus());
             }
         });
-
-
     }
 
     @Override

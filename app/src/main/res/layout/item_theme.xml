@@ -73,7 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="Subthemes: "
+                android:text="@string/subthemes_count"
                 android:textSize="15dp"/>
 
             <TextView

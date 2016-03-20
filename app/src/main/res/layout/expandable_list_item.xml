@@ -37,7 +37,7 @@
             android:layout_marginTop="45dp"
             android:paddingLeft="4dp"
             android:textColor="@color/grey"
-            android:text="ORGANISATOR"
+            android:text="@string/ex_list_organisator"
              />
 
 
@@ -51,8 +51,7 @@
             android:paddingLeft="4dp"
             android:paddingRight="3dp"
             android:layout_marginTop="20dp"
-            android:textSize="18dp"
-            android:text="Stephanie"
+            android:textSize="18sp"
             android:textColor="@color/dark_grey"
 
 
@@ -64,8 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginLeft="1dp"
-            android:textSize="18dp"
-            android:text="Van Gils"
+            android:textSize="18sp"
             android:textColor="@color/dark_grey"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:layout_toRightOf="@+id/textVoornaam"

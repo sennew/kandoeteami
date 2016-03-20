@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -34,7 +35,6 @@ public class ListThemeFragment extends Fragment implements ListThemeContract.Vie
 
     public static ListThemeFragment fragment;
 
-    //IMPLEMENTATIE VOOR DE RECYCLERVIEW
     ThemeItemListener mItemListener = new ThemeItemListener() {
         @Override
         public void onThemeClick(Theme clickTheme) {
@@ -156,6 +156,8 @@ public class ListThemeFragment extends Fragment implements ListThemeContract.Vie
 
     @Override
     public void showErrorMessage(int status) {
-
+        if(getView()!=null) {
+            Snackbar.make(getView(), "Failed to load themes", Snackbar.LENGTH_SHORT).show();
+        }
     }
 }

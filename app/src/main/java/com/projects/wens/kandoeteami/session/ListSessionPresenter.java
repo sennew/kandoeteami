@@ -12,9 +12,6 @@ import retrofit.client.Response;
 
 import static android.support.test.espresso.core.deps.guava.base.Preconditions.checkNotNull;
 
-/**
- * Created by michaelkees on 18/03/16.
- */
 public class ListSessionPresenter  implements ListSessionContract.UserActionListener{
     private final ListSessionContract.view view;
     private final SessionService service;

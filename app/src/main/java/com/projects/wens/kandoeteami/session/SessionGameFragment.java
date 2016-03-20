@@ -4,6 +4,7 @@ package com.projects.wens.kandoeteami.session;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 import com.projects.wens.kandoeteami.R;
 import com.projects.wens.kandoeteami.retrofit.ServiceGenerator;
 import com.projects.wens.kandoeteami.retrofit.service.SessionService;
+import com.projects.wens.kandoeteami.retrofit.service.UserService;
 import com.projects.wens.kandoeteami.session.adapter.SessionCardAdapter;
 import com.projects.wens.kandoeteami.session.adapter.SessionCardItemListener;
 import com.projects.wens.kandoeteami.session.data.SessionDTO;
@@ -32,30 +34,20 @@ import java.util.Map;
 
 public class SessionGameFragment extends Fragment implements SessionGameContract.View {
     private SessionService service;
+    private UserService userService;
     private SessionGameContract.UserActionListener actionListener;
-
     private static final String PREFS_NAME = "MyPrefs";
     private static final String PICASSO_BASEURL = "http://wildfly-teamiip2kdgbe.rhcloud.com/";
-
     private static final String MOVE_PATH = "/topic/move";
-
-
     private int sessionId;
-
     private TextView tvSessionName;
     private TextView tvSessionDate;
     private TextView tvSessionCurUser;
     private ImageView imgSessionInfo;
     private RecyclerView recyclerView;
-
-
     private SessionCardAdapter cardAdapter;
-
     public static SessionGameFragment fragment;
-
     public SessionGameConnection socket;
-
-
 
     public static Fragment newInstance(int sessionid) {
         fragment = new SessionGameFragment();
@@ -76,8 +68,9 @@ public class SessionGameFragment extends Fragment implements SessionGameContract
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         service = ServiceGenerator.createService(SessionService.class, getResources().getString(R.string.baseURL));
-        actionListener = new SessionGamePresenter(this, service);
-        cardAdapter = new SessionCardAdapter(new ArrayList<Card>(0),itemListener, getActivity());
+        userService = ServiceGenerator.createService(UserService.class, getResources().getString(R.string.baseURL));
+        actionListener = new SessionGamePresenter(this, service, userService);
+        cardAdapter = new SessionCardAdapter(new ArrayList<Card>(0), sessionId, itemListener, getActivity(), actionListener);
         sessionId = fragment.getArguments().getInt("SESSIONID");
 
         HashMap<String, ListenerSubscription> subscriptionHashMap = new HashMap<>();
@@ -92,7 +85,7 @@ public class SessionGameFragment extends Fragment implements SessionGameContract
         SharedPreferences settings = getActivity().getSharedPreferences(PREFS_NAME, 0);
         String token = settings.getString("token", null);
         actionListener.loadSession(token, sessionId);
-        socket.start();
+        //socket.start();
     }
 
     @Nullable
@@ -129,10 +122,26 @@ public class SessionGameFragment extends Fragment implements SessionGameContract
 
     @Override
     public void showErrorMessage(String s) {
-
+        if(getView()!=null) {
+            Snackbar.make(getView(), s, Snackbar.LENGTH_SHORT).show();
+        }
     }
 
+    @Override
+    public void showNotCurrentPlayerError() {
+        if (getView() != null) {
+            Snackbar snackbar = Snackbar.make(getView(), "Wait your turn", Snackbar.LENGTH_LONG);
+            snackbar.show();
+        }
+    }
 
+    @Override
+    public void showSuccesMessage(String s) {
+        if (getView() != null) {
+            Snackbar snackbar = Snackbar.make(getView(), "Voted successfully", Snackbar.LENGTH_LONG);
+            snackbar.show();
+        }
+    }
 
 
 

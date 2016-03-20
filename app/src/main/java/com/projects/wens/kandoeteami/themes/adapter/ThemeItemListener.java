@@ -2,10 +2,16 @@ package com.projects.wens.kandoeteami.themes.adapter;
 
 import com.projects.wens.kandoeteami.themes.data.Theme;
 
-/**
- * Created by michaelkees on 04/03/16.
- */
 public interface ThemeItemListener {
+    /**
+     *
+     * @param clickTheme
+     */
     void onThemeClick(Theme clickTheme);
+
+    /**
+     *
+     * @param idClickedTheme
+     */
     void onSubthemesClick(int idClickedTheme);
 }

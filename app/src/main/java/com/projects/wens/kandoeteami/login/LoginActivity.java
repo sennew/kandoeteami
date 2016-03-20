@@ -23,14 +23,7 @@ import com.projects.wens.kandoeteami.R;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-/**
- * Created by senne on 23/02/2016.
- */
 public class LoginActivity extends AppCompatActivity {
-    private DrawerLayout mDrawerLayout;
-    private static final CallbackManager CALLBACK_MANAGER = CallbackManager.Factory.create();;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,9 +44,7 @@ public class LoginActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-
         FacebookSdk.sdkInitialize(this.getApplicationContext());
-
         try {
             PackageInfo info = getPackageManager().getPackageInfo(
                     "com.projects.wens.kandoeteami",
@@ -63,18 +54,13 @@ public class LoginActivity extends AppCompatActivity {
                 md.update(signature.toByteArray());
                 Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
             }
-        } catch (PackageManager.NameNotFoundException e) {
-
-        } catch (NoSuchAlgorithmException e) {
-
+        } catch (PackageManager.NameNotFoundException | NoSuchAlgorithmException e) {
+            Log.i("FB", e.getMessage());
         }
 
         if (null == savedInstanceState){
             initFragment(LoginFragment.newInstance());
         }
-
-
-
     }
 
     private void initFragment(Fragment loginFrag){

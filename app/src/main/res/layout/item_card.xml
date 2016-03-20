@@ -20,7 +20,6 @@
             android:gravity="center"
             android:textColor="@color/light_grey"
             android:textSize="20sp"
-            android:text="1"
             tools:text="1" />
 
     </LinearLayout>
@@ -75,9 +74,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/dark_grey"
             android:textSize="22sp"
-            android:text="4"
-            android:textStyle="bold"
-            tools:text="5" />
+            android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/img_vote_up"

@@ -14,7 +14,7 @@
         android:layout_centerVertical="true"
         android:layout_marginRight="10dp"
         android:background="@drawable/profilepic_placeholder"
-        android:contentDescription="Profielpicture" />
+        android:contentDescription="@string/profile_picture_content_img" />
 
     <ImageView
         android:id="@+id/item_user_organiser_icon"

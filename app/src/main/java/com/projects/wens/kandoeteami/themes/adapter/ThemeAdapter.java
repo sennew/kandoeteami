@@ -50,7 +50,7 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.ViewHolder> 
         if (count == 0){
             holder.countSubthemes.setText("none");
         } else {
-            holder.countSubthemes.setText(""+count);
+            holder.countSubthemes.setText(String.valueOf(count));
         }
 
     }
@@ -91,7 +91,6 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.ViewHolder> 
             countSubthemes.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //TODO: ONCLICKLISTENER OM NAAR SUBTHEMAS TE GAAN
                     int position = getAdapterPosition();
                     Theme theme = mThemes.get(position);
                     themeItemListener.onSubthemesClick(theme.getThemeId());

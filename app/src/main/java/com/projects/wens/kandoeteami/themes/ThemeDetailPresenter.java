@@ -14,9 +14,7 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-/**
- * Created by senne on 10/03/2016.
- */
+
 public class ThemeDetailPresenter implements ThemeDetailContract.UserActionListener {
     private final ThemeDetailContract.View view;
     private final ThemeService service;
@@ -36,7 +34,7 @@ public class ThemeDetailPresenter implements ThemeDetailContract.UserActionListe
 
             @Override
             public void failure(RetrofitError error) {
-                //TODO: error message als thema niet geladen wordt
+                view.showErrorMessage(error.getMessage());
             }
         });
     }
@@ -61,7 +59,7 @@ public class ThemeDetailPresenter implements ThemeDetailContract.UserActionListe
 
             @Override
             public void failure(RetrofitError error) {
-                //TODO: error message als users niet geladen worden
+                view.showErrorMessage(error.getMessage());
             }
         });
     }

@@ -25,9 +25,6 @@ import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-/**
- * Created by senne on 14/03/2016.
- */
 public class ListSubThemeActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     public static final String PREFS_NAME = "MyPrefs";
@@ -57,11 +54,7 @@ public class ListSubThemeActivity extends AppCompatActivity {
         });
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
-
-
-
         ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, 0, 0);
-
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -79,7 +72,7 @@ public class ListSubThemeActivity extends AppCompatActivity {
             initFragment(ListSubThemeFragment.newInstance(all, themeId));
         }
 
-        //DRAWER
+
         String firstname = this.getSharedPreferences(PREFS_NAME, 0).getString("firstname", null);
         String lastname = this.getSharedPreferences(PREFS_NAME, 0).getString("lastname", null);
         String email = this.getSharedPreferences(PREFS_NAME, 0).getString("email", null);
@@ -88,7 +81,7 @@ public class ListSubThemeActivity extends AppCompatActivity {
         TextView tvEmail = (TextView) findViewById(R.id.nav_email);
         tvEmail.setText(email);
 
-        //Opvullen van de profielfoto
+
         CircleImageView circleImage = (CircleImageView) findViewById(R.id.profile_image);
         String profilePictureUrl = this.getSharedPreferences(PREFS_NAME,0).getString("profilepicture", null);
         if (profilePictureUrl != null || profilePictureUrl != ""){
@@ -105,7 +98,6 @@ public class ListSubThemeActivity extends AppCompatActivity {
     }
 
     private void setupDrawerContent(NavigationView navigationView) {
-        //Hier gaan de menu opties uitgewerkt worden
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
@@ -141,12 +133,6 @@ public class ListSubThemeActivity extends AppCompatActivity {
                                 break;
                             case R.id.nav_ic_kandoes:
                                 i = new Intent(getApplicationContext(), ListSessionActivity.class);
-                                startActivity(i);
-                                finish();
-                                break;
-                            case R.id.nav_ic_newkandoe:
-                                i = new Intent(getApplicationContext(), SessionGameActivity.class);
-                                i.putExtra("SESSIONID", 1);
                                 startActivity(i);
                                 finish();
                                 break;

@@ -2,9 +2,7 @@ package com.projects.wens.kandoeteami.register;
 
 import android.content.SharedPreferences;
 
-/**
- * Created by michaelkees on 28/02/16.
- */
+
 public interface RegisterContract {
 
     interface view {
@@ -51,18 +49,40 @@ public interface RegisterContract {
          */
         void showEmailError(String message);
 
+        /**
+         *
+         * @param message
+         */
         void showPasswordError(String message);
 
+        /**
+         *
+         * @param message
+         */
         void showRetypePasswordError(String message);
 
+        /**
+         *
+         * @param message
+         */
         void showUsernameError(String message);
 
+        /**
+         *
+         */
         void showProgressRegister();
 
+        /**
+         *
+         */
         void hideProgress();
     }
 
     interface UserActionListener {
+        /**
+         *
+         * @param sharedPreferences
+         */
        void register(SharedPreferences sharedPreferences);
 
     }

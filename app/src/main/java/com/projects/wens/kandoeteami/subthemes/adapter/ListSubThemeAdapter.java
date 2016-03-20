@@ -14,9 +14,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-/**
- * Created by senne on 14/03/2016.
- */
+
 public class ListSubThemeAdapter extends RecyclerView.Adapter<ListSubThemeAdapter.ViewHolder> {
     private List<SubTheme> mSubThemes;
     private ListSubThemeListener subThemeItemListener;

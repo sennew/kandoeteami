@@ -10,9 +10,6 @@ import android.view.View;
 
 import com.projects.wens.kandoeteami.R;
 
-/**
- * TODO: create PROFILE page
- */
 public class UserActivity extends AppCompatActivity {
 
     @Override

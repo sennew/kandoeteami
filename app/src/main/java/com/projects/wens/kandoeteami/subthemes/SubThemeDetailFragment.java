@@ -32,31 +32,21 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-/**
- * Created by senne on 14/03/2016.
- */
+
 public class SubThemeDetailFragment extends Fragment implements SubThemeDetailContract.View {
     private SubThemaService service;
     private SubThemeDetailContract.UserActionListener subThemeActionListener;
-
     private static final String PREFS_NAME = "MyPrefs";
     private static final String PICASSO_BASEURL = "http://wildfly-teamiip2kdgbe.rhcloud.com/";
-
     private int subThemeId;
-
-    //ELEMENTS ON THE VIEW
     private TextView subthemeDescription;
     private ImageView imgSubtheme;
     private CollapsingToolbarLayout collapsing;
-
     private ExpandableListView expandableListView;
     private ExpandableListViewAdapter adapter;
-
     private LinearLayout horizontalScrollLayout;
-
     private TextView activeSessions;
     private TextView countSessions;
-
     private Dialog allert;
     private TextView dialogDescription;
     private Button dialogButton;
@@ -76,13 +66,8 @@ public class SubThemeDetailFragment extends Fragment implements SubThemeDetailCo
         super.onCreate(savedInstanceState);
         service = ServiceGenerator.createService(SubThemaService.class, "http://wildfly-teamiip2kdgbe.rhcloud.com/api" );
         subThemeActionListener = new SubThemeDetailPresenter(this,service);
-
-        //TODO: Expandable listView adapter
         adapter = new ExpandableListViewAdapter(getContext());
-
-        //TODO: REQUEST FROM BUNDLE TO GET SUBTHEMEID FROM ACTIVITY
         subThemeId = fragment.getArguments().getInt("subThemeId");
-
     }
 
     @Override
@@ -90,9 +75,6 @@ public class SubThemeDetailFragment extends Fragment implements SubThemeDetailCo
         super.onResume();
         SharedPreferences settings = getActivity().getSharedPreferences(PREFS_NAME,0);
         String token = settings.getString("token", null);
-
-        //LOAD SUBTHEME
-        //TODO: actionListener show subThema
         subThemeActionListener.loadSubTheme(token, subThemeId);
     }
 
@@ -122,7 +104,6 @@ public class SubThemeDetailFragment extends Fragment implements SubThemeDetailCo
         });
         expandableListView.setFocusable(false);
 
-        //TODO aanmaken dialog voor description
         allert = new Dialog(getContext());
         allert.requestWindowFeature(Window.FEATURE_NO_TITLE);
         allert.setContentView(inflater.inflate(R.layout.dialog, null));
@@ -153,7 +134,6 @@ public class SubThemeDetailFragment extends Fragment implements SubThemeDetailCo
     public void showSubTheme(SubTheme subTheme, List<GroupItem> items, int activeSession, int coutSession) {
         int descriptionLength = subTheme.getDescription().length();
         if (descriptionLength > 33){
-            //TODO: aanmaken allert tonen description
             subthemeDescription.setText(subTheme.getDescription().substring(0,33) + "....");
             dialogDescription.setText(subTheme.getDescription());
 

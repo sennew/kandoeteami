@@ -14,9 +14,6 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-/**
- * Created by senne on 14/03/2016.
- */
 public class SubThemeDetailPresenter implements SubThemeDetailContract.UserActionListener {
     private final SubThemeDetailContract.View view;
     private final SubThemaService service;
@@ -37,7 +34,7 @@ public class SubThemeDetailPresenter implements SubThemeDetailContract.UserActio
 
             @Override
             public void failure(RetrofitError error) {
-                //TODO: error als subthema niet opgehaald kan worden.
+                view.showErrorMessage(error.getMessage());
 
             }
         });
@@ -63,7 +60,7 @@ public class SubThemeDetailPresenter implements SubThemeDetailContract.UserActio
 
             @Override
             public void failure(RetrofitError error) {
-                //TODO: error message moet nog uitgewerkt worden
+                view.showErrorMessage(error.getMessage());
 
             }
         });

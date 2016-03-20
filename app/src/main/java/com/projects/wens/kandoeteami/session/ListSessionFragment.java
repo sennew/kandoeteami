@@ -27,9 +27,7 @@ import com.projects.wens.kandoeteami.session.data.SessionDTO;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by michaelkees on 18/03/16.
- */
+
 public class ListSessionFragment extends Fragment implements ListSessionContract.view {
     private static final String PICASSO_BASEURL = "http://wildfly-teamiip2kdgbe.rhcloud.com/";
     public static final String PREFS_NAME = "MyPrefs";
@@ -57,8 +55,6 @@ public class ListSessionFragment extends Fragment implements ListSessionContract
 
     public void onResume() {
         super.onResume();
-
-        //Restore preferences
         SharedPreferences settings = getActivity().getSharedPreferences(PREFS_NAME, 0);
         String token = settings.getString("token", null);
         actionListener.loadSessions(true, token);
@@ -132,7 +128,9 @@ public class ListSessionFragment extends Fragment implements ListSessionContract
 
     @Override
     public void showErrorMessage(String message) {
-        //TODO snackbar
+        if(getView()!=null){
+            Snackbar snackbar = Snackbar.make(getView(), message, Snackbar.LENGTH_SHORT);
+        }
     }
 
     SessionItemListener mItemListener = new SessionItemListener() {

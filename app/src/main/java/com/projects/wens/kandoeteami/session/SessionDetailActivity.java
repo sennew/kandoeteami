@@ -12,11 +12,7 @@ import android.view.View;
 
 import com.projects.wens.kandoeteami.R;
 
-/**
- * Created by senne on 15/03/2016.
- */
 public class SessionDetailActivity extends AppCompatActivity {
-    private DrawerLayout mDrawerLayout;
     private int sessionId;
 
     @Override

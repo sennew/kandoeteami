@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -28,16 +29,12 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class ListOrganisationFragment extends Fragment implements ListOrganisationContract.view {
     private static final String PICASSO_BASEURL = "http://wildfly-teamiip2kdgbe.rhcloud.com/";
     public static final String PREFS_NAME = "MyPrefs";
     private ListOrganisationContract.UserActionListener mOrgaActionListener;
     private ContentAdapter mOrganisationAdapter;
     private OrganisationService service;
-
-    //We m
-
 
     public ListOrganisationFragment() {
         //Requires empty public constructor
@@ -133,8 +130,11 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
     }
 
     @Override
-    public void showErrorMessage(int status) {
-        Log.i("ORGANISATION API", "Error with api");
+    public void showErrorMessage(String message) {
+        if(getView()!=null){
+            Snackbar snackbar = Snackbar.make(getView(), "Error loading organisations", Snackbar.LENGTH_SHORT);
+            snackbar.show();
+        }
     }
 
     public static class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ViewHolder> {
@@ -162,7 +162,7 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
             Organisation organisation = mOrganisations.get(position);
             holder.title.setText(organisation.getOrganisationName());
             holder.description.setText(organisation.getAddress());
-            holder.aantalUsersButton.setText(""+organisation.getCountUsers());
+            holder.aantalUsersButton.setText(String.valueOf(organisation.getCountUsers()));
 
             if (organisation.getLogoURL().charAt(0) == 'r') {
                 Picasso.with(context).load(PICASSO_BASEURL + organisation.getLogoURL()).into(holder.image);
@@ -228,10 +228,6 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
         }
     }
 
-    //TODO:IMPLEMENTATIE OM DE LIST OF THEMA'S TE TONEN
-
-
-    //IMPLEMENTATIE VOOR DE RECYCLERVIEW
     OrganisationItemListener mItemListener = new OrganisationItemListener() {
         @Override
         public void onOrganisationClick(Organisation clickOrganisation) {
@@ -244,7 +240,6 @@ public class ListOrganisationFragment extends Fragment implements ListOrganisati
         }
     };
 
-    //Interface voor weer te geven als er op een Organisatie wordt geklikt.
     public interface OrganisationItemListener {
         void onOrganisationClick(Organisation clickOrganisation);
         void onThemeButtonClick(Organisation clickOrganisation);

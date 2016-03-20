@@ -8,10 +8,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.projects.wens.kandoeteami.R;
 import com.projects.wens.kandoeteami.login.LoginActivity;
 import com.projects.wens.kandoeteami.register.RegisterActivity;
+import com.squareup.picasso.Picasso;
 
 
 /**
@@ -27,6 +29,7 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

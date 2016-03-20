@@ -63,7 +63,7 @@ public class OrganisationPresenter implements OrganisationContract.UserActionLis
             }
             @Override
             public void failure(RetrofitError error) {
-                //TODO: error message als organisers niet correct geladen worden
+                view.showErrorMessage(error.getMessage());
             }
         });
     }
@@ -85,7 +85,7 @@ public class OrganisationPresenter implements OrganisationContract.UserActionLis
             }
             @Override
             public void failure(RetrofitError error) {
-                //TODO: error message als members niet correct worden opgehaald.
+                view.showErrorMessage(error.getMessage());
             }
         });
 

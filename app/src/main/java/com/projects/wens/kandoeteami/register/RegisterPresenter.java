@@ -10,9 +10,7 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-/**
- * Created by michaelkees on 28/02/16.
- */
+
 public class RegisterPresenter implements RegisterContract.UserActionListener {
     public static final String PREFS_NAME = "MyPrefs";
     private final RegisterContract.view view;

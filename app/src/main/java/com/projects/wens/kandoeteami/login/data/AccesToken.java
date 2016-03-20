@@ -1,8 +1,5 @@
 package com.projects.wens.kandoeteami.login.data;
 
-/**
- * Created by senne on 24/02/2016.
- */
 public class AccesToken {
     private String acces_token;
 

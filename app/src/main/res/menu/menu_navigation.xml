@@ -1,11 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group  android:id="@+id/group_content" android:checkableBehavior="all">
         <item
-            android:id="@+id/nav_ic_newkandoe"
-            android:icon="@drawable/ic_add_kandoe"
-            android:title="Create new Kandoe" />
-
-        <item
             android:id="@+id/nav_ic_kandoes"
             android:icon="@drawable/ic_my_kandoes"
             android:title="My Kandoes" />

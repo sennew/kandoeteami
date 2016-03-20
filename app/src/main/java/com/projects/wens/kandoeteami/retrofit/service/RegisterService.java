@@ -11,6 +11,11 @@ import retrofit.http.POST;
  */
 public interface RegisterService {
 
+    /**
+     *
+     * @param registerDTO
+     * @param callback
+     */
     @POST("/users")
     void register(@Body RegisterDTO registerDTO, Callback<String> callback);
 

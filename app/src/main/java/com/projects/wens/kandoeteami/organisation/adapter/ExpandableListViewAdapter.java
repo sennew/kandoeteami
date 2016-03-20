@@ -18,9 +18,7 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-/**
- * Created by senne on 04/03/2016.
- */
+
 public class ExpandableListViewAdapter extends BaseExpandableListAdapter {
     private static final String PICASSO_BASEURL = "http://wildfly-teamiip2kdgbe.rhcloud.com/";
     private final LayoutInflater inflater;
@@ -71,8 +69,6 @@ public class ExpandableListViewAdapter extends BaseExpandableListAdapter {
             holder = new ChildHolder();
             convertView = inflater.inflate(R.layout.expandable_list_item, parent, false);
         }
-
-
 
         viewVoornaam = (TextView) convertView.findViewById(R.id.textVoornaam);
         viewActernaam = (TextView) convertView.findViewById(R.id.textAchternaam);

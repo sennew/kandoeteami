@@ -10,9 +10,7 @@ import android.view.View;
 
 import com.projects.wens.kandoeteami.R;
 
-/**
- * Created by senne on 14/03/2016.
- */
+
 public class SubThemeDetailActivity extends AppCompatActivity {
     private int subThemeId;
 
@@ -48,8 +46,4 @@ public class SubThemeDetailActivity extends AppCompatActivity {
         transaction.add(R.id.contentFrame, fragment);
         transaction.commit();
     }
-
-    public int getSubThemeId(){ return subThemeId;}
-
-
 }

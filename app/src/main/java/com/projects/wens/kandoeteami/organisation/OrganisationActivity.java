@@ -11,10 +11,6 @@ import android.widget.Toast;
 
 import com.projects.wens.kandoeteami.R;
 
-
-/**
- * Created by michaelkees on 29/02/16.
- */
 public class OrganisationActivity extends AppCompatActivity {
     private int organisationId;
 

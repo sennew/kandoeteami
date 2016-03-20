@@ -10,9 +10,6 @@ import retrofit.RestAdapter;
 import retrofit.client.OkClient;
 import retrofit.converter.GsonConverter;
 
-/**
- * Created by senne on 23/02/2016.
- */
 public class ServiceGenerator {
     private static RestAdapter.Builder builder = new RestAdapter.Builder();
 
@@ -21,7 +18,6 @@ public class ServiceGenerator {
         httpClient = new OkHttpClient();
         httpClient.setConnectTimeout(10, TimeUnit.SECONDS);
         httpClient.setReadTimeout(10, TimeUnit.SECONDS);
-
         return httpClient;
     }
 

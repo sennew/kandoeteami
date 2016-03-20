@@ -75,7 +75,6 @@ public class ListThemeActivity extends AppCompatActivity {
             initFragment(ListThemeFragment.newInstance(all,organisationId));
         }
 
-        //DRAWER
         String firstname = this.getSharedPreferences(PREFS_NAME, 0).getString("firstname", null);
         String lastname = this.getSharedPreferences(PREFS_NAME, 0).getString("lastname", null);
         String email = this.getSharedPreferences(PREFS_NAME, 0).getString("email", null);
@@ -84,7 +83,6 @@ public class ListThemeActivity extends AppCompatActivity {
         TextView tvEmail = (TextView) findViewById(R.id.nav_email);
         tvEmail.setText(email);
 
-        //Opvullen van de profielfoto
         CircleImageView circleImage = (CircleImageView) findViewById(R.id.profile_image);
         String profilePictureUrl = this.getSharedPreferences(PREFS_NAME,0).getString("profilepicture", null);
         if (profilePictureUrl != null || profilePictureUrl != ""){
@@ -106,7 +104,6 @@ public class ListThemeActivity extends AppCompatActivity {
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        //TODO: UITWERKING MENU OPTIES
                         Intent i;
                         switch (menuItem.getItemId()) {
                             case R.id.nav_ic_organisaitons:
@@ -137,12 +134,6 @@ public class ListThemeActivity extends AppCompatActivity {
                                 break;
                             case R.id.nav_ic_kandoes:
                                 i = new Intent(getApplicationContext(), ListSessionActivity.class);
-                                startActivity(i);
-                                finish();
-                                break;
-                            case R.id.nav_ic_newkandoe:
-                                i = new Intent(getApplicationContext(), SessionGameActivity.class);
-                                i.putExtra("SESSIONID", 1);
                                 startActivity(i);
                                 finish();
                                 break;

@@ -10,9 +10,6 @@ import android.view.View;
 
 import com.projects.wens.kandoeteami.R;
 
-/**
- * Created by senne on 10/03/2016.
- */
 public class ThemeDetailActivity extends AppCompatActivity {
     private int themeId;
 

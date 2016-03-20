@@ -4,7 +4,9 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,16 +25,19 @@ import com.projects.wens.kandoeteami.organisation.data.GroupItem;
 import com.projects.wens.kandoeteami.retrofit.ServiceGenerator;
 import com.projects.wens.kandoeteami.retrofit.service.SessionService;
 import com.projects.wens.kandoeteami.session.data.SessionDTO;
+import com.projects.wens.kandoeteami.session.data.SessionMode;
+import com.projects.wens.kandoeteami.session.data.SessionState;
 import com.projects.wens.kandoeteami.themes.data.Card;
 import com.squareup.picasso.Picasso;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.annotation.Nullable;
 
-/**
- * Created by michaelkees on 18/03/16.
- */
 public class SessionDetailFragment extends Fragment implements SessionDetailContract.View {
 
     private SessionService service;
@@ -54,6 +59,8 @@ public class SessionDetailFragment extends Fragment implements SessionDetailCont
     private TextView tvSessionCurUser;
     private TextView tvSessionTypeAndMode;
     private ImageView imgSession;
+
+    public TextView tvSessionStartTimePrefix;
 
     private CollapsingToolbarLayout collapsing;
 
@@ -99,6 +106,7 @@ public class SessionDetailFragment extends Fragment implements SessionDetailCont
         tvSessionName = (TextView) root.findViewById(R.id.txt_session_name);
         tvSessionDate = (TextView) root.findViewById(R.id.txt_session_date);
         tvSessionTypeAndMode = (TextView) root.findViewById(R.id.txt_session_typeandmode);
+        tvSessionStartTimePrefix = (TextView) root.findViewById(R.id.session_start_prefix);
         imgSession = (ImageView) getActivity().findViewById(R.id.header_img);
 
         collapsing = (CollapsingToolbarLayout) getActivity().findViewById(R.id.collapsing_toolbar);
@@ -130,8 +138,11 @@ public class SessionDetailFragment extends Fragment implements SessionDetailCont
     public void showSession(SessionDTO session, List<GroupItem> items, int activeSession, int countSession) {
         tvSessionName.setText(session.getSessionName());
         tvSessionCurUser.setText(session.getUsers().get(0).getUsername());
-        tvSessionDate.setText(session.getStartTime());
-        tvSessionTypeAndMode.setText(String.valueOf(session.getType() + " | " + session.getMode()));
+        if(session.getState() == SessionState.CREATED && session.getMode() == SessionMode.SYNC){
+            tvSessionTypeAndMode.setText(String.valueOf(session.getType() + " | " + session.getMode() + " | Waiting for users to start"));
+        } else {
+            tvSessionTypeAndMode.setText(String.valueOf(session.getType() + " | " + session.getMode() + " | " + session.getState()));
+        }
 
         if(session.getTheme()!=null){
             if (session.getTheme().getIconURL()!=null && session.getTheme().getIconURL().charAt(0) == 'r'){
@@ -147,9 +158,36 @@ public class SessionDetailFragment extends Fragment implements SessionDetailCont
             }
         }
 
-        //Opvragen cards van een sesion
-        List<Card> cards = session.getCards();
+        String format = "yyyy-MM-dd'T'HH:mm:ss";
+        SimpleDateFormat sdf = new SimpleDateFormat(format, Locale.US); //2016-03-19T07:20:02.295 | yyyy-MM-dd'T'HH:mm:ssZ
+        Date start;
+        Date now = new Date();
 
+        try {
+            start = sdf.parse(session.getStartTime());
+            if (session.getState() == SessionState.CREATED) {
+                if (start.getTime() > now.getTime()) {
+                    //TIME BEFORE START
+                    tvSessionStartTimePrefix.setText("Starting in:");
+                    String time = getTimeBetweenDateTimes(start.getTime(), now.getTime()); //start - now
+                    tvSessionDate.setText(time);
+                } else if (now.getTime() > start.getTime()) {
+                    tvSessionStartTimePrefix.setText("Session time:");
+                    String time = getTimeBetweenDateTimes(now.getTime(), start.getTime()); //now - start
+                    tvSessionDate.setText(time);
+                }
+            } else if (session.getState() == SessionState.IN_PROGRESS) {
+                tvSessionStartTimePrefix.setText("Session time:");
+                String time = getTimeBetweenDateTimes(now.getTime(), start.getTime()); //now - start
+                tvSessionDate.setText(time);
+            } if (session.getState() == SessionState.FINISHED) {
+                tvSessionStartTimePrefix.setText("Game finished.");
+                tvSessionDate.setText("");
+            }
+        } catch (ParseException e) {
+            Log.i("DATE", e.getMessage());
+        }
+        List<Card> cards = session.getCards();
         for (Card c: cards){
             RelativeLayout basis = new RelativeLayout(getContext());
             basis.setLayoutParams(new RelativeLayout.LayoutParams(450, 350));
@@ -186,6 +224,36 @@ public class SessionDetailFragment extends Fragment implements SessionDetailCont
 
     @Override
     public void showErrorMessage(String message) {
-        //TODO: SNACKBAR
+        if(getView()!=null) {
+            Snackbar.make(getView(), message, Snackbar.LENGTH_SHORT).show();
+        }
+    }
+
+    public String getTimeBetweenDateTimes(Long time1, Long time2) {
+        String timeStringToShow="";
+        long different = time1 - time2;
+        long secondsInMilli = 1000;
+        long minutesInMilli = secondsInMilli * 60;
+        long hoursInMilli = minutesInMilli * 60;
+        long daysInMilli = hoursInMilli * 24;
+        long elapsedDays = different / daysInMilli;
+        different = different % daysInMilli;
+        long elapsedHours = different / hoursInMilli;
+        different = different % hoursInMilli;
+        long elapsedMinutes = different / minutesInMilli;
+        if (elapsedDays == 0) {
+            if (elapsedHours == 0) {
+                if (elapsedMinutes == 0) {
+                    timeStringToShow = String.format("A few seconds");
+                } else {
+                    timeStringToShow = String.format("%d minutes", elapsedMinutes);
+                }
+            } else {
+                timeStringToShow = String.format("%d hours, %d minutes", elapsedHours, elapsedMinutes);
+            }
+        } else {
+            timeStringToShow = String.format("%d days, %d hours, %d minutes", elapsedDays, elapsedHours, elapsedMinutes);
+        }
+        return timeStringToShow;
     }
 }

@@ -6,21 +6,57 @@ import com.projects.wens.kandoeteami.organisation.data.Organisation;
 
 import java.util.List;
 
-/**
- * Created by senne on 21/02/2016.
- */
 public interface ListOrganisationContract {
     interface view{
+        /**
+         *
+         * @param active
+         */
         void setProgressIndicator(boolean active);
+
+        /**
+         *
+         * @param organisations
+         */
         void showOrganisations(List<Organisation> organisations);
+
+        /**
+         *
+         * @param organisationId
+         */
         void showOrganisationDetailUi(Integer organisationId);
+
+        /**
+         *
+         * @param organisationId
+         */
         void showOrganisationThemesUi(Integer organisationId);
-        void showErrorMessage(int status);
+
+        /**
+         *
+         * @param message
+         */
+        void showErrorMessage(String message);
     }
 
     interface UserActionListener{
+        /**
+         *
+         * @param forceUpdate
+         * @param token
+         */
         void loadOrganisations(boolean forceUpdate, String token);
+
+        /**
+         *
+         * @param requestOrga
+         */
         void openOrganisationThema(@NonNull Organisation requestOrga);
+
+        /**
+         *
+         * @param requestOrga
+         */
         void openOrganisationDetail(@NonNull Organisation requestOrga);
     }
 }

@@ -1,8 +1,6 @@
 package com.projects.wens.kandoeteami.user.data;
 
-/**
- * Created by michaelkees on 03/03/16.
- */
+
 public class Address {
     private String street;
     private String number;

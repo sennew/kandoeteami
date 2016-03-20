@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -32,31 +33,22 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-/**
- * Created by senne on 10/03/2016.
- */
+
 public class ThemeDetailFragment extends Fragment implements ThemeDetailContract.View {
     private ThemeService service;
     private ThemeDetailContract.UserActionListener themeActionListener;
-
     private static final String PREFS_NAME = "MyPrefs";
     private static final String PICASSO_BASEURL = "http://wildfly-teamiip2kdgbe.rhcloud.com/";
-
     private int themeId;
-
     private TextView themeDescription;
     private ImageView imgTheme;
     private CollapsingToolbarLayout collapsing;
-
     private ExpandableListView expandListThemeUsers;
     private ExpandableListViewAdapter adapter;
-
     private Dialog allert;
     private TextView dialogDescription;
     private Button dialogButtonOk;
-
     private LinearLayout horizontalScrollLayout;
-
     private TextView activeSessions;
     private TextView countSessions;
     private TextView subThemas;
@@ -77,8 +69,6 @@ public class ThemeDetailFragment extends Fragment implements ThemeDetailContract
         service = ServiceGenerator.createService(ThemeService.class, getResources().getString(R.string.baseURL));
         themeActionListener = new ThemeDetailPresenter(this, service);
         adapter = new ExpandableListViewAdapter(getContext());
-
-        //TODO: REQUEST FROM BUNDLE TO GET THEMEID FROM ACTIVITY
         themeId = fragment.getArguments().getInt("ThemeId");
 
     }
@@ -90,7 +80,6 @@ public class ThemeDetailFragment extends Fragment implements ThemeDetailContract
         SharedPreferences settings = getActivity().getSharedPreferences(PREFS_NAME, 0);
         String token = settings.getString("token", null);
 
-        //LOAD THEME
         themeActionListener.loadTheme(token, themeId);
     }
 
@@ -142,7 +131,9 @@ public class ThemeDetailFragment extends Fragment implements ThemeDetailContract
 
     @Override
     public void showSuccesMessage(String message) {
-
+        if(getView()!=null) {
+            Snackbar.make(getView(), message, Snackbar.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -150,7 +141,6 @@ public class ThemeDetailFragment extends Fragment implements ThemeDetailContract
         int descriptionLength = theme.getDescription().length();
         if (descriptionLength > 33){
             themeDescription.setText(theme.getDescription().substring(0,33) + "....");
-            //TODO: HIER MOET DIALOG AANGEMAAKT WORDEN
             dialogDescription.setText(theme.getDescription());
             themeDescription.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -181,8 +171,6 @@ public class ThemeDetailFragment extends Fragment implements ThemeDetailContract
             }
         }
 
-
-        //Opvragen cards van een thema
         List<Card> cards = theme.getCards();
 
         for (Card c: cards){
@@ -221,6 +209,8 @@ public class ThemeDetailFragment extends Fragment implements ThemeDetailContract
 
     @Override
     public void showErrorMessage(String message) {
-
+        if(getView()!=null) {
+            Snackbar.make(getView(), message, Snackbar.LENGTH_SHORT).show();
+        }
     }
 }

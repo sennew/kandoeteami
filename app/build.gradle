@@ -28,6 +28,8 @@ dependencies {
     compile "com.android.support:cardview-v7:$rootProject.supportLibraryVersion"
     compile "com.android.support:design:$rootProject.supportLibraryVersion"
     compile "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
+
+
     //FACEBOOK
     compile 'com.facebook.android:facebook-android-sdk:4.0.0'
     //CircleImage

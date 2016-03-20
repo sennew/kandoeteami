@@ -14,9 +14,6 @@ import de.roderick.weberknecht.WebSocket;
 import de.roderick.weberknecht.WebSocketEventHandler;
 import de.roderick.weberknecht.WebSocketMessage;
 
-/**
- * Created by senne on 17/03/2016.
- */
 public class SessionGameConnection extends Thread implements Runnable {
     public final String websocketConnection = "wss://wildfly-teamiip2kdgbe.rhcloud.com/circleSession";
     WebSocket websocket;

@@ -57,8 +57,6 @@ public class OrganisationFragment extends Fragment implements OrganisationContra
         service = ServiceGenerator.createService(OrganisationService.class, getResources().getString(R.string.baseURL));
         organisationActionListener = new OrganisationPresenter(this, service);
         adapter = new ExpandableListViewAdapter(getContext());
-
-        //TODO: GET ID from BUNDLE
         organisationId = (int) getActivity().getIntent().getExtras().get("ORGAID");
     }
 
@@ -67,10 +65,7 @@ public class OrganisationFragment extends Fragment implements OrganisationContra
         super.onResume();
         SharedPreferences settings = getActivity().getSharedPreferences(PREFS_NAME, 0);
         String token = settings.getString("token", null);
-
-        //LOAD ORGANISATION METHOD?
         organisationActionListener.loadOrganisation(token, organisationId);
-
     }
 
     @Nullable
@@ -92,8 +87,6 @@ public class OrganisationFragment extends Fragment implements OrganisationContra
                 return true;
             }
         });
-
-
 
         allert = new Dialog(getContext());
         allert.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -117,7 +110,6 @@ public class OrganisationFragment extends Fragment implements OrganisationContra
 
     @Override
     public void showOrganisation(Organisation organisation, GroupItem item) {
-        Log.e("SIZE", "SIZE: " + item.getChildren().size());
         descriptionlength = organisation.getAddress().length();
         if (descriptionlength > 33){
             tvOrganisationDescription.setText(organisation.getAddress().substring(0, 33) + ".....");

@@ -29,7 +29,6 @@ public class RegisterFragment extends Fragment implements RegisterContract.view 
 
     private ProgressDialog progressDialog;
 
-    //DECLARATION COMPONENTS
     private Button btnRegister;
     private EditText etUsername;
     private EditText etEmail;
@@ -49,7 +48,6 @@ public class RegisterFragment extends Fragment implements RegisterContract.view 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        //create service + presenter
         service = ServiceGenerator.createService(RegisterService.class, getResources().getString(R.string.baseURL));
         registerListener = new RegisterPresenter(this , service);
 

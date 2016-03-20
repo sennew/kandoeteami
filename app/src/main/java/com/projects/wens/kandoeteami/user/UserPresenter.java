@@ -9,9 +9,6 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-/**
- * Created by michaelkees on 01/03/16.
- */
 public class UserPresenter implements UserContract.UserActionListener {
 
     private final UserContract.View view;
@@ -21,7 +18,6 @@ public class UserPresenter implements UserContract.UserActionListener {
         this.view = view;
         this.service = service;
     }
-
 
     @Override
     public void loadUser(String token) {
@@ -90,7 +86,7 @@ public class UserPresenter implements UserContract.UserActionListener {
 
             @Override
             public void failure(RetrofitError error) {
-                //TODO: uitwerken error message
+                view.showErrorMessage(error.getMessage());
             }
         });
 

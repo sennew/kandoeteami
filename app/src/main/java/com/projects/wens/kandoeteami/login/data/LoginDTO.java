@@ -1,8 +1,5 @@
 package com.projects.wens.kandoeteami.login.data;
 
-/**
- * Created by senne on 26/02/2016.
- */
 public class LoginDTO {
     private String username;
     private String password;

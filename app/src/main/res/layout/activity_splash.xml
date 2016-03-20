@@ -5,7 +5,7 @@
     android:id="@+id/splash"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_abstract_2"
+    android:background="@drawable/kandoe_background_img_flat"
     android:orientation="vertical">
 
     <android.support.design.widget.AppBarLayout
@@ -57,8 +57,8 @@
                 android:layout_marginBottom="50dp"
                 android:layout_marginTop="50dp"
                 android:gravity="center"
-                android:textSize="16dp"
-                android:text="Free platform for making decisions." />
+                android:textSize="16sp"
+                android:text="@string/slogan_app" />
 
             <android.support.v7.widget.AppCompatButton
                 android:id="@+id/login_button"
@@ -75,7 +75,7 @@
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="5dp"
                 android:gravity="center"
-                android:text="Or" />
+                android:text="@string/or_splash" />
 
             <android.support.v7.widget.AppCompatButton
                 android:id="@+id/register_button"

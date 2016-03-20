@@ -1,10 +1,6 @@
 package com.projects.wens.kandoeteami.user.data;
 
 
-
-/**
- * Created by michaelkees on 03/03/16.
- */
 public class Person {
     private String firstname;
     private String lastname;

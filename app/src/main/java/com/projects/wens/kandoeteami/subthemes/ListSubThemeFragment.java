@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,21 +23,14 @@ import com.projects.wens.kandoeteami.subthemes.data.SubTheme;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by senne on 14/03/2016.
- */
+
 public class ListSubThemeFragment extends Fragment implements ListSubThemeContract.View {
     private static final String PREFS_NAME = "MyPrefs";
-
     private ListSubThemeContract.UserActionListener actionListener;
-
     private ListSubThemeAdapter subThemeAdapter;
     private SubThemaService service;
-
     public static ListSubThemeFragment fragment;
-
-    //IMPLEMENTATIE VOOR DE RECYCLERVIEW
-    ListSubThemeListener mItemListener = new ListSubThemeListener() {
+    private ListSubThemeListener mItemListener = new ListSubThemeListener() {
         @Override
         public void onSubThemeClick(SubTheme clickTheme) {
             actionListener.openSubThemeDetail(clickTheme);
@@ -73,7 +67,6 @@ public class ListSubThemeFragment extends Fragment implements ListSubThemeContra
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        //SWIPE AND REFRESH
         SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) root.findViewById(R.id.refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -137,7 +130,6 @@ public class ListSubThemeFragment extends Fragment implements ListSubThemeContra
 
     @Override
     public void showSubThemeDetail(Integer subThemeId) {
-        //TODO: NAAR DE DETAIL PAGINA GAAN VAN EEN SUBTHEMA
         Intent i = new Intent(getContext(), SubThemeDetailActivity.class);
         i.putExtra("subThemeId", subThemeId);
         startActivity(i);
@@ -145,6 +137,8 @@ public class ListSubThemeFragment extends Fragment implements ListSubThemeContra
 
     @Override
     public void showErrorMessage(int status) {
-
+        if(getView()!=null) {
+            Snackbar.make(getView(), "Failed to load subthemes", Snackbar.LENGTH_SHORT).show();
+        }
     }
 }

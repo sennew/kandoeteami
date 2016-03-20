@@ -25,9 +25,7 @@ import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-/**
- * Created by michaelkees on 18/03/16.
- */
+
 public class ListSessionActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private static final String PICASSO_BASEURL = "http://wildfly-teamiip2kdgbe.rhcloud.com/";
@@ -67,16 +65,14 @@ public class ListSessionActivity extends AppCompatActivity {
             initFragment(ListSessionFragment.newInstance());
         }
 
-        //DRAWER
         String firstname = this.getSharedPreferences(PREFS_NAME, 0).getString("firstname", null);
         String lastname = this.getSharedPreferences(PREFS_NAME, 0).getString("lastname", null);
         String email = this.getSharedPreferences(PREFS_NAME, 0).getString("email", null);
         TextView tvUsername = (TextView) findViewById(R.id.nav_username);
-        tvUsername.setText(firstname+" "+lastname);
+        tvUsername.setText(String.valueOf(firstname+" "+lastname));
         TextView tvEmail = (TextView) findViewById(R.id.nav_email);
         tvEmail.setText(email);
 
-        //Opvullen van de profielfoto
         CircleImageView circleImage = (CircleImageView) findViewById(R.id.profile_image);
         String profilePictureUrl = this.getSharedPreferences(PREFS_NAME, 0).getString("profilepicture", null);
         if (profilePictureUrl != null || profilePictureUrl != "") {
@@ -130,12 +126,6 @@ public class ListSessionActivity extends AppCompatActivity {
                                 break;
                             case R.id.nav_ic_kandoes:
                                 i = new Intent(getApplicationContext(), ListSessionActivity.class);
-                                startActivity(i);
-                                finish();
-                                break;
-                            case R.id.nav_ic_newkandoe:
-                                i = new Intent(getApplicationContext(), SessionGameActivity.class);
-                                i.putExtra("SESSIONID", 1);
                                 startActivity(i);
                                 finish();
                                 break;

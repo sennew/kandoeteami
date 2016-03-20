@@ -14,23 +14,50 @@ import retrofit.http.Header;
 import retrofit.http.POST;
 import retrofit.http.Path;
 
-/**
- * Created by senne on 23/02/2016.
- */
 public interface OrganisationService {
 
+    /**
+     *
+     * @param token
+     * @param callback
+     */
     @GET("/organisations/currentUser")
     void getOrganisations(@Header("Authorization") String token, Callback<List<Organisation>> callback);
 
+    /**
+     *
+     * @param token
+     * @param organisationId
+     * @param callback
+     */
     @GET("/organisations/{id}")
     void getOrganisation(@Header("Authorization") String token, @Path("id") int organisationId, Callback<Organisation> callback);
 
+    /**
+     *
+     * @param token
+     * @param organisationId
+     * @param userCallback
+     */
     @GET("/organisations/{orgId}/members")
     void getOrganisationMembers(@Header("Authorization") String token, @Path("orgId") int organisationId, Callback<List<User>> userCallback);
 
+    /**
+     *
+     * @param token
+     * @param organisationId
+     * @param userCallback
+     */
     @GET("/organisations/{orgId}/organisers")
     void getOrganisationOrganisers(@Header("Authorization") String token, @Path("orgId") int organisationId, Callback<List<User>> userCallback);
 
+    /**
+     *
+     * @param token
+     * @param organisationId
+     * @param user
+     * @param userCallback
+     */
     @POST("/organisations/{orgId}/addMember")
     void addOrganisationMember(@Header("Authorization") String token, @Path("orgId") int organisationId, @Body User user, Callback<User> userCallback);
 }
