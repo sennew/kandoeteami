@@ -26,6 +26,10 @@ public class SessionDTO {
     private List<User> users;
     private Theme theme;
     private SubTheme subTheme;
+
+
+
+    private boolean isOrganiser;
     private int playtime;
 
     public SessionDTO() {
@@ -180,5 +184,13 @@ public class SessionDTO {
 
     public void setUsers(List<User> users) {
         this.users = users;
+    }
+
+    public boolean isOrganiser() {
+        return isOrganiser;
+    }
+
+    public void setIsOrganiser(boolean isOrganiser) {
+        this.isOrganiser = isOrganiser;
     }
 }
