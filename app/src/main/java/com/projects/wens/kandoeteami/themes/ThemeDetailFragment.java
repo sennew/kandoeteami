@@ -1,6 +1,7 @@
 package com.projects.wens.kandoeteami.themes;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -27,6 +28,7 @@ import com.projects.wens.kandoeteami.organisation.adapter.ExpandableListViewAdap
 import com.projects.wens.kandoeteami.organisation.data.GroupItem;
 import com.projects.wens.kandoeteami.retrofit.ServiceGenerator;
 import com.projects.wens.kandoeteami.retrofit.service.ThemeService;
+import com.projects.wens.kandoeteami.subthemes.ListSubThemeActivity;
 import com.projects.wens.kandoeteami.themes.data.Card;
 import com.projects.wens.kandoeteami.themes.data.Theme;
 import com.squareup.picasso.Picasso;
@@ -52,6 +54,7 @@ public class ThemeDetailFragment extends Fragment implements ThemeDetailContract
     private TextView activeSessions;
     private TextView countSessions;
     private TextView subThemas;
+    private LinearLayout subThemasLayout;
 
     public static ThemeDetailFragment fragment;
 
@@ -125,7 +128,16 @@ public class ThemeDetailFragment extends Fragment implements ThemeDetailContract
         countSessions = (TextView) root.findViewById(R.id.theme_sessions);
         subThemas = (TextView) root.findViewById(R.id.theme_subthemes);
 
-
+        subThemasLayout = (LinearLayout) root.findViewById(R.id.theme_view_subthemes);
+        subThemasLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getContext(), ListSubThemeActivity.class);
+                i.putExtra("allThemes", false);
+                i.putExtra("subThemeId", themeId);
+                startActivity(i);
+            }
+        });
         return root;
     }
 
@@ -165,9 +177,9 @@ public class ThemeDetailFragment extends Fragment implements ThemeDetailContract
             subThemas.setText("none");
         }else {
             if(count == 1) {
-                subThemas.setText(count + " theme");
+                subThemas.setText(count + " Subtheme");
             } else {
-                subThemas.setText(count + " themes");
+                subThemas.setText(count + " Subthemes");
             }
         }
 
