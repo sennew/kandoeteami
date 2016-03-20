@@ -18,6 +18,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    productFlavors {
+        mock {
+            applicationIdSuffix = ".mock"
+        }
+        prod {
+
+        }
+    }
 }
 
 dependencies {
@@ -55,6 +63,7 @@ dependencies {
     androidTestCompile "com.android.support.test:runner:$rootProject.ext.runnerVersion"
     androidTestCompile "com.android.support.test:rules:$rootProject.ext.runnerVersion"
     // Espresso UI Testing dependencies.
+    compile "com.android.support.test.espresso:espresso-idling-resource:$rootProject.ext.espressoVersion"
     androidTestCompile "com.android.support.test.espresso:espresso-core:$rootProject.ext.espressoVersion"
     androidTestCompile "com.android.support.test.espresso:espresso-contrib:$rootProject.ext.espressoVersion"
     androidTestCompile "com.android.support.test.espresso:espresso-intents:$rootProject.ext.espressoVersion"
