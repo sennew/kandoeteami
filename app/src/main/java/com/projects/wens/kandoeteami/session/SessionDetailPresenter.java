@@ -1,7 +1,5 @@
 package com.projects.wens.kandoeteami.session;
 
-import android.util.Log;
-
 import com.projects.wens.kandoeteami.organisation.data.ChildItem;
 import com.projects.wens.kandoeteami.organisation.data.GroupItem;
 import com.projects.wens.kandoeteami.retrofit.service.SessionService;
@@ -31,15 +29,18 @@ public class SessionDetailPresenter implements SessionDetailContract.UserActionL
             @Override
             public void success(SessionDTO sessionDTO, Response response) {
                 GroupItem item = new GroupItem("SESSION " + sessionDTO.getSessionId() + " MEMBERS");
-
-                List<User> users = sessionDTO.getUsers();
-                for (User u : users) {
-                    ChildItem child = new ChildItem(u.getPerson().getFirstname(), u.getPerson().getLastname(), "MEMBER", u.getProfilePicture());
-                    item.addChildren(child);
+                int dtoSize = 0;
+                if (sessionDTO.getUsers() != null){
+                    List<User> users = sessionDTO.getUsers();
+                    for (User u : users) {
+                        ChildItem child = new ChildItem(u.getPerson().getFirstname(), u.getPerson().getLastname(), "MEMBER", u.getProfilePicture());
+                        item.addChildren(child);
+                    }
+                    groupItems.add(item);
+                    dtoSize = users.size();
                 }
-                groupItems.add(item);
 
-                int dtoSize = users.size();
+                view.showSuccesMessage("Successfully loaded session");
                 view.showSession(sessionDTO, groupItems, dtoSize, dtoSize);
             }
 

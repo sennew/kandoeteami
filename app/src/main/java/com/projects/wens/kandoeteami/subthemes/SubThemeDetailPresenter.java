@@ -31,6 +31,7 @@ public class SubThemeDetailPresenter implements SubThemeDetailContract.UserActio
             @Override
             public void success(SubTheme subTheme, Response response) {
                 getUsersSubTheme(subTheme,token,id);
+                view.showSuccesMessage("Succesfully loaded subtheme");
             }
 
             @Override

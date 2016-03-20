@@ -195,4 +195,9 @@ public class SubThemeDetailFragment extends Fragment implements SubThemeDetailCo
     public void showErrorMessage(String message) {
 
     }
+
+    @Override
+    public void showSuccesMessage(String s) {
+
+    }
 }

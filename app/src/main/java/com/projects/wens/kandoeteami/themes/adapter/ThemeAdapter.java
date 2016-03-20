@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.projects.wens.kandoeteami.R;
@@ -78,6 +79,7 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.ViewHolder> 
         public TextView description;
         public ImageView image;
         public TextView countSubthemes;
+        public RelativeLayout subthemeRelative;
 
         private ThemeItemListener themeItemListener;
 
@@ -88,7 +90,8 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.ViewHolder> 
             description = (TextView) itemView.findViewById(R.id.card_theme_text);
             image = (ImageView) itemView.findViewById(R.id.card_theme_image);
             countSubthemes = (TextView) itemView.findViewById(R.id.theme_subthemes);
-            countSubthemes.setOnClickListener(new View.OnClickListener() {
+            subthemeRelative = (RelativeLayout) itemView.findViewById(R.id.rel_subthemes);
+            subthemeRelative.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int position = getAdapterPosition();

@@ -18,6 +18,13 @@ public class SubTheme {
     private List<Card> cards;
     private Theme theme;
 
+
+    //CONSTRUCTOR OM TE TESTEN
+    public SubTheme(int subThemeId, String subThemeName){
+        this.subThemeId = subThemeId;
+        this.subThemeName = subThemeName;
+    }
+
     public String getThemeName() {
         return subThemeName;
     }

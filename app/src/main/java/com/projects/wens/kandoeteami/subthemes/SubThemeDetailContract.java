@@ -30,6 +30,8 @@ public interface SubThemeDetailContract {
          * @param message
          */
         void showErrorMessage(String message);
+
+        void showSuccesMessage(String s);
     }
 
     interface UserActionListener{

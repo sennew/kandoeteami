@@ -31,6 +31,7 @@ public class ThemeDetailPresenter implements ThemeDetailContract.UserActionListe
             @Override
             public void success(Theme theme, Response response) {
                 getUsersThema(theme, token, id);
+                view.showSuccesMessage("Successfully loaded theme");
             }
 
             @Override

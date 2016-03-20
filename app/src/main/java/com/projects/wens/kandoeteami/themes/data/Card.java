@@ -9,7 +9,7 @@ public class Card {
     private String imageURL;
     private int themeId;
     private int position;
-
+    private int subThemeId;
     public Card() {
     }
 
@@ -59,5 +59,13 @@ public class Card {
 
     public void setImageUrl(String imageUrl) {
         this.imageURL = imageUrl;
+    }
+
+    public int getSubThemeId() {
+        return subThemeId;
+    }
+
+    public void setSubThemeId(int subThemeId) {
+        this.subThemeId = subThemeId;
     }
 }

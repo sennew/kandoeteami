@@ -3,21 +3,16 @@ package com.projects.wens.kandoeteami.user;
 import com.projects.wens.kandoeteami.retrofit.service.UserService;
 import com.projects.wens.kandoeteami.user.data.User;
 
-import junit.framework.TestCase;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
-
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import retrofit.Callback;
 
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyObject;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.verify;
 
@@ -54,7 +49,7 @@ public class UserPresenterTest {
 
     @Test
     public void testShouldUpdateUser() throws Exception {
-        User user = new User(1, "ArneLauryssens", "test123", "test123", "arne.lauryssens@student.kdg.be", null, null);
+        User user = new User(1, "ArneLauryssens", "test123", "test123", "arne.lauryssens@student.kdg.be", null, null, null);
         presenter.updateUser(TOKEN, user);
 
         verify(service).updateCurrentUser(anyString(), any(User.class), argumentCaptor.capture());

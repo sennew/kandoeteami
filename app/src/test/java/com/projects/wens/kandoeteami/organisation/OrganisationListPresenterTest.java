@@ -12,7 +12,6 @@ import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit.Callback;
@@ -25,8 +24,6 @@ import static org.mockito.Mockito.verify;
  */
 public class OrganisationListPresenterTest {
     private static List<Organisation> ORGANISATIONS = Lists.newArrayList(new Organisation("Test1", "Description1"), new Organisation("Test2", "Description2"));
-
-    private static List<Organisation> EMPTY_LISTORGA = new ArrayList<>(0);
 
     private ListOrganisationPresenter mOrganisationPresenter;
     @Mock
@@ -46,9 +43,7 @@ public class OrganisationListPresenterTest {
     public void loadOrganisationFromServiceAndLoadIntoView(){
         String token = "\"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBcm5lTGF1cnlzc2VucyJ9.dblX_wcZ-FMOTqwhnVBvUVIthiR3YvRSLPt_mFds-PU\"";
         mOrganisationPresenter.loadOrganisations(true,token);
-
         verify(mOrganisationService).getOrganisations(anyString(), mLoadOrganisationCallbackCaptor.capture());
-
         mLoadOrganisationCallbackCaptor.getValue().success(ORGANISATIONS, null);
         verify(mListView).setProgressIndicator(false);
         verify(mListView).showOrganisations(ORGANISATIONS);

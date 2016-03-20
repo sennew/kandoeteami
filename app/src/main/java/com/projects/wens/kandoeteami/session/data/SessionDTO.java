@@ -31,6 +31,13 @@ public class SessionDTO {
     public SessionDTO() {
     }
 
+    //Constructor voor te testen
+    public SessionDTO(int sessionId, String sessionName){
+        this.sessionId = sessionId;
+        this.sessionName = sessionName;
+
+    }
+
     public int getSubThemeId() {
         return subThemeId;
     }

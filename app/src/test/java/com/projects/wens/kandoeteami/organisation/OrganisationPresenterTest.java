@@ -1,6 +1,5 @@
 package com.projects.wens.kandoeteami.organisation;
 
-import com.projects.wens.kandoeteami.organisation.data.GroupItem;
 import com.projects.wens.kandoeteami.organisation.data.Organisation;
 import com.projects.wens.kandoeteami.retrofit.service.OrganisationService;
 
@@ -21,7 +20,6 @@ import static org.mockito.Mockito.verify;
 public class OrganisationPresenterTest {
     private static final String TOKEN = "\"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBcm5lTGF1cnlzc2VucyJ9.dblX_wcZ-FMOTqwhnVBvUVIthiR3YvRSLPt_mFds-PU\"";
     private static final Organisation ORGANISATION = new Organisation("KdG Groenplaats", "KdG Adress");
-    private static final GroupItem GROUP_ITEM = new GroupItem("USER MEMBERS");
 
     private OrganisationPresenter presenter;
     @Mock
@@ -41,8 +39,9 @@ public class OrganisationPresenterTest {
     public void testShouldLoadOrganisation() throws Exception {
         presenter.loadOrganisation(TOKEN, 1);
         verify(service).getOrganisation(anyString(), anyInt(), argumentCaptor.capture());
-
         argumentCaptor.getValue().success(ORGANISATION,null);
-        verify(view).showOrganisation(ORGANISATION, GROUP_ITEM);
+        verify(view).showSuccesMessage("Successfully loaded organisations");
     }
+
+
 }

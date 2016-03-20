@@ -38,13 +38,12 @@ public class LoginPresenter implements LoginContract.UserActionListener {
         LoginDTO login = new LoginDTO(username, password);
         final String token;
         if (validate()) {
-            view.showProgressLogin();
             service.login(login, new Callback<String>() {
                 @Override
                 public void success(String accesToken, Response response) {
                     view.saveToken(accesToken);
                     saveUserDetails(accesToken);
-
+                    view.showProgressLogin();
                 }
 
                 @Override
@@ -85,6 +84,7 @@ public class LoginPresenter implements LoginContract.UserActionListener {
     }
 
     private void saveUserDetails(String accesToken){
+        view.showProgressLogin();
         userService.getCurrentUser("Bearer " + accesToken, new Callback<User>() {
             @Override
             public void success(User user, Response response) {

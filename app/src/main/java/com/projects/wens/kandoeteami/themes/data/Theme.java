@@ -22,6 +22,12 @@ public class Theme {
     public Theme() {
     }
 
+    //CONSTRUCTOR VOOR TESTING
+    public Theme(String themeName, int themeId){
+        this.themeId = themeId;
+        this.themeName = themeName;
+    }
+
     public int getThemeId() {
         return themeId;
     }
