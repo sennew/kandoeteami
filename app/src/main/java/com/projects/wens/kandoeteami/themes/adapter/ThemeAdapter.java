@@ -93,7 +93,7 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.ViewHolder> 
                 public void onClick(View v) {
                     int position = getAdapterPosition();
                     Theme theme = mThemes.get(position);
-                    themeItemListener.onSubthemesClick(theme.getThemeId());
+                    themeItemListener.onSubthemeClick(theme.getThemeId());
                 }
             });
             itemView.setOnClickListener(this);

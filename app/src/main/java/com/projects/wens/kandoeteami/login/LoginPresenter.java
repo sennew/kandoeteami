@@ -72,7 +72,7 @@ public class LoginPresenter implements LoginContract.UserActionListener {
                 view.saveToken(accesToken);
                 view.stopProgress();
                 saveUserDetails(accesToken);
-                view.showOrganisationsActivity();
+                view.showActivity();
             }
 
             @Override
@@ -91,7 +91,7 @@ public class LoginPresenter implements LoginContract.UserActionListener {
                 view.showSuccessMessage("Login correct");
                 view.saveUserDetails(user.getPerson().getFirstname(), user.getPerson().getLastname(), user.getProfilePicture(), user.getEmail());
                 view.stopProgress();
-                view.showOrganisationsActivity();
+                view.showActivity();
             }
 
             @Override

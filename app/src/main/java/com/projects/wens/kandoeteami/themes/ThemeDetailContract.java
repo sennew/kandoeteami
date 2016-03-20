@@ -5,19 +5,16 @@ import com.projects.wens.kandoeteami.themes.data.Theme;
 
 import java.util.List;
 
-/**
- * Created by senne on 10/03/2016.
- */
 public interface ThemeDetailContract {
     interface View{
         /**
-         *
+         * show succes message on success rest call
          * @param message
          */
         void showSuccesMessage(String message);
 
         /**
-         *
+         * show theme in view on success rest call with theme, group items, active sessions and count
          * @param theme
          * @param items
          * @param activeSession
@@ -26,7 +23,7 @@ public interface ThemeDetailContract {
         void showTheme(Theme theme, List<GroupItem> items, int activeSession, int countSession);
 
         /**
-         *
+         * show error message on failure rest call
          * @param message
          */
         void showErrorMessage(String message);
@@ -35,7 +32,7 @@ public interface ThemeDetailContract {
     interface UserActionListener {
 
         /**
-         *
+         * request rest call GET theme with token and id
          * @param token
          * @param id
          */

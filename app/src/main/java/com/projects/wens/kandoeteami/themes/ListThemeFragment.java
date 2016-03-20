@@ -42,7 +42,7 @@ public class ListThemeFragment extends Fragment implements ListThemeContract.Vie
         }
 
         @Override
-        public void onSubthemesClick(int idClickedTheme) {
+        public void onSubthemeClick(int idClickedTheme) {
             actionListener.loadSubThemesForTheme(idClickedTheme);
         }
     };

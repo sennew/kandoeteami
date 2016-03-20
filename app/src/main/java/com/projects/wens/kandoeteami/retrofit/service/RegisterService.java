@@ -6,13 +6,11 @@ import retrofit.Callback;
 import retrofit.http.Body;
 import retrofit.http.POST;
 
-/**
- * Created by michaelkees on 28/02/16.
- */
+
 public interface RegisterService {
 
     /**
-     *
+     * rest call post users to create user object
      * @param registerDTO
      * @param callback
      */

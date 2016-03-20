@@ -126,7 +126,7 @@ public class SubThemeDetailFragment extends Fragment implements SubThemeDetailCo
     }
 
     @Override
-    public void showSuccesMessage(String message) {
+    public void showSuccessMessage(String message) {
 
     }
 

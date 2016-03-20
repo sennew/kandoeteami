@@ -160,7 +160,7 @@ public class LoginFragment extends Fragment implements LoginContract.view {
     }
 
     @Override
-    public void showOrganisationsActivity() {
+    public void showActivity() {
 
         Intent i = new Intent(getContext(), ListSessionActivity.class);
         startActivity(i);

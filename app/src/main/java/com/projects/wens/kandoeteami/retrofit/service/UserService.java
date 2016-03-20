@@ -13,7 +13,7 @@ import retrofit.http.Path;
 public interface UserService {
 
     /**
-     *
+     * rest call find user by id
      * @param token
      * @param userId
      * @param callback
@@ -22,7 +22,7 @@ public interface UserService {
     void getUserById(@Header("Authorization") String token, @Path("userId") int userId, Callback<User> callback);
 
     /**
-     *
+     * rest call find current user
      * @param token
      * @param callback
      */
@@ -30,7 +30,7 @@ public interface UserService {
     void getCurrentUser(@Header("Authorization") String token, Callback<User> callback);
 
     /**
-     *
+     * rest call update current user POST
      * @param token
      * @param user
      * @param userCallback
@@ -39,7 +39,7 @@ public interface UserService {
     void updateCurrentUser(@Header("Authorization") String token, @Body User user, Callback<User> userCallback);
 
     /**
-     *
+     * rest call update current users password
      * @param token
      * @param user
      * @param callback

@@ -11,13 +11,13 @@ import java.util.List;
 public interface SubThemeDetailContract {
     interface View{
         /**
-         *
+         * show success message on success rest call
          * @param message
          */
-        void showSuccesMessage(String message);
+        void showSuccessMessage(String message);
 
         /**
-         *
+         * show subtheme in view with param subtheme, items, active and total sessions
          * @param subTheme
          * @param items
          * @param activeSession
@@ -26,7 +26,7 @@ public interface SubThemeDetailContract {
         void showSubTheme(SubTheme subTheme, List<GroupItem> items,int activeSession, int coutSession );
 
         /**
-         *
+         * show error message on failure rest call
          * @param message
          */
         void showErrorMessage(String message);
@@ -35,7 +35,7 @@ public interface SubThemeDetailContract {
     interface UserActionListener{
 
         /**
-         *
+         * request loading subtheme rest call GET
          * @param token
          * @param id
          */

@@ -13,7 +13,7 @@ import retrofit.http.Path;
 
 public interface SubThemaService {
     /**
-     *
+     * rest call get subthemes
      * @param token
      * @param callback
      */
@@ -21,7 +21,7 @@ public interface SubThemaService {
     void getSubThemes(@Header("Authorization") String token, Callback<List<SubTheme>> callback);
 
     /**
-     *
+     * rest call find subtheme by id
      * @param token
      * @param id
      * @param callback
@@ -30,7 +30,7 @@ public interface SubThemaService {
     void getSubTheme(@Header("Authorization") String token, @Path("themeId") int id,Callback<SubTheme> callback);
 
     /**
-     *
+     * rest call find subthemes by theme id
      * @param token
      * @param id
      * @param callback
@@ -39,7 +39,7 @@ public interface SubThemaService {
     void getSubthemesByThemeId(@Header("Authorization") String token, @Path("themeId") int id, Callback<List<SubTheme>> callback);
 
     /**
-     *
+     * rest call find sessions subtheme
      * @param token
      * @param id
      * @param callback

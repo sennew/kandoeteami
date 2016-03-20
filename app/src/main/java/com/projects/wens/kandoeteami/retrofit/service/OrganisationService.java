@@ -17,7 +17,7 @@ import retrofit.http.Path;
 public interface OrganisationService {
 
     /**
-     *
+     * rest call organisation currentuser
      * @param token
      * @param callback
      */
@@ -25,7 +25,7 @@ public interface OrganisationService {
     void getOrganisations(@Header("Authorization") String token, Callback<List<Organisation>> callback);
 
     /**
-     *
+     * rest call find organisation by id
      * @param token
      * @param organisationId
      * @param callback
@@ -34,7 +34,7 @@ public interface OrganisationService {
     void getOrganisation(@Header("Authorization") String token, @Path("id") int organisationId, Callback<Organisation> callback);
 
     /**
-     *
+     * rest call find members organisation
      * @param token
      * @param organisationId
      * @param userCallback
@@ -43,7 +43,7 @@ public interface OrganisationService {
     void getOrganisationMembers(@Header("Authorization") String token, @Path("orgId") int organisationId, Callback<List<User>> userCallback);
 
     /**
-     *
+     * rest call find organisers organisation
      * @param token
      * @param organisationId
      * @param userCallback
@@ -52,7 +52,7 @@ public interface OrganisationService {
     void getOrganisationOrganisers(@Header("Authorization") String token, @Path("orgId") int organisationId, Callback<List<User>> userCallback);
 
     /**
-     *
+     * rest call add member organisation
      * @param token
      * @param organisationId
      * @param user

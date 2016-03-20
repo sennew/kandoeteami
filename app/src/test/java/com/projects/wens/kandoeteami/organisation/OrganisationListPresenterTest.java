@@ -64,7 +64,7 @@ public class OrganisationListPresenterTest {
     @Test
     public void clickOnThemes_showThemesUi(){
         Organisation organisation = ORGANISATIONS.get(1);
-        mOrganisationPresenter.openOrganisationThema(organisation);
+        mOrganisationPresenter.openOrganisationTheme(organisation);
         verify(mListView).showOrganisationThemesUi(organisation.getOrganisationId());
     }
 

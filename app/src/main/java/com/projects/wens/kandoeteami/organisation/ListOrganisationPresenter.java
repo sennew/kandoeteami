@@ -50,7 +50,7 @@ public class ListOrganisationPresenter implements ListOrganisationContract.UserA
     }
 
     @Override
-    public void openOrganisationThema(@NonNull Organisation requestOrga) {
+    public void openOrganisationTheme(@NonNull Organisation requestOrga) {
         view.showOrganisationThemesUi(requestOrga.getOrganisationId());
     }
 

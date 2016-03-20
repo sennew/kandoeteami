@@ -9,32 +9,20 @@ public interface OrganisationContract {
     interface View{
 
         /**
-         *
+         * show succes message on success rest calls
          * @param message
          */
         void showSuccesMessage(String message);
 
         /**
-         *
+         * show organisation in view component with param organisation and groupItem
          * @param organisation
          * @param item
          */
         void showOrganisation(Organisation organisation, GroupItem item);
 
         /**
-         *
-         * @return
-         */
-        String getOrganisationName();
-
-        /**
-         *
-         * @return
-         */
-        String getOrganisationDescription();
-
-        /**
-         *
+         * show error message on failure rest calls
          * @param message
          */
         void showErrorMessage(String message);
@@ -42,7 +30,7 @@ public interface OrganisationContract {
 
     interface UserActionListener {
         /**
-         *
+         * getting organisation from rest call with param token and userId
          * @param token
          * @param id
          */

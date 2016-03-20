@@ -12,7 +12,7 @@ import retrofit.http.Path;
 
 public interface ThemeService {
     /**
-     *
+     * rest call get themes
      * @param token
      * @param callback
      */
@@ -20,7 +20,7 @@ public interface ThemeService {
     void getThemes(@Header("Authorization") String token, Callback<List<Theme>> callback);
 
     /**
-     *
+     * rest call find themes by organisation id
      * @param token
      * @param organisationId
      * @param callback
@@ -29,7 +29,7 @@ public interface ThemeService {
     void getThemesOfOrganisation(@Header("Authorization") String token,@Path("id") int organisationId, Callback<List<Theme>> callback);
 
     /**
-     *
+     * rest call find theme by id
      * @param token
      * @param themeId
      * @param callback
@@ -38,7 +38,7 @@ public interface ThemeService {
     void getTheme(@Header("Authorization") String token, @Path("themeId") int themeId, Callback<Theme> callback);
 
     /**
-     *
+     * rest call find sessions' theme
      * @param token
      * @param themeId
      * @param callback

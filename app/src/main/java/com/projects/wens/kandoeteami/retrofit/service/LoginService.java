@@ -11,7 +11,7 @@ import retrofit.http.POST;
 public interface LoginService {
 
     /**
-     *
+     * rest call login
      * @param loginDTO
      * @param callback
      */
@@ -19,7 +19,7 @@ public interface LoginService {
     void login(@Body LoginDTO loginDTO, Callback<String> callback);
 
     /**
-     *
+     * rest call login with facebook
      * @param user
      * @param callback
      */
