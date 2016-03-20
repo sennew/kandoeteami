@@ -19,9 +19,7 @@ import retrofit.Callback;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.verify;
 
-/**
- * Created by senne on 01/03/2016.
- */
+
 public class OrganisationListPresenterTest {
     private static List<Organisation> ORGANISATIONS = Lists.newArrayList(new Organisation("Test1", "Description1"), new Organisation("Test2", "Description2"));
 

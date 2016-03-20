@@ -20,9 +20,6 @@ import retrofit.Callback;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.verify;
 
-/**
- * Created by senne on 20/03/2016.
- */
 public class SessionListPresenterTest {
     private static final List<User> USERS = Lists.newArrayList(new User(), new User());
     private static List<SessionDTO> SESSIONS = Lists.newArrayList(new SessionDTO(1, "TEST SESSION 1"), new SessionDTO(2, "TEST SESSION 2"));

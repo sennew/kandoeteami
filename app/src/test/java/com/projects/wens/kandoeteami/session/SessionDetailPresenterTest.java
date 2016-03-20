@@ -16,9 +16,6 @@ import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.verify;
 
-/**
- * Created by senne on 20/03/2016.
- */
 public class SessionDetailPresenterTest {
     private static final String TOKEN = "\"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBcm5lTGF1cnlzc2VucyJ9.dblX_wcZ-FMOTqwhnVBvUVIthiR3YvRSLPt_mFds-PU\"";
     private static final SessionDTO SESSION = new SessionDTO(1,"TEST SESSION 1");
