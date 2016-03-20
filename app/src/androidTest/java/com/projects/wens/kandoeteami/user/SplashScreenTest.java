@@ -1,5 +1,6 @@
 package com.projects.wens.kandoeteami.user;
 
+import android.content.Intent;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.suitebuilder.annotation.SmallTest;
@@ -7,6 +8,7 @@ import android.test.suitebuilder.annotation.SmallTest;
 import com.projects.wens.kandoeteami.R;
 import com.projects.wens.kandoeteami.start.SplashActivity;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,7 +30,11 @@ public class SplashScreenTest {
     public ActivityTestRule<SplashActivity> mSplashActivity =
             new ActivityTestRule<SplashActivity>(SplashActivity.class);
 
-
+    @Before
+    public void intentSplashScreen(){
+        Intent startIntent = new Intent();
+        mSplashActivity.launchActivity(startIntent);
+    }
     //TEST: Als je op het main screen komt moet er op het registerButton klikken en Register tonen
     @Test
     public void TestClickOnRegister_opensViewRegister() throws Exception {
