@@ -54,4 +54,18 @@ public class OrganisationListPresenterTest {
         verify(mListView).showOrganisations(ORGANISATIONS);
     }
 
+    @Test
+    public void clickOnOrganisation_showsDetailUi(){
+        Organisation orga = ORGANISATIONS.get(1);
+        mOrganisationPresenter.openOrganisationDetail(orga);
+        verify(mListView).showOrganisationDetailUi(orga.getOrganisationId());
+    }
+
+    @Test
+    public void clickOnThemes_showThemesUi(){
+        Organisation organisation = ORGANISATIONS.get(1);
+        mOrganisationPresenter.openOrganisationThema(organisation);
+        verify(mListView).showOrganisationThemesUi(organisation.getOrganisationId());
+    }
+
 }
