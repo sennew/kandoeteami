@@ -1,7 +1,6 @@
 package com.projects.wens.kandoeteami.user;
 
 import android.app.Dialog;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -115,10 +114,8 @@ public class UserFragment extends Fragment implements UserContract.View{
         btnEditUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                etUsername.setEnabled(true);
                 etFirstName.setEnabled(true);
                 etLastName.setEnabled(true);
-                etEmail.setEnabled(true);
                 etAddressStreet.setEnabled(true);
                 etAddressNumber.setEnabled(true);
                 etAddressCity.setEnabled(true);
@@ -136,7 +133,6 @@ public class UserFragment extends Fragment implements UserContract.View{
                 etUsername.setEnabled(false);
                 etFirstName.setEnabled(false);
                 etLastName.setEnabled(false);
-                etEmail.setEnabled(false);
                 etAddressStreet.setEnabled(false);
                 etAddressNumber.setEnabled(false);
                 etAddressCity.setEnabled(false);
